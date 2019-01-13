@@ -17,7 +17,7 @@
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
 DIST=.rhel7
-SPECFILE="gdal.spec"
+SPECFILE="gbd-gdal.spec"
 
 # Now, include global Makefile
 include ../../../common/Makefile.global
