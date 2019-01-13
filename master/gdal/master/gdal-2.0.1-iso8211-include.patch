@@ -1,0 +1,11 @@
+diff -Nur gdal-2.0.1-fedora/frmts/iso8211/8211createfromxml.cpp gdal-2.0.1-fedora-iso8211/frmts/iso8211/8211createfromxml.cpp
+--- gdal-2.0.1-fedora/frmts/iso8211/8211createfromxml.cpp	2015-09-15 16:06:51.000000000 +0200
++++ gdal-2.0.1-fedora-iso8211/frmts/iso8211/8211createfromxml.cpp	2015-10-18 03:04:21.812446373 +0200
+@@ -28,6 +28,7 @@
+  ****************************************************************************/
+ 
+ #include "cpl_minixml.h"
++#include "cpl_conv.h"
+ #include "iso8211.h"
+ #include <map>
+ #include <string>
