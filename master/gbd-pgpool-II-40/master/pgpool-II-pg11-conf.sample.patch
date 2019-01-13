@@ -1,0 +1,27 @@
+--- src/sample/pgpool.conf.sample.old	2017-07-11 11:35:29.104676578 +0100
++++ src/sample/pgpool.conf.sample	2017-07-11 11:36:15.235279626 +0100
+@@ -67,7 +67,7 @@
+                                    # Port number for backend 0
+ backend_weight0 = 1
+                                    # Weight for backend 0 (only in load balancing mode)
+-backend_data_directory0 = '/var/lib/pgsql/data'
++backend_data_directory0 = '/var/lib/gbdsql/11/data'
+                                    # Data directory for backend 0
+ backend_flag0 = 'ALLOW_TO_FAILOVER'
+                                    # Controls various backend behavior
+@@ -210,13 +210,13 @@
+ # FILE LOCATIONS
+ #------------------------------------------------------------------------------
+ 
+-pid_file_name = '/var/run/pgpool/pgpool.pid'
++pid_file_name = '/var/run/gbd-pgpool-II-11/pgpool.pid'
+                                    # PID file name
+                                    # Can be specified as relative to the"
+                                    # location of pgpool.conf file or
+                                    # as an absolute path
+                                    # (change requires restart)
+-logdir = '/var/log/pgpool'
++logdir = '/var/log/gbd-pgpool-II-11'
+                                    # Directory of pgPool status file
+                                    # (change requires restart)
+ 

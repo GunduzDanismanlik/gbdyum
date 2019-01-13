@@ -1,0 +1,13 @@
+[Unit]
+Description=PGPool-II Middleware Between GBDSQL Servers And GBDSQL Database Clients
+After=syslog.target network.target
+
+[Service]
+User=gbdsql
+
+EnvironmentFile=-/etc/sysconfig/gbd-pgpool-II-11
+ExecStart=/usr/gbd/pgpool-11/bin/pgpool -f /usr/gbd/pgpool-11/etc/pgpool.conf $OPTS 
+ExecStop=/usr/gbd/pgpool-11/bin/pgpool -f /usr/gbd/pgpool-11/etc/pgpool.conf -m fast stop
+
+[Install]
+WantedBy=multi-user.target
