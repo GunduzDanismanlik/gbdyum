@@ -1,0 +1,16 @@
+[global]
+repo1-path=/var/lib/gbd-pgbackrest
+repo1-host=localhost
+repo1-host-user=gbdsql
+
+repo1-retention-full=3
+log-level-console=info
+log-level-file=detail
+compress=n
+
+[global:archive-push]
+log-level-console=info
+log-level-stderr=info
+
+[main]
+pg1-path=/var/lib/gbdsql/11/data
