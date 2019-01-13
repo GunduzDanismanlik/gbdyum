@@ -1,3 +1,4 @@
+%global debug_package %{nil}
 %global pgmajorversion 11
 %global	gbddir /usr/gbd
 %global	gbdsname gbd-%{sname}
@@ -138,7 +139,7 @@ BuildRequires:	advance-toolchain-%{atstring}-devel
 %endif
 
 # Enable/disable generating refmans
-%global build_refman 1
+%global build_refman 0
 
 # We have multilib triage
 %if "%{_lib}" == "lib"
@@ -525,10 +526,10 @@ make    DESTDIR=%{buildroot} \
         install \
         install-man
 
-install -pm 755 ogr/ogrsf_frmts/s57/s57dump %{buildroot}%{gbddir}/%{sname}/bin
-install -pm 755 frmts/iso8211/8211createfromxml %{buildroot}%{gbddir}/%{sname}/bin
-install -pm 755 frmts/iso8211/8211dump %{buildroot}%{gbddir}/%{sname}/bin
-install -pm 755 frmts/iso8211/8211view %{buildroot}%{gbddir}/%{sname}/bin
+install -pm 755 ogr/ogrsf_frmts/s57/s57dump %{buildroot}%{gdalinstdir}/bin
+install -pm 755 frmts/iso8211/8211createfromxml %{buildroot}%{gdalinstdir}/bin
+install -pm 755 frmts/iso8211/8211dump %{buildroot}%{gdalinstdir}/bin
+install -pm 755 frmts/iso8211/8211view %{buildroot}%{gdalinstdir}/bin
 
 # Directory for auto-loading plugins
 mkdir -p %{buildroot}%{_libdir}/%{name}plugins
@@ -592,13 +593,13 @@ done
 
 #TODO: Header date lost during installation
 # Install multilib cpl_config.h bz#430894
-install -p -D -m 644 port/cpl_config.h %{buildroot}%{_includedir}%{name}/cpl_config-%{cpuarch}.h
+install -p -D -m 644 port/cpl_config.h %{buildroot}%{gdalinstdir}/include/cpl_config-%{cpuarch}.h
 # Create universal multilib cpl_config.h bz#341231
 # The problem is still there in 1.9.
 #TODO: Ticket?
 
 #>>>>>>>>>>>>>
-cat > %{buildroot}%{_includedir}%{name}/cpl_config.h <<EOF
+cat > %{buildroot}%{gdalinstdir}/include//cpl_config.h <<EOF
 #include <bits/wordsize.h>
 
 #if __WORDSIZE == 32
@@ -623,7 +624,7 @@ cat > %{name}.pc <<EOF
 prefix=%{_prefix}
 exec_prefix=%{_prefix}
 libdir=%{_libdir}
-includedir=%{gbddir}/%{sname}/include
+includedir=%{gdalinstdir}/include
 
 Name: GDAL
 Description: GIS file format library
@@ -642,10 +643,10 @@ touch -r NEWS %{buildroot}%{_libdir}/pkgconfig/%{name}.pc
 # TODO: The extra script will direct you to 64 bit libs on
 # 64 bit systems -- whether you like that or not
 # GBD
-#mv %{buildroot}%{gbddir}/%{sname}/bin/%{sname}-config %{buildroot}%{gbddir}/%{sname}/bin/%{sname}-config-%{cpuarch}
+#mv %{buildroot}%{gdalinstdir}/bin/%{sname}-config %{buildroot}%{gdalinstdir}/bin/%{sname}-config-%{cpuarch}
 
 #>>>>>>>>>>>>>
-cat > %{buildroot}%{gbddir}/%{sname}/bin/%{sname}-config <<EOF
+cat > %{buildroot}%{gdalinstdir}/bin/%{sname}-config <<EOF
 #!/bin/bash
 
 ARCH=\$(uname -m)
@@ -659,11 +660,11 @@ x86_64 | ppc64 | ppc64le | ia64 | s390x | sparc64 | alpha | alphaev6 | aarch64 )
 esac
 EOF
 #<<<<<<<<<<<<<
-touch -r NEWS %{buildroot}%{gbddir}/%{sname}/bin/%{name}-config
-chmod 755 %{buildroot}%{gbddir}/%{sname}/bin/%{name}-config
+touch -r NEWS %{buildroot}%{gdalinstdir}/bin/%{name}-config
+chmod 755 %{buildroot}%{gdalinstdir}/bin/%{name}-config
 
 # Clean up junk
-rm -f %{buildroot}%{gbddir}/%{sname}/bin/*.dox
+rm -f %{buildroot}%{gdalinstdir}/bin/*.dox
 
 #jni-libs and libgdal are also built static (*.a)
 #.exists and .packlist stem from Perl
@@ -676,11 +677,11 @@ rm -f %{buildroot}%{_datadir}/%{name}/LICENSE.TXT
 
 # Throw away random API man mages plus artefact seemingly caused by Doxygen 1.8.1 or 1.8.1.1
 for f in 'GDAL*' BandProperty ColorAssociation CutlineTransformer DatasetProperty EnhanceCBInfo ListFieldDesc NamedColor OGRSplitListFieldLayer VRTBuilder; do
-  rm -rf %{buildroot}%{gbddir}/%{sname}/share/man/man1/$f.1*
+  rm -rf %{buildroot}%{gdalinstdir}/share/man/man1/$f.1*
 done
 #TODO: What's that?
-rm -f %{buildroot}%{gbddir}/%{sname}/share/man/man1/*_%{name}-%{version}-fedora_apps_*
-rm -f %{buildroot}%{gbddir}/%{sname}/share/man/man1/_home_rouault_dist_wrk_gdal_apps_.1*
+rm -f %{buildroot}%{gdalinstdir}/share/man/man1/*_%{name}-%{version}-fedora_apps_*
+rm -f %{buildroot}%{gdalinstdir}/share/man/man1/_home_rouault_dist_wrk_gdal_apps_.1*
 
 %check
 %if %{run_tests}
@@ -727,52 +728,52 @@ popd
 %endif
 
 %files
-%{gbddir}/%{sname}/bin/gdallocationinfo
-%{gbddir}/%{sname}/bin/gdal_contour
-%{gbddir}/%{sname}/bin/gdal_rasterize
-%{gbddir}/%{sname}/bin/gdal_translate
-%{gbddir}/%{sname}/bin/gdaladdo
-%{gbddir}/%{sname}/bin/gdalinfo
-%{gbddir}/%{sname}/bin/gdaldem
-%{gbddir}/%{sname}/bin/gdalbuildvrt
-%{gbddir}/%{sname}/bin/gdaltindex
-%{gbddir}/%{sname}/bin/gdalwarp
-%{gbddir}/%{sname}/bin/gdal_grid
-%{gbddir}/%{sname}/bin/gdalenhance
-%{gbddir}/%{sname}/bin/gdalmanage
-%{gbddir}/%{sname}/bin/gdalserver
-%{gbddir}/%{sname}/bin/gdalsrsinfo
-%{gbddir}/%{sname}/bin/gdaltransform
-%{gbddir}/%{sname}/bin/nearblack
-%{gbddir}/%{sname}/bin/ogr*
-%{gbddir}/%{sname}/bin/8211*
-%{gbddir}/%{sname}/bin/s57*
-%{gbddir}/%{sname}/bin/testepsg
-%{gbddir}/%{sname}/share/man/man1/gdal*.1*
-%exclude %{gbddir}/%{sname}/share/man/man1/gdal-config.1*
-%exclude %{gbddir}/%{sname}/share/man/man1/gdal2tiles.1*
-%exclude %{gbddir}/%{sname}/share/man/man1/gdal_fillnodata.1*
-%exclude %{gbddir}/%{sname}/share/man/man1/gdal_merge.1*
-%exclude %{gbddir}/%{sname}/share/man/man1/gdal_retile.1*
-%exclude %{gbddir}/%{sname}/share/man/man1/gdal_sieve.1*
-%{gbddir}/%{sname}/share/man/man1/nearblack.1*
-%{gbddir}/%{sname}/share/man/man1/ogr*.1*
+%{gdalinstdir}/bin/gdallocationinfo
+%{gdalinstdir}/bin/gdal_contour
+%{gdalinstdir}/bin/gdal_rasterize
+%{gdalinstdir}/bin/gdal_translate
+%{gdalinstdir}/bin/gdaladdo
+%{gdalinstdir}/bin/gdalinfo
+%{gdalinstdir}/bin/gdaldem
+%{gdalinstdir}/bin/gdalbuildvrt
+%{gdalinstdir}/bin/gdaltindex
+%{gdalinstdir}/bin/gdalwarp
+%{gdalinstdir}/bin/gdal_grid
+%{gdalinstdir}/bin/gdalenhance
+%{gdalinstdir}/bin/gdalmanage
+%{gdalinstdir}/bin/gdalserver
+%{gdalinstdir}/bin/gdalsrsinfo
+%{gdalinstdir}/bin/gdaltransform
+%{gdalinstdir}/bin/nearblack
+%{gdalinstdir}/bin/ogr*
+%{gdalinstdir}/bin/8211*
+%{gdalinstdir}/bin/s57*
+%{gdalinstdir}/bin/testepsg
+%{gdalinstdir}/share/man/man1/gdal*.1*
+%exclude %{gdalinstdir}/share/man/man1/gdal-config.1*
+%exclude %{gdalinstdir}/share/man/man1/gdal2tiles.1*
+%exclude %{gdalinstdir}/share/man/man1/gdal_fillnodata.1*
+%exclude %{gdalinstdir}/share/man/man1/gdal_merge.1*
+%exclude %{gdalinstdir}/share/man/man1/gdal_retile.1*
+%exclude %{gdalinstdir}/share/man/man1/gdal_sieve.1*
+%{gdalinstdir}/share/man/man1/nearblack.1*
+%{gdalinstdir}/share/man/man1/ogr*.1*
 
 %files libs
 %doc LICENSE.TXT NEWS PROVENANCE.TXT COMMITERS PROVENANCE.TXT-fedora
-%{gbddir}/%{sname}/lib//libgdal.so.*
-%{gbddir}/%{sname}/share/%{sname}
+%{gdalinstdir}/lib//libgdal.so.*
+%{gdalinstdir}/share/
 #TODO: Possibly remove files like .dxf, .dgn, ...
-%dir %{gbddir}/%{sname}/lib/%{sname}plugins
+%dir %{gdalinstdir}/lib/%{sname}plugins
 
 %files devel
-%{gbddir}/%{sname}/bin/%{name}-config
-#%{gbddir}/%{sname}/bin/%{name}-config-%{cpuarch}
-%{gbddir}/%{sname}/share/man/man1/gdal-config.1*
-%dir %{gbddir}/%{sname}/include/
-%{gbddir}/%{sname}/include//*.h
-%{gbddir}/%{sname}/lib/*.so
-%{_libdir}/pkgconfig/%{name}.pc
+%{gdalinstdir}bin/gdal-config
+#%{gdalinstdir}/bin/%{name}-config-%{cpuarch}
+%{gdalinstdir}/share/man/man1/gdal-config.1*
+%dir %{gdalinstdir}/include/
+%{gdalinstdir}/include/*.h
+%{gdalinstdir}/lib/*.so
+%{gdalinstdir}/lib/pkgconfig/%{sname}.pc
 
 # Can I even have a separate Java package anymore?
 %files java -f .mfiles
@@ -790,14 +791,14 @@ popd
 %doc swig/python/README.txt
 %doc swig/python/samples
 #TODO: Bug with .py files in EPEL 5 bindir, see http://fedoraproject.org/wiki/EPEL/GuidelinesAndPolicies
-%{gbddir}/%{sname}/bin/*.py
-%{gbddir}/%{sname}/share/man/man1/pct2rgb.1*
-%{gbddir}/%{sname}/share/man/man1/rgb2pct.1*
-%{gbddir}/%{sname}/share/man/man1/gdal2tiles.1*
-%{gbddir}/%{sname}/share/man/man1/gdal_fillnodata.1*
-%{gbddir}/%{sname}/share/man/man1/gdal_merge.1*
-%{gbddir}/%{sname}/share/man/man1/gdal_retile.1*
-%{gbddir}/%{sname}/share/man/man1/gdal_sieve.1*
+/bin/*.py
+%{gdalinstdir}/share/man/man1/pct2rgb.1*
+%{gdalinstdir}/share/man/man1/rgb2pct.1*
+%{gdalinstdir}/share/man/man1/gdal2tiles.1*
+%{gdalinstdir}/share/man/man1/gdal_fillnodata.1*
+%{gdalinstdir}/share/man/man1/gdal_merge.1*
+%{gdalinstdir}/share/man/man1/gdal_retile.1*
+%{gdalinstdir}/share/man/man1/gdal_sieve.1*
 %{python_sitearch}/osgeo
 %{python_sitearch}/GDAL-%{version}-py*.egg-info
 %{python_sitearch}/osr.py*
@@ -805,7 +806,7 @@ popd
 %{python_sitearch}/gdal*.py*
 
 %files doc
-%doc gdal_frmts ogrsf_frmts refman
+%doc gdal_frmts ogrsf_frmts
 
 #TODO: jvm
 #Should be managed by the Alternatives system and not via ldconfig
