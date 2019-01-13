@@ -23,28 +23,28 @@ build92: bfsrpm92
 	--define "_builddir $(HOME)/rpm92/BUILD" \
 	--define "_srcrpmdir $(HOME)/rpm92/SRPMS" \
 	--define "_rpmdir $(HOME)/rpm92/RPMS/" --sign \
-	--define "pgmajorversion 92" --define "pginstdir /usr/pgsql-9.2" --define "pgpackageversion 9.2" \
+	--define "pgmajorversion 92" --define "pginstdir /usr/gbdsql-9.2" --define "pgpackageversion 9.2" \
 	--define "dist $(DIST)" -bb $(SPECFILE)
 
 srpm92: prep
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \
 	--define "_builddir ." --define "_srcrpmdir ." --sign \
 	--define "_buildrootdir $(HOME)/rpm92/BUILDROOT" \
-	--define "pgmajorversion 92" --define "pginstdir /usr/pgsql-9.2"  --define "pgpackageversion 9.2" \
+	--define "pgmajorversion 92" --define "pginstdir /usr/gbdsql-9.2"  --define "pgpackageversion 9.2" \
 	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
 
 bfsrpm92: prep
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \
 	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm92/SRPMS" --sign \
 	--define "_buildrootdir $(HOME)/rpm92/BUILDROOT" \
-	--define "pgmajorversion 92" --define "pginstdir /usr/pgsql-9.2"  --define "pgpackageversion 9.2" \
+	--define "pgmajorversion 92" --define "pginstdir /usr/gbdsql-9.2"  --define "pgpackageversion 9.2" \
 	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
 
 bfnosignsrpm92: prep
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \
 	--define "_buildrootdir $(HOME)/rpm92/BUILDROOT" \
 	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm92/SRPMS" \
-	--define "pgmajorversion 92" --define "pginstdir /usr/pgsql-9.2"  --define "pgpackageversion 9.2" \
+	--define "pgmajorversion 92" --define "pginstdir /usr/gbdsql-9.2"  --define "pgpackageversion 9.2" \
 	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
 
 rpm92: prep
@@ -54,7 +54,7 @@ rpm92: prep
 	--define "_buildrootdir $(HOME)/rpm92/BUILDROOT" \
 	--define "_srcrpmdir $(PWD)" \
 	--define "_rpmdir $(PWD)" \
-	--define "pgmajorversion 92" --define "pginstdir /usr/pgsql-9.2" --define "pgpackageversion 9.2" \
+	--define "pgmajorversion 92" --define "pginstdir /usr/gbdsql-9.2" --define "pgpackageversion 9.2" \
 	--define "dist $(DIST)" -bb $(SPECFILE)
 
 nosignbuild92: bfnosignsrpm92
@@ -64,14 +64,14 @@ nosignbuild92: bfnosignsrpm92
 	--define "_buildrootdir $(HOME)/rpm92/BUILDROOT" \
 	--define "_srcrpmdir $(HOME)/rpm92/SRPMS" \
 	--define "_rpmdir $(HOME)/rpm92/RPMS/" \
-	--define "pgmajorversion 92" --define "pginstdir /usr/pgsql-9.2" --define "pgpackageversion 9.2" \
+	--define "pgmajorversion 92" --define "pginstdir /usr/gbdsql-9.2" --define "pgpackageversion 9.2" \
 	--define "dist $(DIST)" -bb $(SPECFILE)
 
 noprepbuild92:
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \
 	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm92/SRPMS" --sign \
 	--define "_buildrootdir $(HOME)/rpm92/BUILDROOT" \
-	--define "pgmajorversion 92" --define "pginstdir /usr/pgsql-9.2" --define "pgpackageversion 9.2" \
+	--define "pgmajorversion 92" --define "pginstdir /usr/gbdsql-9.2" --define "pgpackageversion 9.2" \
 	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
 
 	rpmbuild --define "_sourcedir $(PWD)" \
@@ -80,7 +80,7 @@ noprepbuild92:
 	--define "_buildrootdir $(HOME)/rpm92/BUILDROOT" \
 	--define "_srcrpmdir $(HOME)/rpm92/SRPMS" \
 	--define "_rpmdir $(HOME)/rpm92/RPMS/" --sign \
-	--define "pgmajorversion 92" --define "pginstdir /usr/pgsql-9.2" --define "pgpackageversion 9.2" \
+	--define "pgmajorversion 92" --define "pginstdir /usr/gbdsql-9.2" --define "pgpackageversion 9.2" \
 	--define "dist $(DIST)" -bb $(SPECFILE)
 
 nopreprpm92:
@@ -90,13 +90,13 @@ nopreprpm92:
 	--define "_buildrootdir $(HOME)/rpm92/BUILDROOT" \
 	--define "_srcrpmdir $(PWD)" \
 	--define "_rpmdir $(PWD)" \
-	--define "pgmajorversion 92" --define "pginstdir /usr/pgsql-9.2" --define "pgpackageversion 9.2" \
+	--define "pgmajorversion 92" --define "pginstdir /usr/gbdsql-9.2" --define "pgpackageversion 9.2" \
 	--define "dist $(DIST)" -bb $(SPECFILE)
 
 noprepsrpm92:
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \
 	--define "_builddir ." --define "_srcrpmdir ." \
 	--define "_buildrootdir $(HOME)/rpm92/BUILDROOT" \
-	--define "pgmajorversion 92" --define "pginstdir /usr/pgsql-9.2" --define "pgpackageversion 9.2" \
+	--define "pgmajorversion 92" --define "pginstdir /usr/gbdsql-9.2" --define "pgpackageversion 9.2" \
 	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
 

@@ -21,7 +21,7 @@ prep11testing:
 	# Update spec file, patches, etc, before running spectool:
 	git pull
 	# Use spectool to download source files, especially tarballs.
-	spectool -g -S --define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" $(SPECFILE)
+	spectool -g -S --define "pgmajorversion 11" --define "pginstdir /usr/gbdsql-11" --define "pgpackageversion 11" $(SPECFILE)
 
 build11testing: bfsrpm11testing
 	rpmbuild --define "_sourcedir $(PWD)" \
@@ -30,28 +30,28 @@ build11testing: bfsrpm11testing
 	--define "_builddir $(HOME)/rpm11testing/BUILD" \
 	--define "_srcrpmdir $(HOME)/rpm11testing/SRPMS" \
 	--define "_rpmdir $(HOME)/rpm11testing/RPMS/" --sign \
-	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/gbdsql-11" --define "pgpackageversion 11" \
 	--define "dist $(DIST)" -bb $(SPECFILE)
 
 srpm11testing: prep11
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \
 	--define "_builddir ." --define "_srcrpmdir ." --sign \
 	--define "_buildrootdir $(HOME)/rpm11testing/BUILDROOT" \
-	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11"  --define "pgpackageversion 11" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/gbdsql-11"  --define "pgpackageversion 11" \
 	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
 
 bfsrpm11testing: prep11
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \
 	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm11testing/SRPMS" --sign \
 	--define "_buildrootdir $(HOME)/rpm11testing/BUILDROOT" \
-	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11"  --define "pgpackageversion 11" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/gbdsql-11"  --define "pgpackageversion 11" \
 	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
 
 bfnosignsrpm11testing: prep11
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \
 	--define "_buildrootdir $(HOME)/rpm11testing/BUILDROOT" \
 	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm11testing/SRPMS" \
-	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11"  --define "pgpackageversion 11" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/gbdsql-11"  --define "pgpackageversion 11" \
 	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
 
 rpm11testing: prep11
@@ -61,7 +61,7 @@ rpm11testing: prep11
 	--define "_buildrootdir $(HOME)/rpm11testing/BUILDROOT" \
 	--define "_srcrpmdir $(PWD)" \
 	--define "_rpmdir $(PWD)" \
-	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/gbdsql-11" --define "pgpackageversion 11" \
 	--define "dist $(DIST)" -bb $(SPECFILE)
 
 nosignbuild11testimg: bfnosignsrpm11testing
@@ -71,14 +71,14 @@ nosignbuild11testimg: bfnosignsrpm11testing
 	--define "_buildrootdir $(HOME)/rpm11testing/BUILDROOT" \
 	--define "_srcrpmdir $(HOME)/rpm11testing/SRPMS" \
 	--define "_rpmdir $(HOME)/rpm11testing/RPMS/" \
-	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/gbdsql-11" --define "pgpackageversion 11" \
 	--define "dist $(DIST)" -bb $(SPECFILE)
 
 noprepbuild11testing:
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \
 	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm11testing/SRPMS" --sign \
 	--define "_buildrootdir $(HOME)/rpm11testing/BUILDROOT" \
-	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/gbdsql-11" --define "pgpackageversion 11" \
 	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
 
 	rpmbuild --define "_sourcedir $(PWD)" \
@@ -87,7 +87,7 @@ noprepbuild11testing:
 	--define "_buildrootdir $(HOME)/rpm11testing/BUILDROOT" \
 	--define "_srcrpmdir $(HOME)/rpm11testing/SRPMS" \
 	--define "_rpmdir $(HOME)/rpm11testing/RPMS/" --sign \
-	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/gbdsql-11" --define "pgpackageversion 11" \
 	--define "dist $(DIST)" -bb $(SPECFILE)
 
 nopreprpm11testing:
@@ -97,13 +97,13 @@ nopreprpm11testing:
 	--define "_buildrootdir $(HOME)/rpm11testing/BUILDROOT" \
 	--define "_srcrpmdir $(PWD)" \
 	--define "_rpmdir $(PWD)" \
-	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/gbdsql-11" --define "pgpackageversion 11" \
 	--define "dist $(DIST)" -bb $(SPECFILE)
 
 noprepsrpm11testing:
 	rpmbuild --define "_sourcedir ." --define "_specdir ." \
 	--define "_builddir ." --define "_srcrpmdir ." \
 	--define "_buildrootdir $(HOME)/rpm11testing/BUILDROOT" \
-	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/gbdsql-11" --define "pgpackageversion 11" \
 	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
 
