@@ -1,10 +1,11 @@
 %undefine _debugsource_packages
+%global gbddir /usr/gbd
 %global postgismajorversion 2.5
 %global postgiscurrmajorversion %(echo %{postgismajorversion}|tr -d '.')
 %global postgisprevmajorversion 2.4
 %global sname	postgis
-%global	geosinstdir /usr/gbd-geos37
-%global	projinstdir /usr/gbd-proj49
+%global	geosinstdir %{gbddir}-geos37
+%global	projinstdir %{gbddir}-proj49
 
 %{!?utils:%global	utils 1}
 %if 0%{?fedora} >= 27 || 0%{?rhel} >= 7 || 0%{?suse_version} >= 1315
@@ -62,14 +63,14 @@ BuildRequires:	libxml2-devel
 BuildRequires:	gtk2-devel > 2.8.0
 %endif
 %if %{sfcgal}
-BuildRequires:	SFCGAL-devel
-Requires:	SFCGAL
+BuildRequires:	gbd-sfcgal-devel
+Requires:	gbd-sfcgal
 %endif
 %if %{raster}
   %if 0%{?rhel} && 0%{?rhel} < 6
-BuildRequires:	gdal-devel >= 1.9.2-9
+BuildRequires:	gbd-gdal-devel >= 1.9.2-9
   %else
-BuildRequires:	gdal-devel >= 1.11.4-11
+BuildRequires:	gbd-gdal-devel >= 1.11.4-11
   %endif
 %endif
 %ifarch ppc64 ppc64le
@@ -90,9 +91,9 @@ Requires:	libjson-c2 libgdal20
 %else
 Requires: json-c
 %if 0%{?rhel} && 0%{?rhel} < 6
-Requires:	gdal-libs >= 1.9.2-9
+Requires:	gbd-gdal-libs >= 1.9.2-9
 %else
-Requires:	gdal-libs >= 1.11.4-11
+Requires:	gbd-gdal-libs >= 1.11.4-11
 %endif
 %endif
 Requires(post):	%{_sbindir}/update-alternatives
@@ -202,7 +203,7 @@ LDFLAGS="$LDFLAGS -L/%{geosinstdir}/lib64 -L%{projinstdir}/lib64"; export LDFLAG
 	--without-raster \
 %endif
 %if %{sfcgal}
-	--with-sfcgal=%{_bindir}/sfcgal-config \
+	--with-sfcgal=%{gbddir}/sfcgal/bin/sfcgal-config \
 %endif
 %if %{shp2pgsqlgui}
 	--with-gui \
