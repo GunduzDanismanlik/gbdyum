@@ -1,0 +1,11 @@
+--- src/bin/initdb/initdb.c.old	2019-01-13 09:56:41.829522110 +0000
++++ src/bin/initdb/initdb.c	2019-01-13 09:57:50.066560127 +0000
+@@ -2085,6 +2085,8 @@
+ 	static const char *const postgres_setup[] = {
+ 		"CREATE DATABASE postgres;\n\n",
+ 		"COMMENT ON DATABASE postgres IS 'default administrative connection database';\n\n",
++		"CREATE DATABASE gbdsql ENCODING='UTF-8' LC_COLLATE = 'tr_TR.UTF-8' LC_CTYPE='tr_TR.UTF-8' TEMPLATE template0;\n\n"
++		"COMMENT ON DATABASE gbdsql IS 'Türkçe sıralama destekli veritabanı';\n\n",
+ 		NULL
+ 	};
+ 
