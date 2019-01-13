@@ -1,1 +1,0 @@
-../master/gbd-gdal.spec
