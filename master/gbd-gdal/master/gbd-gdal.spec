@@ -1,3 +1,4 @@
+%global pgmajorversion 11
 %global	gbddir /usr/gbd
 %global	gbdsname gbd-%{sname}
 %global	sname gdal
@@ -267,10 +268,10 @@ This package contains HTML and PDF documentation for GDAL.
 %global __provides_exclude_from ^%{python_sitearch}/.*\.so$
 
 %prep
-%setup -q -n %{name}-%{version}-fedora
+%setup -q -n %{sname}-%{version}-fedora
 
 # Unpack tests to the same directory
-%setup -q -D -a 1 -n %{name}-%{version}-fedora
+%setup -q -D -a 1 -n %{sname}-%{version}-fedora
 
 # Delete bundled libraries
 rm -rf frmts/zlib
