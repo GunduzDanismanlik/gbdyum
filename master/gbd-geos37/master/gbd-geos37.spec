@@ -1,6 +1,6 @@
-%global		gbdsname gbd-%{sname}
+%global		gbddir	/usr/gbd
 %global		sname geos
-%global		geosinstdir /usr/%{gbdsname}37
+%global		geosinstdir %{gbddir}/%{sname}37
 
 # Specify the subdirectory for the libraries:
 %ifarch i686 i386
@@ -15,7 +15,7 @@
 %global atpath		/opt/%{atstring}
 %endif
 
-Name:		%{gbdsname}37
+Name:		gbd-%{sname}37
 Version:	3.7.0
 Release:	1GBD%{?dist}.1
 Summary:	GEOS is a C++ port of the Java Topology Suite
@@ -125,7 +125,7 @@ cd doc
 
 # Create linker config file:
 %{__mkdir} -p %{buildroot}%{_sysconfdir}/ld.so.conf.d/
-echo "%{geosinstdir}/%{_geoslibdir}/" > %{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}-pgdg-libs.conf
+echo "%{geosinstdir}/%{_geoslibdir}/" > %{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}-libs.conf
 
 %check
 # test module
@@ -156,7 +156,7 @@ echo "%{geosinstdir}/%{_geoslibdir}/" > %{buildroot}%{_sysconfdir}/ld.so.conf.d/
 %{geosinstdir}/%{_geoslibdir}/libgeos_c.so*
 %exclude %{geosinstdir}/%{_geoslibdir}/*.a
 %exclude %{geosinstdir}/%{_geoslibdir}/*.la
-%config(noreplace) %attr (644,root,root) %{_sysconfdir}/ld.so.conf.d/%{name}-pgdg-libs.conf
+%config(noreplace) %attr (644,root,root) %{_sysconfdir}/ld.so.conf.d/%{name}-libs.conf
 
 %files devel
 %defattr(-,root,root,-)
