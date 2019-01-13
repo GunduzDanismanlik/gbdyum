@@ -22,7 +22,7 @@ Source0:	http://download.osgeo.org/%{sname}/%{sname}-%{version}.tar.gz
 Source1:	http://download.osgeo.org//proj/proj-datumgrid-1.5.zip
 Source2:	%{name}-libs.conf
 
-Patch0:		proj-4.8.0-removeinclude.patch
+Patch0:		%{gbdsname}-4.8.0-removeinclude.patch
 BuildRoot:	%{_tmppath}/%{sname}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:	libtool
