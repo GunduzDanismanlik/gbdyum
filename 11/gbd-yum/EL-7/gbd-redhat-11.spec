@@ -43,5 +43,5 @@ key for GBD RPMs.
 %{_sysconfdir}/pki/rpm-gpg/*
 
 %changelog
-* Sun 13 Jan 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11-2
+* Sun Jan 13 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11-2
 - GBDSQL depo paketi
