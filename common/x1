@@ -1,0 +1,15 @@
+#########################################
+# General Makefile			#
+# for RPM packaging			#
+# https://yum.gunduzdanismanlik.com	#
+#					#
+# Devrim Gunduz				#
+# devrim@gunduz.org			#
+#########################################
+#					#
+#					#
+# build target is for			#
+# RPM buildfarm				#
+#					#
+#					#
+#########################################

@@ -1,0 +1,109 @@
+#########################################
+# General Makefile			#
+# for RPM packaging			#
+# https://yum.gunduzdanismanlik.com	#
+#					#
+# Devrim Gunduz				#
+# devrim@gunduzdanismanlik.com		#
+#########################################
+#					#
+#					#
+# build target is for			#
+# RPM buildfarm				#
+#					#
+#					#
+#########################################
+
+## PostgreSQL 11
+
+prep11:
+	if [ -f dead.package ]; then echo "This package is marked as dead. Build won't continue"; exit 1; fi
+	# Update spec file, patches, etc, before running spectool:
+	git pull
+	# Use spectool to download source files, especially tarballs.
+	spectool -g -S --define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" $(SPECFILE)
+
+build11: bfsrpm11
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define "_buildrootdir $(HOME)/rpm11/BUILDROOT" \
+	--define "_builddir $(HOME)/rpm11/BUILD" \
+	--define "_srcrpmdir $(HOME)/rpm11/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm11/RPMS/" --sign \
+	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+srpm11: prep11
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir ." --sign \
+	--define "_buildrootdir $(HOME)/rpm11/BUILDROOT" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11"  --define "pgpackageversion 11" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+bfsrpm11: prep11
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm11/SRPMS" --sign \
+	--define "_buildrootdir $(HOME)/rpm11/BUILDROOT" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11"  --define "pgpackageversion 11" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+bfnosignsrpm11: prep11
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_buildrootdir $(HOME)/rpm11/BUILDROOT" \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm11/SRPMS" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11"  --define "pgpackageversion 11" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+rpm11: prep11
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(PWD)" \
+	--define "_buildrootdir $(HOME)/rpm11/BUILDROOT" \
+	--define "_srcrpmdir $(PWD)" \
+	--define "_rpmdir $(PWD)" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+nosignbuild11: bfnosignsrpm11
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(HOME)/rpm11/BUILD" \
+	--define "_buildrootdir $(HOME)/rpm11/BUILDROOT" \
+	--define "_srcrpmdir $(HOME)/rpm11/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm11/RPMS/" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+noprepbuild11:
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm11/SRPMS" --sign \
+	--define "_buildrootdir $(HOME)/rpm11/BUILDROOT" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(HOME)/rpm11/BUILD" \
+	--define "_buildrootdir $(HOME)/rpm11/BUILDROOT" \
+	--define "_srcrpmdir $(HOME)/rpm11/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm11/RPMS/" --sign \
+	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+nopreprpm11:
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(PWD)" \
+	--define "_buildrootdir $(HOME)/rpm11/BUILDROOT" \
+	--define "_srcrpmdir $(PWD)" \
+	--define "_rpmdir $(PWD)" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+noprepsrpm11:
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir ." \
+	--define "_buildrootdir $(HOME)/rpm11/BUILDROOT" \
+	--define "pgmajorversion 11" --define "pginstdir /usr/pgsql-11" --define "pgpackageversion 11" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+

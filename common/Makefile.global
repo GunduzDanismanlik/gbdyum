@@ -1,0 +1,44 @@
+#########################################
+# General Makefile 		   	#
+# for RPM packaging		   	#
+# https://yum.gunduzdanismanlik.com	#
+#			   		#
+# Devrim Gunduz		   		#
+# devrim@gunduzdanismanlik.com 		#
+#########################################
+#			 		#
+#					#
+# build target is for      		#
+# RPM buildfarm		   		#
+#			   		#
+#			   		#
+#########################################
+
+prep:
+	if [ -f dead.package ]; then echo "This package is marked as dead. Build won't continue"; exit 1; fi
+
+	# Update spec file, patches, etc, before running spectool:
+	git pull
+
+	# Use spectool to download source files, especially tarballs.
+	spectool -g -S $(SPECFILE)
+
+allclean:
+	git clean -dfx
+
+clean:
+	rm -rf i386/ i586/ i686/ x86_64/ noarch/
+	rm -f *.src.rpm
+	rm -f *.tar *.tar.gz *.tar.bz2 *.tgz *.zip .xz
+
+include ../../../common/Makefile.global-PG93
+include ../../../common/Makefile.global-PG94
+include ../../../common/Makefile.global-PG95
+include ../../../common/Makefile.global-PG96
+include ../../../common/Makefile.global-PG96-testing
+include ../../../common/Makefile.global-PG10-testing
+include ../../../common/Makefile.global-PG10
+include ../../../common/Makefile.global-PG11-testing
+include ../../../common/Makefile.global-PG11
+include ../../../common/Makefile.global-PG12-testing
+

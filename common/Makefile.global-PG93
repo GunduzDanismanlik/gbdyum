@@ -1,0 +1,102 @@
+#########################################
+# General Makefile			#
+# for RPM packaging			#
+# https://yum.gunduzdanismanlik.com	#
+#					#
+# Devrim Gunduz				#
+# devrim@gunduzdanismanlik.com		#
+#########################################
+#					#
+#					#
+# build target is for			#
+# RPM buildfarm				#
+#					#
+#					#
+#########################################
+
+## PostgreSQL 9.3
+
+build93: bfsrpm93
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define "_buildrootdir $(HOME)/rpm93/BUILDROOT" \
+	--define "_builddir $(HOME)/rpm93/BUILD" \
+	--define "_srcrpmdir $(HOME)/rpm93/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm93/RPMS/" --sign \
+	--define "pgmajorversion 93" --define "pginstdir /usr/pgsql-9.3" --define "pgpackageversion 9.3" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+srpm93: prep
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir ." --sign \
+	--define "_buildrootdir $(HOME)/rpm93/BUILDROOT" \
+	--define "pgmajorversion 93" --define "pginstdir /usr/pgsql-9.3"  --define "pgpackageversion 9.3" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+bfsrpm93: prep
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm93/SRPMS" --sign \
+	--define "_buildrootdir $(HOME)/rpm93/BUILDROOT" \
+	--define "pgmajorversion 93" --define "pginstdir /usr/pgsql-9.3"  --define "pgpackageversion 9.3" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+bfnosignsrpm93: prep
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_buildrootdir $(HOME)/rpm93/BUILDROOT" \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm93/SRPMS" \
+	--define "pgmajorversion 93" --define "pginstdir /usr/pgsql-9.3"  --define "pgpackageversion 9.3" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+rpm93: prep
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(PWD)" \
+	--define "_buildrootdir $(HOME)/rpm93/BUILDROOT" \
+	--define "_srcrpmdir $(PWD)" \
+	--define "_rpmdir $(PWD)" \
+	--define "pgmajorversion 93" --define "pginstdir /usr/pgsql-9.3" --define "pgpackageversion 9.3" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+nosignbuild93: bfnosignsrpm93
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(HOME)/rpm93/BUILD" \
+	--define "_buildrootdir $(HOME)/rpm93/BUILDROOT" \
+	--define "_srcrpmdir $(HOME)/rpm93/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm93/RPMS/" \
+	--define "pgmajorversion 93" --define "pginstdir /usr/pgsql-9.3" --define "pgpackageversion 9.3" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+noprepbuild93:
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm93/SRPMS" --sign \
+	--define "_buildrootdir $(HOME)/rpm93/BUILDROOT" \
+	--define "pgmajorversion 93" --define "pginstdir /usr/pgsql-9.3" --define "pgpackageversion 9.3" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(HOME)/rpm93/BUILD" \
+	--define "_buildrootdir $(HOME)/rpm93/BUILDROOT" \
+	--define "_srcrpmdir $(HOME)/rpm93/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm93/RPMS/" --sign \
+	--define "pgmajorversion 93" --define "pginstdir /usr/pgsql-9.3" --define "pgpackageversion 9.3" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+nopreprpm93:
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(PWD)" \
+	--define "_buildrootdir $(HOME)/rpm93/BUILDROOT" \
+	--define "_srcrpmdir $(PWD)" \
+	--define "_rpmdir $(PWD)" \
+	--define "pgmajorversion 93" --define "pginstdir /usr/pgsql-9.3" --define "pgpackageversion 9.3" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+noprepsrpm93:
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir ." \
+	--define "_buildrootdir $(HOME)/rpm93/BUILDROOT" \
+	--define "pgmajorversion 93" --define "pginstdir /usr/pgsql-9.3" --define "pgpackageversion 9.3" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+

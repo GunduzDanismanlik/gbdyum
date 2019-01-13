@@ -1,0 +1,109 @@
+#########################################
+# General Makefile			#
+# for RPM packaging			#
+# https://yum.gunduzdanismanlik.com	#
+#					#
+# Devrim Gunduz				#
+# devrim@gunduzdanismanlik.com		#
+#########################################
+#					#
+#					#
+# build target is for			#
+# RPM buildfarm				#
+#					#
+#					#
+#########################################
+
+## PostgreSQL 10 Testing
+
+prep10testing:
+	if [ -f dead.package ]; then echo "This package is marked as dead. Build won't continue"; exit 1; fi
+	# Update spec file, patches, etc, before running spectool:
+	git pull
+	# Use spectool to download source files, especially tarballs.
+	spectool -g -S --define "pgmajorversion 10" --define "pginstdir /usr/pgsql-10" --define "pgpackageversion 10" $(SPECFILE)
+
+build10testing: bfsrpm10testing
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define "_buildrootdir $(HOME)/rpm10testing/BUILDROOT" \
+	--define "_builddir $(HOME)/rpm10testing/BUILD" \
+	--define "_srcrpmdir $(HOME)/rpm10testing/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm10testing/RPMS/" --sign \
+	--define "pgmajorversion 10" --define "pginstdir /usr/pgsql-10" --define "pgpackageversion 10" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+srpm10testing: prep10
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir ." --sign \
+	--define "_buildrootdir $(HOME)/rpm10testing/BUILDROOT" \
+	--define "pgmajorversion 10" --define "pginstdir /usr/pgsql-10"  --define "pgpackageversion 10" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+bfsrpm10testing: prep10
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm10testing/SRPMS" --sign \
+	--define "_buildrootdir $(HOME)/rpm10testing/BUILDROOT" \
+	--define "pgmajorversion 10" --define "pginstdir /usr/pgsql-10"  --define "pgpackageversion 10" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+bfnosignsrpm10testing: prep10
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_buildrootdir $(HOME)/rpm10testing/BUILDROOT" \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm10testing/SRPMS" \
+	--define "pgmajorversion 10" --define "pginstdir /usr/pgsql-10"  --define "pgpackageversion 10" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+rpm10testing: prep10
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(PWD)" \
+	--define "_buildrootdir $(HOME)/rpm10testing/BUILDROOT" \
+	--define "_srcrpmdir $(PWD)" \
+	--define "_rpmdir $(PWD)" \
+	--define "pgmajorversion 10" --define "pginstdir /usr/pgsql-10" --define "pgpackageversion 10" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+nosignbuild10testimg: bfnosignsrpm10testing
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(HOME)/rpm10testing/BUILD" \
+	--define "_buildrootdir $(HOME)/rpm10testing/BUILDROOT" \
+	--define "_srcrpmdir $(HOME)/rpm10testing/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm10testing/RPMS/" \
+	--define "pgmajorversion 10" --define "pginstdir /usr/pgsql-10" --define "pgpackageversion 10" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+noprepbuild10testing:
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm10testing/SRPMS" --sign \
+	--define "_buildrootdir $(HOME)/rpm10testing/BUILDROOT" \
+	--define "pgmajorversion 10" --define "pginstdir /usr/pgsql-10" --define "pgpackageversion 10" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(HOME)/rpm10testing/BUILD" \
+	--define "_buildrootdir $(HOME)/rpm10testing/BUILDROOT" \
+	--define "_srcrpmdir $(HOME)/rpm10testing/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm10testing/RPMS/" --sign \
+	--define "pgmajorversion 10" --define "pginstdir /usr/pgsql-10" --define "pgpackageversion 10" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+nopreprpm10testing:
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(PWD)" \
+	--define "_buildrootdir $(HOME)/rpm10testing/BUILDROOT" \
+	--define "_srcrpmdir $(PWD)" \
+	--define "_rpmdir $(PWD)" \
+	--define "pgmajorversion 10" --define "pginstdir /usr/pgsql-10" --define "pgpackageversion 10" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+noprepsrpm10testing:
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir ." \
+	--define "_buildrootdir $(HOME)/rpm10testing/BUILDROOT" \
+	--define "pgmajorversion 10" --define "pginstdir /usr/pgsql-10" --define "pgpackageversion 10" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+

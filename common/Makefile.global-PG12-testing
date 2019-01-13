@@ -1,0 +1,109 @@
+#########################################
+# General Makefile			#
+# for RPM packaging			#
+# https://yum.gunduzdanismanlik.com	#
+#					#
+# Devrim Gunduz				#
+# devrim@gunduzdanismanlik.com		#
+#########################################
+#					#
+#					#
+# build target is for			#
+# RPM buildfarm				#
+#					#
+#					#
+#########################################
+
+## PostgreSQL 12 Testing
+
+prep12testing:
+	if [ -f dead.package ]; then echo "This package is marked as dead. Build won't continue"; exit 1; fi
+	# Update spec file, patches, etc, before running spectool:
+	git pull
+	# Use spectool to download source files, especially tarballs.
+	spectool -g -S --define "pgmajorversion 12" --define "pginstdir /usr/pgsql-12" --define "pgpackageversion 12" $(SPECFILE)
+
+build12testing: bfsrpm12testing
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define "_buildrootdir $(HOME)/rpm12testing/BUILDROOT" \
+	--define "_builddir $(HOME)/rpm12testing/BUILD" \
+	--define "_srcrpmdir $(HOME)/rpm12testing/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm12testing/RPMS/" --sign \
+	--define "pgmajorversion 12" --define "pginstdir /usr/pgsql-12" --define "pgpackageversion 12" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+srpm12testing: prep
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir ." --sign \
+	--define "_buildrootdir $(HOME)/rpm12testing/BUILDROOT" \
+	--define "pgmajorversion 12" --define "pginstdir /usr/pgsql-12"  --define "pgpackageversion 12" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+bfsrpm12testing: prep
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm12testing/SRPMS" --sign \
+	--define "_buildrootdir $(HOME)/rpm12testing/BUILDROOT" \
+	--define "pgmajorversion 12" --define "pginstdir /usr/pgsql-12"  --define "pgpackageversion 12" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+bfnosignsrpm12testing: prep
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_buildrootdir $(HOME)/rpm12testing/BUILDROOT" \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm12testing/SRPMS" \
+	--define "pgmajorversion 12" --define "pginstdir /usr/pgsql-12"  --define "pgpackageversion 12" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+rpm12testing: prep
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(PWD)" \
+	--define "_buildrootdir $(HOME)/rpm12testing/BUILDROOT" \
+	--define "_srcrpmdir $(PWD)" \
+	--define "_rpmdir $(PWD)" \
+	--define "pgmajorversion 12" --define "pginstdir /usr/pgsql-12" --define "pgpackageversion 12" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+nosignbuild12testimg: bfnosignsrpm12testing
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(HOME)/rpm12testing/BUILD" \
+	--define "_buildrootdir $(HOME)/rpm12testing/BUILDROOT" \
+	--define "_srcrpmdir $(HOME)/rpm12testing/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm12testing/RPMS/" \
+	--define "pgmajorversion 12" --define "pginstdir /usr/pgsql-12" --define "pgpackageversion 12" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+noprepbuild12testing:
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir $(HOME)/rpm12testing/SRPMS" --sign \
+	--define "_buildrootdir $(HOME)/rpm12testing/BUILDROOT" \
+	--define "pgmajorversion 12" --define "pginstdir /usr/pgsql-12" --define "pgpackageversion 12" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(HOME)/rpm12testing/BUILD" \
+	--define "_buildrootdir $(HOME)/rpm12testing/BUILDROOT" \
+	--define "_srcrpmdir $(HOME)/rpm12testing/SRPMS" \
+	--define "_rpmdir $(HOME)/rpm12testing/RPMS/" --sign \
+	--define "pgmajorversion 12" --define "pginstdir /usr/pgsql-12" --define "pgpackageversion 12" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+nopreprpm12testing:
+	rpmbuild --define "_sourcedir $(PWD)" \
+	--define "_specdir $(PWD)" \
+	--define  "_builddir $(PWD)" \
+	--define "_buildrootdir $(HOME)/rpm12testing/BUILDROOT" \
+	--define "_srcrpmdir $(PWD)" \
+	--define "_rpmdir $(PWD)" \
+	--define "pgmajorversion 12" --define "pginstdir /usr/pgsql-12" --define "pgpackageversion 12" \
+	--define "dist $(DIST)" -bb $(SPECFILE)
+
+noprepsrpm12testing:
+	rpmbuild --define "_sourcedir ." --define "_specdir ." \
+	--define "_builddir ." --define "_srcrpmdir ." \
+	--define "_buildrootdir $(HOME)/rpm12testing/BUILDROOT" \
+	--define "pgmajorversion 12" --define "pginstdir /usr/pgsql-12" --define "pgpackageversion 12" \
+	--define "_rpmdir ." --define "dist $(DIST)" --nodeps -bs $(SPECFILE)
+
