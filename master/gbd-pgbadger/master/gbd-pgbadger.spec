@@ -7,7 +7,7 @@ Version:	10.2
 Release:	1%{?dist}
 Group:		Applications/Databases
 License:	PostgreSQL
-Source0:	https://github.com/darold/%{name}/archive/v%{version}.tar.gz
+Source0:	https://github.com/darold/%{sname}/archive/v%{version}.tar.gz
 URL:		https://darold.github.io/%{sname}/
 BuildArch:	noarch
 Requires:	perl-Text-CSV_XS
