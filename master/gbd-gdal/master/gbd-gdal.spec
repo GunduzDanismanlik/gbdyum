@@ -127,7 +127,7 @@ BuildRequires:	zlib-devel
 # Run time dependency for gpsbabel driver
 Requires:	gpsbabel
 
-Requires:	%{sname}-libs%{?_isa} = %{version}-%{release}
+Requires:	%{gbdsname}-libs%{?_isa} = %{version}-%{release}
 
 %ifarch ppc64 ppc64le
 AutoReq:	0
@@ -178,8 +178,8 @@ Requires:	advance-toolchain-%{atstring}-runtime
 Requires: pkgconfig
 %endif
 
-Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
-Obsoletes:	%{name}-static < 1.9.0-1
+Requires:	%{gbdsname}-libs%{?_isa} = %{version}-%{release}
+Obsoletes:	%{gbdsname}-static < 1.9.0-1
 
 %description devel
 This package contains development files for GDAL.
@@ -188,7 +188,7 @@ This package contains development files for GDAL.
 %package libs
 Summary:	GDAL file format library
 Group:		System Environment/Libraries
-Obsoletes:	%{name}-ruby < 1.11.0-1
+Obsoletes:	%{gbdsname}-ruby < 1.11.0-1
 %ifarch ppc64 ppc64le
 AutoReq:	0
 Requires:	advance-toolchain-%{atstring}-runtime
@@ -201,7 +201,7 @@ This package contains the GDAL file format library.
 Summary:	Java modules for the GDAL file format library
 Group:		Development/Libraries
 Requires:	jpackage-utils
-Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
+Requires:	%{gbdsname}-libs%{?_isa} = %{version}-%{release}
 %ifarch ppc64 ppc64le
 AutoReq:	0
 Requires:	advance-toolchain-%{atstring}-runtime
@@ -227,7 +227,7 @@ This package contains the API documentation for %{name}.
 %package perl
 Summary:	Perl modules for the GDAL file format library
 Group:		Development/Libraries
-Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
+Requires:	%{gbdsname}-libs%{?_isa} = %{version}-%{release}
 Requires:	perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 %ifarch ppc64 ppc64le
 AutoReq:	0
@@ -242,7 +242,7 @@ The GDAL Perl modules provide support to handle multiple GIS file formats.
 Summary:	Python modules for the GDAL file format library
 Group:		Development/Libraries
 Requires:	numpy
-Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
+Requires:	%{gbdsname}-libs%{?_isa} = %{version}-%{release}
 %ifarch ppc64 ppc64le
 AutoReq:	0
 Requires:	advance-toolchain-%{atstring}-runtime
