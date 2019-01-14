@@ -1,0 +1,10 @@
+/var/log/gbd-pgagent_11.log {
+    missingok
+    compress
+    notifempty
+    sharedscripts
+    create 0640 gbdpgagent gbdpgagent
+    nodateext
+    weekly
+    rotate 5
+}
