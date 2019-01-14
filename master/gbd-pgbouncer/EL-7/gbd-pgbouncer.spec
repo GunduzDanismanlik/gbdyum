@@ -1,0 +1,1 @@
+../master/gbd-pgbouncer.spec
