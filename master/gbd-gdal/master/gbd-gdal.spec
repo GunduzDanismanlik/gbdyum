@@ -768,7 +768,7 @@ popd
 
 %files devel
 %{gdalinstdir}/bin/gdal-config
-%{gdalinstdir}/bin/gbd-dal-config
+%{gdalinstdir}/bin/gbd-gdal-config
 #%{gdalinstdir}/bin/%{name}-config-%{cpuarch}
 %{gdalinstdir}/share/man/man1/gdal-config.1*
 %dir %{gdalinstdir}/include/
@@ -801,11 +801,18 @@ popd
 %{gdalinstdir}/share/man/man1/gdal_merge.1*
 %{gdalinstdir}/share/man/man1/gdal_retile.1*
 %{gdalinstdir}/share/man/man1/gdal_sieve.1*
+%{gdalinstdir}/bin/esri2wkt.py
+%{gdalinstdir}/bin/gcps2vec.py
+%{gdalinstdir}/bin/gcps2wld.py
+%{gdalinstdir}/bin/mkgraticule.py
+%{gdalinstdir}/bin/pct2rgb.py
+%{gdalinstdir}/bin/rgb2pct.py
 %{python_sitearch}/osgeo
 %{python_sitearch}/GDAL-%{version}-py*.egg-info
 %{python_sitearch}/osr.py*
 %{python_sitearch}/ogr.py*
-/usr/gbd/gdal/bin/gdal*.py*
+%{python_sitearch}/gdal*.py*
+%{gdalinstdir}/bin/gdal*.py*
 
 %files doc
 %doc gdal_frmts ogrsf_frmts
