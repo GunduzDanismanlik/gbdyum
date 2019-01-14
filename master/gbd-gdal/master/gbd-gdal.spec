@@ -767,7 +767,7 @@ popd
 %dir %{gdalinstdir}/lib/%{sname}plugins
 
 %files devel
-%{gdalinstdir}bin/gdal-config
+%{gdalinstdir}/bin/gdal-config
 #%{gdalinstdir}/bin/%{name}-config-%{cpuarch}
 %{gdalinstdir}/share/man/man1/gdal-config.1*
 %dir %{gdalinstdir}/include/
