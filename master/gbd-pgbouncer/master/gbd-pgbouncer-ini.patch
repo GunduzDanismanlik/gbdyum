@@ -1,6 +1,46 @@
---- etc/pgbouncer.ini.old	2012-04-24 01:42:43.093199723 +0300
-+++ etc/pgbouncer.ini	2012-04-24 01:43:58.083201432 +0300
-@@ -59,10 +59,10 @@
+--- etc/pgbouncer.ini.old	2019-01-14 23:24:32.403692667 +0000
++++ etc/pgbouncer.ini	2019-01-14 23:25:01.744692667 +0000
+@@ -13,6 +13,9 @@
+ ; redirect bardb to bazdb on localhost
+ ;bardb = host=localhost dbname=bazdb
+ 
++; gbdsql
++gbdsql = host=localhost user=gbdsql dbname=gbdsql
++
+ ; access to dest database will go with single user
+ ;forcedb = host=127.0.0.1 port=300 user=baz password=foo client_encoding=UNICODE datestyle=ISO connect_query='SELECT 1'
+ 
+@@ -33,8 +36,8 @@
+ ;;; Administrative settings
+ ;;;
+ 
+-logfile = /var/log/pgbouncer/pgbouncer.log
+-pidfile = /var/run/pgbouncer/pgbouncer.pid
++logfile = /var/log/gbd-pgbouncer/gbd-pgbouncer.log
++pidfile = /run/gbdsql/gbd-pgbouncer.pid
+ 
+ ;;;
+ ;;; Where to wait for clients
+@@ -45,8 +48,7 @@
+ listen_port = 6432
+ 
+ ; Unix socket is also used for -R.
+-; On Debian it should be /var/run/postgresql
+-;unix_socket_dir = /tmp
++unix_socket_dir = /run/gbdsql
+ ;unix_socket_mode = 0777
+ ;unix_socket_group =
+ 
+@@ -105,7 +107,7 @@
+ ; any, trust, plain, crypt, md5, cert, hba, pam
+ auth_type = trust
+ ;auth_file = /8.0/main/global/pg_auth
+-auth_file = /etc/pgbouncer/userlist.txt
++auth_file = /usr/gbd/pgbouncer/etc/userlist.txt
+ 
+ ;; Path to HBA-style auth config
+ ;auth_hba_file =
+@@ -119,10 +121,10 @@
  ;;;
  
  ; comma-separated list of users, who are allowed to change settings
@@ -13,3 +53,12 @@
  
  ;;;
  ;;; Pooler personality questions
+@@ -290,7 +292,7 @@
+ ;; Max number pkt_buf to process in one event loop.
+ ;sbuf_loopcnt = 5
+ 
+-;; Maximum PostgreSQL protocol packet size.
++;; Maximum GBDSQL protocol packet size.
+ ;max_packet_size = 2147483647
+ 
+ ;; networking options, for info: man 7 tcp

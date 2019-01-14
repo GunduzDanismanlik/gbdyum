@@ -15,13 +15,13 @@ After=network.target
 [Service]
 Type=forking
 
-User=gbdpgbouncer
-Group=gbdpgbouncer
+User=gbdsql
+Group=gbdsql
 
 # Path to the init file
 Environment=BOUNCERCONF=/usr/gbd/pgbouncer/etc/pgbouncer.ini
 
-PIDFile=/run/gbd-pgbouncer/pgbouncer.pid
+PIDFile=/run/gbdsql/gbd-pgbouncer.pid
 
 # Where to send early-startup messages from the server 
 # This is normally controlled by the global default set by systemd

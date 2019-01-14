@@ -9,6 +9,6 @@
 	weekly
 	rotate 5
 	postrotate
-		/bin/kill -HUP `cat /run/gbd-pgbouncer/pgbouncer.pid  2>/dev/null` 2> /dev/null || true
+		/bin/kill -HUP `cat /run/gbdsql/gbd-pgbouncer.pid  2>/dev/null` 2> /dev/null || true
 	endscript
 }

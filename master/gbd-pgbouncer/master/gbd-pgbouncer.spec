@@ -18,8 +18,6 @@
 %global atpath		/opt/%{atstring}
 %endif
 
-%global _varrundir %{_localstatedir}/run/%{name}
-
 Name:		gbd-%{sname}
 Version:	1.9.0
 Release:	1%{?dist}.1
@@ -123,7 +121,7 @@ sed -i.fedora \
 # ... and make a tmpfiles script to recreate it at reboot.
 %{__mkdir} -p %{buildroot}%{_tmpfilesdir}
 cat > %{buildroot}%{_tmpfilesdir}/%{name}.conf <<EOF
-d %{_varrundir} 0700 gbdpgbouncer gbdpgbouncer -
+d /run/gbdsql 0700 gbdsql gbdsql -
 EOF
 
 %else
@@ -152,13 +150,13 @@ EOF
 if [ ! -d %{_localstatedir}/log/gbd-pgbouncer ] ; then
 %{__mkdir} -m 700 %{_localstatedir}/log/gbd-pgbouncer
 fi
-%{__chown} -R gbdpgbouncer:gbdpgbouncer %{_localstatedir}/log/gbd-pgbouncer
-%{__chown} -R gbdpgbouncer:gbdpgbouncer %{_varrundir} >/dev/null 2>&1 || :
+%{__chown} -R gbdsql:gbdsql %{_localstatedir}/log/gbd-pgbouncer
+%{__chown} -R gbdsql:gbdsql /run/gbdsql >/dev/null 2>&1 || :
 
 %pre
-groupadd -r gbdpgbouncer >/dev/null 2>&1 || :
-useradd -m -g gbdpgbouncer -r -s /bin/bash \
-	-c "GBDSQL PgBouncer Server" gbdpgbouncer >/dev/null 2>&1 || :
+groupadd -r gbdsql >/dev/null 2>&1 || :
+useradd -m -g gbdsql -r -s /bin/bash \
+	-c "GBDSQL PgBouncer Server" gbdsql >/dev/null 2>&1 || :
 
 %preun
 %if %{systemd_enabled}
@@ -172,7 +170,7 @@ fi
 
 %postun
 if [ $1 -eq 0 ]; then
-%{__rm} -rf %{_varrundir}
+%{__rm} -rf /run/gbdsql
 fi
 %if %{systemd_enabled}
 %systemd_postun_with_restart %{name}.service
@@ -199,7 +197,7 @@ fi
 #%{_bindir}/%{name}
 #%config(noreplace) %{_sysconfdir}/%{name}/%{name}.ini
 %if %{systemd_enabled}
-%ghost %{_varrundir}
+%ghost /run/gbdsql
 %{_tmpfilesdir}/%{name}.conf
 %attr(644,root,root) %{_unitdir}/%{name}.service
 %else
