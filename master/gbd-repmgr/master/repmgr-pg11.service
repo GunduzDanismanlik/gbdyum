@@ -1,6 +1,6 @@
 # It's not recommended to modify this file in-place, because it will be
 # overwritten during package upgrades.  If you want to customize, the
-# best way is to create a file "/etc/systemd/system/repmgr.service",
+# best way is to create a file "/etc/systemd/system/gbd-repmgr.service",
 # containing
 #	.include /lib/systemd/system/repmgr.service
 #	...make your changes here...
@@ -8,28 +8,28 @@
 # http://fedoraproject.org/wiki/Systemd#How_do_I_customize_a_unit_file.2F_add_a_custom_unit_file.3F
 
 [Unit]
-Description=A replication manager, and failover management tool for PostgreSQL
+Description=A replication manager, and failover management tool for GBDSQL
 After=syslog.target
 After=network.target
-After=postgresql-11.service
+After=gbdsql-11.service
 
 [Service]
 Type=forking
 
-User=postgres
-Group=postgres
+User=gbdsql
+Group=gbdsql
 
 # PID file
-PIDFile=/run/repmgr/repmgrd-11.pid
+PIDFile=/run/gbd-repmgr/repmgrd-11.pid
 
-# Location of repmgr conf file:
-Environment=REPMGRDCONF=/etc/repmgr/11/repmgr.conf
-Environment=PIDFILE=/run/repmgr/repmgrd-11.pid
+# Location of gbd-repmgr conf file:
+Environment=REPMGRDCONF=/usr/gbd/repmgr/etc/11/repmgr.conf
+Environment=PIDFILE=/run/gbd-repmgr/repmgrd-11.pid
 
 # Where to send early-startup messages from the server 
 # This is normally controlled by the global default set by systemd
 # StandardOutput=syslog
-ExecStart=/usr/pgsql-11/bin/repmgrd -f ${REPMGRDCONF} -p ${PIDFILE} -d --verbose 
+ExecStart=/usr/gbdsql-11/bin/repmgrd -f ${REPMGRDCONF} -p ${PIDFILE} -d --verbose 
 ExecStop=/usr/bin/kill -TERM $MAINPID
 ExecReload=/usr/bin/kill -HUP $MAINPID
 

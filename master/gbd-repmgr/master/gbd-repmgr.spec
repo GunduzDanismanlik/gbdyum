@@ -99,7 +99,7 @@ USE_PGXS=1 %{__make} install  DESTDIR=%{buildroot}
 # ... and make a tmpfiles script to recreate it at reboot.
 %{__mkdir} -p %{buildroot}%{_tmpfilesdir}
 cat > %{buildroot}%{_tmpfilesdir}/%{name}.conf <<EOF
-d %{_rundir} 0755 gbdsql gbdsql -
+d %{_rundir}/gbd-repmgr 0755 gbdsql gbdsql -
 EOF
 
 %else
