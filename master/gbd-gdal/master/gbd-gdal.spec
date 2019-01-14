@@ -768,12 +768,14 @@ popd
 
 %files devel
 %{gdalinstdir}/bin/gdal-config
+%{gdalinstdir}/bin/gbd-dal-config
 #%{gdalinstdir}/bin/%{name}-config-%{cpuarch}
 %{gdalinstdir}/share/man/man1/gdal-config.1*
 %dir %{gdalinstdir}/include/
 %{gdalinstdir}/include/*.h
 %{gdalinstdir}/lib/*.so
 %{gdalinstdir}/lib/pkgconfig/%{sname}.pc
+/usr/lib64/pkgconfig/gbd-gdal.pc
 
 # Can I even have a separate Java package anymore?
 %files java -f .mfiles
@@ -791,7 +793,7 @@ popd
 %doc swig/python/README.txt
 %doc swig/python/samples
 #TODO: Bug with .py files in EPEL 5 bindir, see http://fedoraproject.org/wiki/EPEL/GuidelinesAndPolicies
-/bin/*.py
+%{gdalinstdir}/bin/epsg_tr.py
 %{gdalinstdir}/share/man/man1/pct2rgb.1*
 %{gdalinstdir}/share/man/man1/rgb2pct.1*
 %{gdalinstdir}/share/man/man1/gdal2tiles.1*
@@ -803,7 +805,7 @@ popd
 %{python_sitearch}/GDAL-%{version}-py*.egg-info
 %{python_sitearch}/osr.py*
 %{python_sitearch}/ogr.py*
-%{python_sitearch}/gdal*.py*
+/usr/gbd/gdal/bin/gdal*.py*
 
 %files doc
 %doc gdal_frmts ogrsf_frmts
