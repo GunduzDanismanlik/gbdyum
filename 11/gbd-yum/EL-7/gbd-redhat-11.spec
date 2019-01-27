@@ -1,7 +1,7 @@
 Name:		gbd-redhat11
 Version:	11
 Release:	2
-Summary:	GBDSQL 11.X CentOS Depo Yapılandırması
+Summary:	GBDSQL 11.X RHEL Depo Yapılandırması
 Group:		System Environment/Base
 License:	PostgreSQL
 URL:		https://yum.gbdsql.org
