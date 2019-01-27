@@ -3,9 +3,9 @@ Version:	11
 Release:	2
 Summary:	GBDSQL 11.X CentOS Depo Yapılandırması
 Group:		System Environment/Base
-License:	BSD
+License:	PostgreSQL
 URL:		https://yum.gbdsql.org
-Source0		https://yum.gbdsql.org/RPM-GPG-KEY-GBD-11
+Source0:	https://yum.gbdsql.org/RPM-GPG-KEY-GBD-11
 Source2:	gbd-11-redhat.repo
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:	noarch
@@ -34,7 +34,7 @@ key for GBD RPMs.
 %{__rm} -rf %{buildroot}
 
 %post
-/bin/rpm --import %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-GBD-11
+/usr/bin/rpm --import %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-GBD-11
 
 %files
 %defattr(-,root,root,-)

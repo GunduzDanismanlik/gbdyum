@@ -34,7 +34,7 @@ key for GBD RPMs.
 %{__rm} -rf %{buildroot}
 
 %post
-/bin/rpm --import %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-GBD-11
+/usr/bin/rpm --import %{_sysconfdir}/pki/rpm-gpg/RPM-GPG-KEY-GBD-11
 
 %files
 %defattr(-,root,root,-)

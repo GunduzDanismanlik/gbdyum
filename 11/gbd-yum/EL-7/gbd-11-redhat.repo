@@ -1,30 +1,29 @@
-[pgdg11]
-name=PostgreSQL 11 $releasever - $basearch
-baseurl=https://download.postgresql.org/pub/repos/yum/11/redhat/rhel-$releasever-$basearch
+[gbdsql11]
+name=GBDSQL 11 $releasever - $basearch
+baseurl=https://<kullanici_adi>:<parola>@yum.gunduzdanismanlik.com/11/redhat/rhel-$releasever-$basearch
 enabled=1
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG-11
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-gbd-11
 
-[pgdg11-source]
-name=PostgreSQL 11 $releasever - $basearch - Source
+[gbdsql11-source]
+name=GBDSQL 11 $releasever - $basearch - Source
 failovermethod=priority
-baseurl=https://download.postgresql.org/pub/repos/yum/srpms/11/redhat/rhel-$releasever-$basearch
+baseurl=https://<kullanici_adi>:<parola>@yum.gunduzdanismanlik.com/srpms/11/redhat/rhel-$releasever-$basearch
 enabled=0
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG-11
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-gbd-11
 
-[pgdg11-updates-testing]
-name=PostgreSQL 11 $releasever - $basearch
-baseurl=https://download.postgresql.org/pub/repos/yum/testing/11/redhat/rhel-$releasever-$basearch
+[gbdsql11-updates-testing]
+name=GBDSQL 11 $releasever - $basearch
+baseurl=https://<kullanici_adi>:<parola>@yum.gunduzdanismanlik.com/testing/11/redhat/rhel-$releasever-$basearch
 enabled=0
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG-11
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-gbd-11
 
-[pgdg11-source-updates-testing]
-name=PostgreSQL 11 $releasever - $basearch - Source
+[gbdsql11-source-updates-testing]
+name=GBDSQL 11 $releasever - $basearch - Source
 failovermethod=priority
-baseurl=https://download.postgresql.org/pub/repos/yum/srpms/testing/11/redhat/rhel-$releasever-$basearch
+baseurl=https://<kullanici_adi>:<parola>@yum.gunduzdanismanlik.com/srpms/testing/11/redhat/rhel-$releasever-$basearch
 enabled=0
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG-11
-
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-gbd-11
