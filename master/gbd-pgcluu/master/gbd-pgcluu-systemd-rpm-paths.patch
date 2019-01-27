@@ -1,0 +1,78 @@
+--- pgcluu.service.old	2019-01-27 22:03:50.420950521 +0000
++++ pgcluu.service	2019-01-27 22:06:55.045028951 +0000
+@@ -1,24 +1,20 @@
+-# Feel free to modify the name of the PostgreSQL service following
+-# your installation.
+-#
+ # For more info about custom unit files, see
+ # http://fedoraproject.org/wiki/Systemd#How_do_I_customize_a_unit_file.2F_add_a_custom_unit_file.3F
+ 
+ 
+-
+ [Unit]
+-Description=Postgresql performance and auditing reporting
++Description=GBDSQL Performans ve Audit Raporlaması
+ Documentation=man:pgcluu(1)
+ 
+ 
+ [Service]
+ PermissionsStartOnly=true
+-User=postgres
+-Environment=STATDIR=/var/lib/pgcluu/data
+-Environment=REPORTDIR=/var/lib/pgcluu/report
++User=gbdsql
++Environment=STATDIR=/var/lib/gbd-pgcluu/data
++Environment=REPORTDIR=/var/lib/gbd-pgcluu/report
+ ExecStartPre=-/bin/mkdir -p $REPORTDIR
+-ExecStartPre=-/bin/chown postgres: $REPORTDIR
+-ExecStart=/usr/local/bin/pgcluu -o $REPORTDIR $STATDIR
++ExecStartPre=-/bin/chown gbdsql: $REPORTDIR
++ExecStart=/usr/gbd/pgcluu/bin/pgcluu -o $REPORTDIR $STATDIR
+ 
+ [Install]
+ WantedBy=multi-user.target
+--- pgcluu_collectd.service.old	2019-01-27 22:04:01.789016924 +0000
++++ pgcluu_collectd.service	2019-01-27 22:06:46.684980118 +0000
+@@ -1,30 +1,30 @@
+ # Start script to run pgcluu_collectd as daemon
+ # 
+-# Feel free to modify the name of the PostgreSQL service and the path to following
++# Feel free to modify the name of the GBDSQL service and the path to following
+ # your installation.
+ #
+ 
+ [Unit]
+-Description=Postgresql performance and auditing statistics collecting
+-Documentation=man:pgcluu(1)
+-After=postgresql-9.x.service
+-Wants=postgresql-9.x.service
++Description=GBDSQL Performans  ve Audit İstatistikleri Toplanması
++Documentation=man:gbd-pgcluu(1)
++After=gbdsql-11.service
++Wants=gbdsql-11.service
+ 
+ 
+ [Service]
+ Type=forking
+ PermissionsStartOnly=true
+-User=postgres
+-Environment=STATDIR=/var/lib/pgcluu/data
+-Environment=PIDFILE=/var/run/postgresql/pgcluu_collectd.pid
++User=gbdsql
++Environment=STATDIR=/var/lib/gbd-pgcluu/data
++Environment=PIDFILE=/var/run/gbdsql/pgcluu_collectd.pid
+ ExecStartPre=-/bin/mkdir -p $STATDIR
+-ExecStartPre=-/bin/chown postgres: $STATDIR
+-ExecStart=/usr/local/bin/pgcluu_collectd --daemonize --rotate-daily --pid-file $PIDFILE $STATDIR
+-ExecStop=/usr/local/bin/pgcluu_collectd -k --pid-file $PIDFILE
++ExecStartPre=-/bin/chown gbdsql: $STATDIR
++ExecStart=/usr/gbd/pgcluu/bin/pgcluu_collectd --daemonize --rotate-daily --pid-file $PIDFILE $STATDIR
++ExecStop=/usr/gbd/pgcluu/bin/pgcluu_collectd -k --pid-file $PIDFILE
+ KillMode=process
+ Restart=on-failure
+ RestartSec=60s
+-PIDFile=/var/run/postgresql/pgcluu_collectd.pid
++PIDFile=/var/run/gbdsql/pgcluu_collectd.pid
+ 
+ [Install]
+ WantedBy=multi-user.target
