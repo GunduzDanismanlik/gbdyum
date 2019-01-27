@@ -178,7 +178,7 @@ fi
 %{_tmpfilesdir}/%{name}.conf
 %{_unitdir}/%{name}.service
 %dir %{gbddir}/%{sname}/etc/
-%config(noreplace) %{buildroot}%{gbddir}/%{sname}/etc/%{name}.conf
+%config(noreplace) %{gbddir}/%{sname}/etc/%{name}.conf
 %else
 %{_initrddir}/%{name}
 %endif
