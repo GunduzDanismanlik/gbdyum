@@ -4,7 +4,7 @@
 Summary:	A fast GBDSQL log analyzer
 Name:		gbd-%{sname}
 Version:	10.2
-Release:	1%{?dist}
+Release:	1GBD%{?dist}
 Group:		Applications/Databases
 License:	PostgreSQL
 Source0:	https://github.com/darold/%{sname}/archive/v%{version}.tar.gz
@@ -57,5 +57,5 @@ compressed file.
 %{gbddir}/%{sname}/man/man1/%{name}
 
 %changelog
-* Wed Jan 2 2019 - Devrim Gündüz <devrim@gunduz.org> 10.2
-- GBDSSQL için ilk paketleme
+* Wed Jan 2 2019 - Devrim Gündüz <devrim@gunduzdanismanlik.com> -10.2GBD
+- GBDSSQL için ilk paket

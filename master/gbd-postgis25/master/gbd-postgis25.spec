@@ -351,5 +351,5 @@ fi
 %doc %{sname}-%{version}.pdf
 
 %changelog
-* Wed Jan 2 2019 Devrim Gündüz <devrim@gunduz.org> - 2.5.1-4
-- GBDSQL için ilk sürüm
+* Wed Jan 2 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.5.1-4GBD
+- GBDSQL için ilk paket

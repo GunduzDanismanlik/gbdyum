@@ -29,7 +29,7 @@
 
 Name:		%{gbdsname}
 Version:	1.11.4
-Release:	12%{?dist}
+Release:	12GBD%{?dist}
 Summary:	GIS file format library
 Group:		System Environment/Libraries
 License:	MIT
@@ -826,5 +826,5 @@ popd
 #Or as before, using ldconfig
 
 %changelog
-* Sun Jan 28 2018 Devrim Gündüz <devrim@gunduz.org> - 1.11.4-12
-- Initial version of gbd-gdal
+* Sun Jan 28 2018 Devrim Gündüz <devrim@gunduzdanismanlik.com> 1.11.4-12GBD
+- GBDSQL için ilk paket

@@ -106,4 +106,4 @@ strip %{buildroot}%{pginstdir}/lib/*.so
 
 %changelog
 * Sun Jan 27 20198 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.00.0000-1GBD
-- Update to 11.00.0000
+- GBDSQL için ilk paket

@@ -177,5 +177,5 @@ echo "%{geosinstdir}/%{_geoslibdir}/" > %{buildroot}%{_sysconfdir}/ld.so.conf.d/
 %{geosinstdir}/%{_geoslibdir}/python%{pyver}/site-packages/%{sname}/%{sname}.py?
 
 %changelog
-* Mon Oct 15 2018 Devrim Gündüz <devrim@gunduz.org> - 3.7.0-1.1
-- Initial GBDSQL build
+* Mon Oct 15 2018 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 3.7.0-1.1GBD
+- GBDSQL için ilk paket

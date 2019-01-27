@@ -16,7 +16,7 @@
 Summary:	Job scheduler for PostgreSQL
 Name:		gbd-%{sname}_%{pgmajorversion}
 Version:	4.0.0
-Release:	2%{?dist}
+Release:	2GBD%{?dist}
 License:	PostgreSQL
 Source0:	https://download.postgresql.org/pub/pgadmin/%{sname}/pgAgent-%{version}-Source.tar.gz
 Source2:	gbd-%{sname}-%{pgmajorversion}.service
@@ -187,5 +187,5 @@ fi
 %{pginstdir}/share/extension/%{sname}.control
 
 %changelog
-* Fri Jan 4 2019 Devrim Gündüz <devrim@gunduz.org> - 4.0.0-2
+* Fri Jan 4 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 4.0.0-2GBD
 - GBDSQL için ilk paket

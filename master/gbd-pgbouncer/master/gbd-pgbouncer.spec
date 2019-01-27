@@ -20,7 +20,7 @@
 
 Name:		gbd-%{sname}
 Version:	1.9.0
-Release:	1%{?dist}.1
+Release:	1GBD%{?dist}.1
 Summary:	Lightweight connection pooler for PostgreSQL
 License:	MIT and BSD
 URL:		https://%{sname}.github.io/
@@ -210,5 +210,5 @@ fi
 %{gbddir}/%{sname}/share/man/man*/pgbouncer.*
 
 %changelog
-* Mon Oct 15 2018 Devrim Gündüz <devrim@gunduz.org> - 1.9.0-1.1
-- GBDSQL için ilk paketleme
+* Mon Oct 15 2018 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 1.9.0-1.1GBD
+- GBDSQL için ilk paket

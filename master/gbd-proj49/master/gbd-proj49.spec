@@ -205,42 +205,5 @@ popd
 %attr(0644,root,root) %{projinstdir}/share/%{sname}/epsg
 
 %changelog
-* Mon Oct 15 2018 Devrim Gündüz <devrim@gunduz.org> - 0:4.9.3-3.1
-- Rebuild against PostgreSQL 11.0
-
-* Tue Nov 28 2017 Devrim Gündüz <devrim@gunduz.org> - 4.9.3-3
-- Fix linker config file contents. Per report from Daniel Farina.
-
-* Thu Nov 23 2017 Devrim Gündüz <devrim@gunduz.org> - 4.9.3-2
-- Add a linker config file to satisfy GDAL and other packages
-  which we use while building PostGIS.
-
-* Tue Nov 21 2017 Devrim Gündüz <devrim@gunduz.org> 4.9.3-1
-- Update to 4.9.3
-
-* Mon Apr 24 2017 Devrim Gündüz <devrim@gunduz.org> 4.9.2-1
-- Update to 4.9.2
-
-* Wed Mar 11 2015 Devrim Gündüz <devrim@gunduz.org> 4.9.1-1
-- Update to 4.9.1
-- track soname so bumps are not a suprise.
-- -devel: include .pc file here (left copy in -nad too)
-
-* Thu Jul 26 2012 Devrim Gündüz <devrim@gunduz.org> - 0:4.8.0-2
-- Add --without-jni to configure, for clean build..
-
-* Wed Apr 04 2012 - Devrim Gündüz <devrim@gunduz.org> - 0:4.8.0-1
-- Update to 4.8.0
-
-* Thu Dec 10 2009 - Devrim Gündüz <devrim@gunduz.org> - 0:4.7.0-1
-- Update to 4.7.0
-- Update proj-datumgrid to 1.5
-- Fix attr issue for epsg package.
-
-* Tue Dec 2 2008 - Devrim Gündüz <devrim@gunduz.org> - 0:4.6.1-1
-- Update to 4.6.1
-- Update URLs
-
-* Thu Apr 3 2008 - Devrim Gündüz <devrim@gunduz.org> - 0:4.6.0-1
-- Initial build for yum.postgresql.org, based on Fedora/EPEL spec.
-
+* Sun Jan 27 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 0:4.9.3-3.1GBD
+- GBDSQL için ilk paket

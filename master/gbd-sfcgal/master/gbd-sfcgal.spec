@@ -130,5 +130,5 @@ make %{?_smp_mflags} install/fast DESTDIR=%{buildroot}
 %{gbddir}/%{sname}/lib/libSFCGAL.la
 
 %changelog
-* Mon Oct 15 2018 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 1.2.2-1.1
-- GBDSQL için ilk sürüm
+* Mon Oct 15 2018 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 1.2.2-1.1GBD
+- GBDSQL için ilk paket

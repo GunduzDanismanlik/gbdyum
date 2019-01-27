@@ -9,7 +9,7 @@
 Summary:	GBDSQL Audit Extension
 Name:		gbd-%{sname}13_%{pgmajorversion}
 Version:	1.3.0
-Release:	GBD1%{?dist}
+Release:	1GBD%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Source0:	https://github.com/%{sname}/%{sname}/archive/%{version}.tar.gz
@@ -82,5 +82,5 @@ trail or audit log. The term audit log is used in this documentation.
 %endif
 
 %changelog
-* Tue Jan 15 2019 Devrim GGündüz <devrim@gunduzdanismanlik.com> 1.3.0-1
+* Tue Jan 15 2019 Devrim GGündüz <devrim@gunduzdanismanlik.com> 1.3.0-1GBD
 - GBDSQL için ilk paket

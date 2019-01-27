@@ -9,7 +9,7 @@
 Summary:	GBDSQL-based distributed RDBMS
 Name:		gbd-%{sname}_%{pgmajorversion}
 Version:	8.1.1
-Release:	1%{dist}
+Release:	1GBD%{dist}
 License:	AGPLv3
 Group:		Applications/Databases
 Source0:	https://github.com/citusdata/%{sname}/archive/v%{version}.tar.gz
@@ -106,5 +106,5 @@ make %{?_smp_mflags}
 %{pginstdir}/include/server/distributed/*.h
 
 %changelog
-* Tue Jan 15 2019 Devrim Gündüz <devrim@gunduz.org> 8.1.1-1
+* Tue Jan 15 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> 8.1.1-1GBD
 - GBDSQL için ilk paket

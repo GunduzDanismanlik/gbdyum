@@ -3,7 +3,7 @@
 Summary:	JDBC driver for GBDSQL
 Name:		gbdsql-jdbc
 Version:	42.2.5
-Release:	1%{?dist}
+Release:	1GBD%{?dist}
 # ASL 2.0 applies only to gbdsql-jdbc.pom file, the rest is BSD
 License:	BSD and ASL 2.0
 Group:		Applications/Databases
@@ -142,5 +142,5 @@ test $? -eq 0 && { cat test.log ; exit 1 ; }
 %doc %{_javadocdir}/%{name}
 
 %changelog
-* Sun Jan 27 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 42.2.5-1.1
+* Sun Jan 27 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 42.2.5-1.1GBD
 - GBDSQL için ilk paket

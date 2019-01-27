@@ -4,7 +4,7 @@
 Summary:	Reliable PostgreSQL Backup & Restore
 Name:		gbd-%{sname}
 Version:	2.08
-Release:	1%{?dist}
+Release:	1GBD%{?dist}
 License:	MIT
 Group:		Applications/Databases
 Url:		http://www.pgbackrest.org/
@@ -69,5 +69,5 @@ popd
 %attr(-,gbdsql,gbdsql) /var/spool/%{name}
 
 %changelog
-* Fri Jan 4 2019 Devrim Gündüz <devrim@gunduz.org> - 2.08-1
-- Update to 2.08
+* Fri Jan 4 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.08-1GBD
+- GBDSQL için ilk paket
