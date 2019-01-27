@@ -6,6 +6,7 @@ repo1-host-user=gbdsql
 repo1-retention-full=3
 log-level-console=info
 log-level-file=detail
+log-path=/var/log/gbd-pgbackrest
 compress=n
 
 [global:archive-push]
