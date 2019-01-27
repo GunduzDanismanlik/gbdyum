@@ -9,6 +9,8 @@ log-level-file=detail
 log-path=/var/log/gbd-pgbackrest
 compress=n
 
+lock-path=/tmp/gbd-pgbackrest
+
 [global:archive-push]
 log-level-console=info
 log-level-stderr=info
