@@ -4,7 +4,8 @@ baseurl=https://yum.gunduzdanismanlik.com/11/redhat/rhel-$releasever-$basearch
 enabled=1
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-GBD-11
-# GBD tarafından verilen kullanıcı adı ve parolanızı giriniz:
+# GBD tarafından verilen kullanıcı adı ve parolanızı giriniz.
+# Kullanıcı adı ve parola icin depo@gbdsql.org adresine e-posta atabilirsiniz.
 username=<kullanıcı adı>
 password=<parola>
 
@@ -15,7 +16,8 @@ baseurl=https://<kullanici_adi>:<parola>@yum.gunduzdanismanlik.com/srpms/11/redh
 enabled=0
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-GBD-11
-# GBD tarafından verilen kullanıcı adı ve parolanızı giriniz:
+# GBD tarafından verilen kullanıcı adı ve parolanızı giriniz.
+# Kullanıcı adı ve parola icin depo@gbdsql.org adresine e-posta atabilirsiniz.
 username=<kullanıcı adı>
 password=<parola>
 
@@ -25,7 +27,8 @@ baseurl=https://<kullanici_adi>:<parola>@yum.gunduzdanismanlik.com/testing/11/re
 enabled=0
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-GBD-11
-# GBD tarafından verilen kullanıcı adı ve parolanızı giriniz:
+# GBD tarafından verilen kullanıcı adı ve parolanızı giriniz.
+# Kullanıcı adı ve parola icin depo@gbdsql.org adresine e-posta atabilirsiniz.
 username=<kullanıcı adı>
 password=<parola>
 
@@ -36,6 +39,7 @@ baseurl=https://<kullanici_adi>:<parola>@yum.gunduzdanismanlik.com/srpms/testing
 enabled=0
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-GBD-11
-# GBD tarafından verilen kullanıcı adı ve parolanızı giriniz:
+# GBD tarafından verilen kullanıcı adı ve parolanızı giriniz.
+# Kullanıcı adı ve parola icin depo@gbdsql.org adresine e-posta atabilirsiniz.
 username=<kullanıcı adı>
 password=<parola>
