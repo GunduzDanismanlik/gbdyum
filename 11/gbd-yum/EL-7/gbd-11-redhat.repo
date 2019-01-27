@@ -3,7 +3,7 @@ name=GBDSQL 11 $releasever - $basearch
 baseurl=https://<kullanici_adi>:<parola>@yum.gunduzdanismanlik.com/11/redhat/rhel-$releasever-$basearch
 enabled=1
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-gbd-11
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-GBD-11
 
 [gbdsql11-source]
 name=GBDSQL 11 $releasever - $basearch - Source
@@ -11,14 +11,14 @@ failovermethod=priority
 baseurl=https://<kullanici_adi>:<parola>@yum.gunduzdanismanlik.com/srpms/11/redhat/rhel-$releasever-$basearch
 enabled=0
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-gbd-11
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-GBD-11
 
 [gbdsql11-updates-testing]
 name=GBDSQL 11 $releasever - $basearch
 baseurl=https://<kullanici_adi>:<parola>@yum.gunduzdanismanlik.com/testing/11/redhat/rhel-$releasever-$basearch
 enabled=0
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-gbd-11
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-GBD-11
 
 [gbdsql11-source-updates-testing]
 name=GBDSQL 11 $releasever - $basearch - Source
@@ -26,4 +26,5 @@ failovermethod=priority
 baseurl=https://<kullanici_adi>:<parola>@yum.gunduzdanismanlik.com/srpms/testing/11/redhat/rhel-$releasever-$basearch
 enabled=0
 gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-gbd-11
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-GBD-11
+
