@@ -1,0 +1,9 @@
+# GBD: gbd-pgaudit13 ayarları
+pgaudit.log=off
+pgaudit.log_catalog=off
+pgaudit.log_client=off
+pgaudit.log_level=log
+pgaudit.log_parameter=on
+pgaudit.log_relation=on
+pgaudit.log_statement_once=off
+
