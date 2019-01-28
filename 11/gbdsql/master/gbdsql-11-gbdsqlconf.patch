@@ -1,14 +1,5 @@
---- src/backend/utils/misc/postgresql.conf.sample.old	2019-01-28 17:02:08.048223705 +0000
-+++ src/backend/utils/misc/postgresql.conf.sample	2019-01-28 17:36:16.767815259 +0000
-@@ -56,7 +56,7 @@
- 
- # - Connection Settings -
- 
--#listen_addresses = 'localhost'		# what IP address(es) to listen on;
-+listen_addresses = '*'			# what IP address(es) to listen on;
- 					# comma-separated list of addresses;
- 					# defaults to 'localhost'; use '*' for all
- 					# (change requires restart)
+--- src/backend/utils/misc/postgresql.conf.sample.old	2019-01-28 22:05:35.589224069 +0000
++++ src/backend/utils/misc/postgresql.conf.sample	2019-01-28 22:08:33.548233412 +0000
 @@ -188,7 +188,7 @@
  					# unrecoverable data corruption)
  #synchronous_commit = on		# synchronization level;
@@ -41,15 +32,6 @@
  				# placeholders: %p = path of file to archive
  				#               %f = file name only
  				# e.g. 'test ! -f /mnt/server/archivedir/%f && cp %p /mnt/server/archivedir/%f'
-@@ -238,7 +238,7 @@
- 
- #max_wal_senders = 10		# max number of walsender processes
- 				# (change requires restart)
--#wal_keep_segments = 0		# in logfile segments; 0 disables
-+wal_keep_segments = 256		# in logfile segments; 0 disables
- #wal_sender_timeout = 60s	# in milliseconds; 0 disables
- 
- #max_replication_slots = 10	# max number of replication slots
 @@ -361,25 +361,25 @@
  
  # - Where to Log -
@@ -114,9 +96,8 @@
  					#   %% = '%'
  					# e.g. '<%u%%%d> '
 -#log_lock_waits = off			# log lock waits >= deadlock_timeout
--#log_statement = 'none'			# none, ddl, mod, all
 +log_lock_waits = on			# log lock waits >= deadlock_timeout
-+log_statement = 'ddl'			# none, ddl, mod, all
+ #log_statement = 'none'			# none, ddl, mod, all
  #log_replication_commands = off
 -#log_temp_files = -1			# log temporary files equal or larger
 +log_temp_files = 0			# log temporary files equal or larger
@@ -159,22 +140,22 @@
  #local_preload_libraries = ''
  #session_preload_libraries = ''
  #jit_provider = 'llvmjit'		# JIT library to use
-@@ -686,3 +686,18 @@
+@@ -675,7 +675,7 @@
+ # These options allow settings to be loaded from files other than the
+ # default postgresql.conf.
+ 
+-#include_dir = 'conf.d'			# include files ending in '.conf' from
++include_dir = 'conf.d'			# include files ending in '.conf' from
+ 					# directory 'conf.d'
+ #include_if_exists = 'exists.conf'	# include file only if it exists
+ #include = 'special.conf'		# include file
+@@ -686,3 +686,9 @@
  #------------------------------------------------------------------------------
  
  # Add settings for extensions here
++
 +# GBD: pg_stat_statements:
 +pg_stat_statements.max = 10000
 +pg_stat_statements.track = all
 +pg_stat_statements.track_utility = on
 +pg_stat_statements.save = on
-+
-+# GBD: gbd-pgaudit
-+pgaudit.log=off
-+pgaudit.log_catalog=off
-+pgaudit.log_client=off
-+pgaudit.log_level=log
-+pgaudit.log_parameter=on
-+pgaudit.log_relation=on
-+pgaudit.log_statement_once=off
-+
