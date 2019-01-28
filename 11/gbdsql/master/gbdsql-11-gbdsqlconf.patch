@@ -1,0 +1,180 @@
+--- src/backend/utils/misc/postgresql.conf.sample.old	2019-01-28 17:02:08.048223705 +0000
++++ src/backend/utils/misc/postgresql.conf.sample	2019-01-28 17:36:16.767815259 +0000
+@@ -56,7 +56,7 @@
+ 
+ # - Connection Settings -
+ 
+-#listen_addresses = 'localhost'		# what IP address(es) to listen on;
++listen_addresses = '*'			# what IP address(es) to listen on;
+ 					# comma-separated list of addresses;
+ 					# defaults to 'localhost'; use '*' for all
+ 					# (change requires restart)
+@@ -188,7 +188,7 @@
+ 					# unrecoverable data corruption)
+ #synchronous_commit = on		# synchronization level;
+ 					# off, local, remote_write, remote_apply, or on
+-#wal_sync_method = fsync		# the default is the first option
++wal_sync_method = fdatasync		# the default is the first option
+ 					# supported by the operating system:
+ 					#   open_datasync
+ 					#   fdatasync (default on Linux)
+@@ -196,8 +196,8 @@
+ 					#   fsync_writethrough
+ 					#   open_sync
+ #full_page_writes = on			# recover from partial page writes
+-#wal_compression = off			# enable compression of full-page writes
+-#wal_log_hints = off			# also do full page writes of non-critical updates
++wal_compression = on			# enable compression of full-page writes
++wal_log_hints = on			# also do full page writes of non-critical updates
+ 					# (change requires restart)
+ #wal_buffers = -1			# min 32kB, -1 sets based on shared_buffers
+ 					# (change requires restart)
+@@ -218,9 +218,9 @@
+ 
+ # - Archiving -
+ 
+-#archive_mode = off		# enables archiving; off, on, or always
++archive_mode = on		# enables archiving; off, on, or always
+ 				# (change requires restart)
+-#archive_command = ''		# command to use to archive a logfile segment
++archive_command = '/bin/true'		# command to use to archive a logfile segment
+ 				# placeholders: %p = path of file to archive
+ 				#               %f = file name only
+ 				# e.g. 'test ! -f /mnt/server/archivedir/%f && cp %p /mnt/server/archivedir/%f'
+@@ -238,7 +238,7 @@
+ 
+ #max_wal_senders = 10		# max number of walsender processes
+ 				# (change requires restart)
+-#wal_keep_segments = 0		# in logfile segments; 0 disables
++wal_keep_segments = 256		# in logfile segments; 0 disables
+ #wal_sender_timeout = 60s	# in milliseconds; 0 disables
+ 
+ #max_replication_slots = 10	# max number of replication slots
+@@ -361,25 +361,25 @@
+ 
+ # - Where to Log -
+ 
+-#log_destination = 'stderr'		# Valid values are combinations of
++log_destination = 'stderr'		# Valid values are combinations of
+ 					# stderr, csvlog, syslog, and eventlog,
+ 					# depending on platform.  csvlog
+ 					# requires logging_collector to be on.
+ 
+ # This is used when logging to stderr:
+-#logging_collector = off		# Enable capturing of stderr and csvlog
++logging_collector = on			# Enable capturing of stderr and csvlog
+ 					# into log files. Required to be on for
+ 					# csvlogs.
+ 					# (change requires restart)
+ 
+ # These are only used if logging_collector is on:
+-#log_directory = 'log'			# directory where log files are written,
++log_directory = 'log'			# directory where log files are written,
+ 					# can be absolute or relative to PGDATA
+-#log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'	# log file name pattern,
++log_filename = 'postgresql-%a.log'	# log file name pattern,
+ 					# can include strftime() escapes
+ #log_file_mode = 0600			# creation mode for log files,
+ 					# begin with 0 to use octal notation
+-#log_truncate_on_rotation = off		# If on, an existing log file with the
++log_truncate_on_rotation = on		# If on, an existing log file with the
+ 					# same name as the new log file will be
+ 					# truncated rather than appended to.
+ 					# But such truncation only occurs on
+@@ -387,9 +387,9 @@
+ 					# or size-driven rotation.  Default is
+ 					# off, meaning append to existing files
+ 					# in all cases.
+-#log_rotation_age = 1d			# Automatic rotation of logfiles will
++log_rotation_age = 1d			# Automatic rotation of logfiles will
+ 					# happen after that time.  0 disables.
+-#log_rotation_size = 10MB		# Automatic rotation of logfiles will
++log_rotation_size = 0			# Automatic rotation of logfiles will
+ 					# happen after that much log output.
+ 					# 0 disables.
+ 
+@@ -456,13 +456,13 @@
+ #debug_print_rewritten = off
+ #debug_print_plan = off
+ #debug_pretty_print = on
+-#log_checkpoints = off
++log_checkpoints = on
+ #log_connections = off
+ #log_disconnections = off
+ #log_duration = off
+ #log_error_verbosity = default		# terse, default, or verbose messages
+ #log_hostname = off
+-#log_line_prefix = '%m [%p] '		# special values:
++log_line_prefix = '< user=%u app=%a db=%d host=%h pid=%p time=%m xid=%x > '		# special values:
+ 					#   %a = application name
+ 					#   %u = user name
+ 					#   %d = database name
+@@ -483,10 +483,10 @@
+ 					#        processes
+ 					#   %% = '%'
+ 					# e.g. '<%u%%%d> '
+-#log_lock_waits = off			# log lock waits >= deadlock_timeout
+-#log_statement = 'none'			# none, ddl, mod, all
++log_lock_waits = on			# log lock waits >= deadlock_timeout
++log_statement = 'ddl'			# none, ddl, mod, all
+ #log_replication_commands = off
+-#log_temp_files = -1			# log temporary files equal or larger
++log_temp_files = 0			# log temporary files equal or larger
+ 					# than the specified size in kilobytes;
+ 					# -1 disables, 0 logs all temp files
+ #log_timezone = 'GMT'
+@@ -495,7 +495,7 @@
+ # PROCESS TITLE
+ #------------------------------------------------------------------------------
+ 
+-#cluster_name = ''			# added to process titles if nonempty
++cluster_name = 'gbdsql/11'			# added to process titles if nonempty
+ 					# (change requires restart)
+ #update_process_title = on
+ 
+@@ -508,7 +508,7 @@
+ 
+ #track_activities = on
+ #track_counts = on
+-#track_io_timing = off
++track_io_timing = on
+ #track_functions = none			# none, pl, all
+ #track_activity_query_size = 1024	# (change requires restart)
+ #stats_temp_directory = 'pg_stat_tmp'
+@@ -528,7 +528,7 @@
+ 
+ #autovacuum = on			# Enable autovacuum subprocess?  'on'
+ 					# requires track_counts to also be on.
+-#log_autovacuum_min_duration = -1	# -1 disables, 0 logs all actions and
++log_autovacuum_min_duration = 0		# -1 disables, 0 logs all actions and
+ 					# their durations, > 0 logs only
+ 					# actions running at least this number
+ 					# of milliseconds.
+@@ -614,7 +614,7 @@
+ 
+ # - Shared Library Preloading -
+ 
+-#shared_preload_libraries = ''	# (change requires restart)
++shared_preload_libraries = 'pg_stat_statements,pgaudit'	# (change requires restart)
+ #local_preload_libraries = ''
+ #session_preload_libraries = ''
+ #jit_provider = 'llvmjit'		# JIT library to use
+@@ -686,3 +686,18 @@
+ #------------------------------------------------------------------------------
+ 
+ # Add settings for extensions here
++# GBD: pg_stat_statements:
++pg_stat_statements.max = 10000
++pg_stat_statements.track = all
++pg_stat_statements.track_utility = on
++pg_stat_statements.save = on
++
++# GBD: gbd-pgaudit
++pgaudit.log=off
++pgaudit.log_catalog=off
++pgaudit.log_client=off
++pgaudit.log_level=log
++pgaudit.log_parameter=on
++pgaudit.log_relation=on
++pgaudit.log_statement_once=off
++

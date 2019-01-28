@@ -119,7 +119,7 @@ Source3:	%{sname}-%{pgmajorversion}.init
 %endif
 
 Patch1:		%{sname}-%{pgmajorversion}-rpm-pgsql.patch
-Patch3:		%{sname}-%{pgmajorversion}-logging.patch
+Patch3:		%{sname}-%{pgmajorversion}-gbdsqlconf.patch
 Patch5:		%{sname}-%{pgmajorversion}-var-run-socket.patch
 Patch6:		%{sname}-%{pgmajorversion}-perl-rpath.patch
 # GBD Patches
