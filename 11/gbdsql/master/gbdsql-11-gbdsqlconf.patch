@@ -1,5 +1,5 @@
---- src/backend/utils/misc/postgresql.conf.sample.old	2019-01-29 00:22:18.897732513 +0000
-+++ src/backend/utils/misc/postgresql.conf.sample	2019-01-29 00:25:40.342756527 +0000
+--- src/backend/utils/misc/postgresql.conf.sample.old	2019-01-29 00:42:00.416964157 +0000
++++ src/backend/utils/misc/postgresql.conf.sample	2019-01-29 00:42:26.531970384 +0000
 @@ -188,7 +188,7 @@
  					# unrecoverable data corruption)
  #synchronous_commit = on		# synchronization level;
@@ -54,7 +54,7 @@
 +log_directory = 'log'			# directory where log files are written,
  					# can be absolute or relative to PGDATA
 -#log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log'	# log file name pattern,
-+log_filename = 'postgresql-%a.log'	# log file name pattern,
++log_filename = 'gbdsql-%a.log'		# log file name pattern,
  					# can include strftime() escapes
  #log_file_mode = 0600			# creation mode for log files,
  					# begin with 0 to use octal notation
