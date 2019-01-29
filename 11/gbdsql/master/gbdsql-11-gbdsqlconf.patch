@@ -1,5 +1,5 @@
---- src/backend/utils/misc/postgresql.conf.sample.old	2019-01-28 22:05:35.589224069 +0000
-+++ src/backend/utils/misc/postgresql.conf.sample	2019-01-28 22:08:33.548233412 +0000
+--- src/backend/utils/misc/postgresql.conf.sample.old	2019-01-29 00:22:18.897732513 +0000
++++ src/backend/utils/misc/postgresql.conf.sample	2019-01-29 00:25:40.342756527 +0000
 @@ -188,7 +188,7 @@
  					# unrecoverable data corruption)
  #synchronous_commit = on		# synchronization level;
@@ -136,19 +136,10 @@
  # - Shared Library Preloading -
  
 -#shared_preload_libraries = ''	# (change requires restart)
-+shared_preload_libraries = 'pg_stat_statements,pgaudit'	# (change requires restart)
++shared_preload_libraries = 'pg_stat_statements'	# (change requires restart)
  #local_preload_libraries = ''
  #session_preload_libraries = ''
  #jit_provider = 'llvmjit'		# JIT library to use
-@@ -675,7 +675,7 @@
- # These options allow settings to be loaded from files other than the
- # default postgresql.conf.
- 
--#include_dir = 'conf.d'			# include files ending in '.conf' from
-+include_dir = 'conf.d'			# include files ending in '.conf' from
- 					# directory 'conf.d'
- #include_if_exists = 'exists.conf'	# include file only if it exists
- #include = 'special.conf'		# include file
 @@ -686,3 +686,9 @@
  #------------------------------------------------------------------------------
  
