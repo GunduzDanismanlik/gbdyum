@@ -13,7 +13,6 @@ Release:	1GBD%{?dist}
 License:	BSD
 Group:		Applications/Databases
 Source0:	https://github.com/%{sname}/%{sname}/archive/%{version}.tar.gz
-Source1:	gbd-%{sname}-gbdsql.conf.patch
 Patch0:		gbd-%{sname}-pg%{pgmajorversion}-makefile-pgxs.patch
 URL:		https://www.pgaudit.org
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -63,9 +62,6 @@ trail or audit log. The term audit log is used in this documentation.
 %{__install} -d %{buildroot}%{pginstdir}/doc/extension
 %{__install} -m 644 README.md %{buildroot}%{pginstdir}/doc/extension/README-%{sname}.md
 %{__rm} -f %{buildroot}%{pginstdir}/doc/extension/README.md
-# Install GBDSQL specific config file
-%{__install} -d %{buildroot}/var/lib/gbdsql/%{pgmajorversion}/data/conf.d
-%{__install} -m 644 %{SOURCE1} %{buildroot}/var/lib/gbdsql/%{pgmajorversion}/data/conf.d/gbd-pgaudit13-gbdsql.conf
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -76,7 +72,6 @@ trail or audit log. The term audit log is used in this documentation.
 %{pginstdir}/lib/%{sname}.so
 %{pginstdir}/share/extension/pgaudit--1.3.sql
 %{pginstdir}/share/extension/%{sname}.control
-%attr(700,gbdsql,gbdsql) /var/lib/gbdsql/%{pgmajorversion}/data/conf.d/gbd-pgaudit13-gbdsql.conf
 %ifarch ppc64 ppc64le
  %else
  %if %{pgmajorversion} >= 11 && %{pgmajorversion} < 90
