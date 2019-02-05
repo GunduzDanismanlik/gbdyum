@@ -1,0 +1,60 @@
+--- src/bin/psql/startup.c.old	2019-02-05 21:56:25.152558156 +0000
++++ src/bin/psql/startup.c	2019-02-05 21:58:06.179558156 +0000
+@@ -786,7 +786,7 @@
+ static void
+ showVersion(void)
+ {
+-	puts("psql (PostgreSQL) " PG_VERSION);
++	puts("psql (GBDSQL) " PG_VERSION);
+ }
+ 
+ 
+--- src/bin/psql/mainloop.c.old	2019-02-05 21:56:16.571558156 +0000
++++ src/bin/psql/mainloop.c	2019-02-05 21:57:52.941558156 +0000
+@@ -202,7 +202,7 @@
+ 			strncmp(line, "PGDMP", 5) == 0)
+ 		{
+ 			free(line);
+-			puts(_("The input is a PostgreSQL custom-format dump.\n"
++			puts(_("The input is a GBDSQL custom-format dump.\n"
+ 				   "Use the pg_restore command-line client to restore this dump to a database.\n"));
+ 			fflush(stdout);
+ 			successResult = EXIT_FAILURE;
+@@ -285,7 +285,7 @@
+ #endif
+ 				else
+ 				{
+-					puts(_("You are using psql, the command-line interface to PostgreSQL."));
++					puts(_("You are using psql, the command-line interface to GBDSQL."));
+ 					printf(_("Type:  \\copyright for distribution terms\n"
+ 							 "       \\h for help with SQL commands\n"
+ 							 "       \\? for help with psql commands\n"
+--- src/bin/psql/help.c.old	2019-02-05 21:56:11.543558156 +0000
++++ src/bin/psql/help.c	2019-02-05 21:57:15.051558156 +0000
+@@ -70,7 +70,7 @@
+ 	 */
+ 	output = PageOutput(61, pager ? &(pset.popt.topt) : NULL);
+ 
+-	fprintf(output, _("psql is the PostgreSQL interactive terminal.\n\n"));
++	fprintf(output, _("psql is the GBDSQL interactive terminal.\n\n"));
+ 	fprintf(output, _("Usage:\n"));
+ 	fprintf(output, _("  psql [OPTION]... [DBNAME [USERNAME]]\n\n"));
+ 
+@@ -143,7 +143,7 @@
+ 	fprintf(output, _("\nFor more information, type \"\\?\" (for internal commands) or \"\\help\" (for SQL\n"
+ 					  "commands) from within psql, or consult the psql section in the PostgreSQL\n"
+ 					  "documentation.\n\n"));
+-	fprintf(output, _("Report bugs to <pgsql-bugs@postgresql.org>.\n"));
++	fprintf(output, _("Report bugs to <destek@gbdsql.com>.\n"));
+ 
+ 	ClosePager(output);
+ }
+@@ -170,7 +170,7 @@
+ 	output = PageOutput(125, pager ? &(pset.popt.topt) : NULL);
+ 
+ 	fprintf(output, _("General\n"));
+-	fprintf(output, _("  \\copyright             show PostgreSQL usage and distribution terms\n"));
++	fprintf(output, _("  \\copyright             show GBDSQL usage and distribution terms\n"));
+ 	fprintf(output, _("  \\crosstabview [COLUMNS] execute query and display results in crosstab\n"));
+ 	fprintf(output, _("  \\errverbose            show most recent error message at maximum verbosity\n"));
+ 	fprintf(output, _("  \\g [FILE] or ;         execute query (and send results to file or |pipe)\n"));

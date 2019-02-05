@@ -124,7 +124,7 @@ Patch5:		%{sname}-%{pgmajorversion}-var-run-socket.patch
 Patch6:		%{sname}-%{pgmajorversion}-perl-rpath.patch
 # GBD Patches
 Patch7:		%{sname}-%{pgmajorversion}-creategbdsqldb.patch
-
+Patch8:		%{sname}-%{pgmajorversion}-psql.patch
 BuildRequires:	perl glibc-devel bison flex >= 2.5.31
 BuildRequires:	perl(ExtUtils::MakeMaker)
 BuildRequires:	readline-devel zlib-devel >= 1.0.4
@@ -549,6 +549,7 @@ benchmarks.
 %patch6 -p0
 # GBD Patches
 %patch7 -p0
+%patch8 -p0
 
 %{__cp} -p %{SOURCE12} .
 
