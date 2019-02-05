@@ -1,0 +1,11 @@
+--- CMakeLists.txt.old	2018-02-06 20:47:37.894178361 +0000
++++ CMakeLists.txt	2018-02-06 20:47:49.192250521 +0000
+@@ -61,7 +61,7 @@
+     "The path to a PostgreSQL installation")
+ endif (UNIX)
+ 
+-find_program(PG_CONFIG pg_config
++find_program(PG_CONFIG /usr/gbdsql-11/bin/pg_config
+   HINTS
+   ${PG_PATH}
+   PATH_SUFFIXES

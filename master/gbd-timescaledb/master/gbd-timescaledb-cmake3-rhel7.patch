@@ -1,0 +1,11 @@
+--- bootstrap.old	2018-03-07 16:17:45.686370282 +0000
++++ bootstrap	2018-03-07 16:17:58.077432788 +0000
+@@ -30,7 +30,7 @@
+ 
+ mkdir -p ${BUILD_DIR} && \
+     cd ${BUILD_DIR} && \
+-    cmake ${SRC_DIR} "$@"
++    cmake3 ${SRC_DIR} "$@"
+ 
+ echo "TimescaleDB build system initialized in ${BUILD_DIR}. To compile, do:"
+ echo -e "\033[1mcd ${BUILD_DIR} && make\033[0m"
