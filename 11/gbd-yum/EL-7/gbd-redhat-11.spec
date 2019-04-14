@@ -1,6 +1,6 @@
 Name:		gbd-redhat11
 Version:	11
-Release:	2
+Release:	3
 Summary:	GBDSQL 11.X RHEL Depo Yapılandırması
 Group:		System Environment/Base
 License:	PostgreSQL
@@ -43,5 +43,8 @@ key for GBD RPMs.
 %{_sysconfdir}/pki/rpm-gpg/*
 
 %changelog
+* Sun Apr 14 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11-3
+- GBDSQL artık kullanıcı adı / parola istemiyor.
+
 * Sun Jan 13 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11-2
 - GBDSQL depo paketi
