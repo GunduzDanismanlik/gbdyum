@@ -3,7 +3,7 @@
 %global gbddir	/usr/gbd
 Summary:	Reliable PostgreSQL Backup & Restore
 Name:		gbd-%{sname}
-Version:	2.08
+Version:	2.12
 Release:	1GBD%{?dist}
 License:	MIT
 Group:		Applications/Databases
@@ -69,5 +69,8 @@ popd
 %attr(-,gbdsql,gbdsql) /var/spool/%{name}
 
 %changelog
+* Sun Apr 14 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.12-1GBD
+- 2.12 güncellemesi
+
 * Fri Jan 4 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.08-1GBD
 - GBDSQL için ilk paket
