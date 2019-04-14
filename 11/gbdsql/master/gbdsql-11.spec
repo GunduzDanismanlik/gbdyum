@@ -91,7 +91,7 @@
 Summary:	GBDSQL client programs and libraries
 Name:		%{sname}%{pgmajorversion}
 Version:	11.2
-Release:	2GBD%{?dist}
+Release:	1GBD%{?dist}
 License:	PostgreSQL
 Group:		Applications/Databases
 Url:		https://www.gunduzdanismanlik.com
@@ -1527,9 +1527,6 @@ fi
 %endif
 
 %changelog
-* Sun Apr 14 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.2-2GBD
-- yum hataları için rebuild
-
 * Fri Feb 15 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.2-1GBD
 * 11.2 güncellemesi
 
