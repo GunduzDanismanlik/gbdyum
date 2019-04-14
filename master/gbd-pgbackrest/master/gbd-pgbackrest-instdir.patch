@@ -1,13 +1,13 @@
---- src/Makefile.old	2019-01-13 23:41:32.143678524 +0300
-+++ src/Makefile	2019-01-13 23:41:49.886780081 +0300
-@@ -156,8 +156,8 @@
+--- src/Makefile.old	2019-04-14 02:28:17.649284151 +0100
++++ src/Makefile	2019-04-14 02:29:02.620557231 +0100
+@@ -182,8 +182,8 @@
  # Installation.  DESTDIR can be used to modify the install location.
  ####################################################################################################################################
  install: pgbackrest
--	install -d $(DESTDIR)/usr/bin
--	install -m 755 pgbackrest $(DESTDIR)/usr/bin
+-	install -d $(DESTDIR)
+-	install -m 755 pgbackrest $(DESTDIR)
 +	install -d $(DESTDIR)/usr/gbd/pgbackrest/bin
 +	install -m 755 pgbackrest $(DESTDIR)/usr/gbd/pgbackrest/bin
  
  ####################################################################################################################################
- # Compile rules
+ # Uninstallation.  DESTDIR should be set to the same value as when installed.
