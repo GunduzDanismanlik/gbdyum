@@ -26,20 +26,20 @@
 %{!?pam:%global pam 1}
 %{!?plpython2:%global plpython2 1}
 
-%if 0%{?rhel} <= 7
+%if 0%{?rhel} && 0%{?rhel} <= 7
 # RHEL 6 and 7 does not have Python 3
 %{!?plpython3:%global plpython3 0}
 %endif
 
-%if 0%{?fedora} > 23
+%if 0%{?fedora} && 0%{?fedora} > 27
 # All Fedora releases now use Python3
 %{!?plpython3:%global plpython3 1}
 # This is the list of contrib modules that will be compiled with PY3 as well:
 %global python3_build_list hstore_plpython jsonb_plpython ltree_plpython
 %endif
 
-%if 0%{?rhel} >= 8
-# RHEL 8 now use Python3
+%if 0%{?rhel} && 0%{?rhel} >= 8
+# RHEL 8 now uses Python3
 %{!?plpython3:%global plpython3 1}
 # This is the list of contrib modules that will be compiled with PY3 as well:
 %global python3_build_list hstore_plpython jsonb_plpython ltree_plpython
@@ -90,7 +90,7 @@
 
 Summary:	GBDSQL client programs and libraries
 Name:		%{sname}%{pgmajorversion}
-Version:	11.2
+Version:	11.3
 Release:	1GBD%{?dist}
 License:	PostgreSQL
 Group:		Applications/Databases
@@ -384,15 +384,20 @@ Requires:	libicu-devel
 %endif
 
 %if %enabletaptests
-%if 0%{?suse_version}
-%if 0%{?suse_version} >= 1315
+%if 0%{?suse_version} && 0%{?suse_version} >= 1315
 Requires:	perl-IPC-Run
+BuildRequires:	perl-IPC-Run
 %endif
-%else
-Requires:	perl-IPC-Run
-%endif
+%if 0%{?rhel} && 0%{?rhel} <= 7
 Requires:	perl-Test-Simple
+BuildRequires:	perl-Test-Simple
 %endif
+%if 0%{?fedora}
+Requires:	perl-IPC-Run
+BuildRequires:	perl-IPC-Run
+%endif
+%endif
+
 Provides:	postgresql-devel
 
 %ifarch ppc64 ppc64le
@@ -1527,6 +1532,9 @@ fi
 %endif
 
 %changelog
+* Fri May 10 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.3-1GBD
+- 11.3 güncellemesi
+
 * Fri Feb 15 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.2-1GBD
 * 11.2 güncellemesi
 
