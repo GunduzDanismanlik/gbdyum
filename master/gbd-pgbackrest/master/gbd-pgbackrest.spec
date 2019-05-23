@@ -3,7 +3,7 @@
 %global gbddir	/usr/gbd
 Summary:	Reliable PostgreSQL Backup & Restore
 Name:		gbd-%{sname}
-Version:	2.12
+Version:	2.14
 Release:	1GBD%{?dist}
 License:	MIT
 Group:		Applications/Databases
@@ -39,6 +39,7 @@ are required to perform a backup which increases security.
 
 %build
 pushd src
+./configure
 %{__make}
 popd
 
@@ -69,6 +70,9 @@ popd
 %attr(-,gbdsql,gbdsql) /var/spool/%{name}
 
 %changelog
+* Thu May 23 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.14-1GBD
+- 2.14 güncellemesi
+
 * Sun Apr 14 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.12-1GBD
 - 2.12 güncellemesi
 
