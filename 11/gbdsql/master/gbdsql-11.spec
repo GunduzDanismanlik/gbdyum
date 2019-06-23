@@ -1,5 +1,4 @@
 %global pgmajorversion 11
-#%global debug_package %{nil}
 # These are macros to be used with find_lang and other stuff
 %global packageversion 110
 %global prevmajorversion 10
@@ -90,7 +89,7 @@
 
 Summary:	GBDSQL client programs and libraries
 Name:		%{sname}%{pgmajorversion}
-Version:	11.3
+Version:	11.4
 Release:	1GBD%{?dist}
 License:	PostgreSQL
 Group:		Applications/Databases
@@ -1532,6 +1531,9 @@ fi
 %endif
 
 %changelog
+* Thu Jun 19 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.4-1GBD
+- 11.4 güncellemesi
+
 * Fri May 10 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.3-1GBD
 - 11.3 güncellemesi
 
