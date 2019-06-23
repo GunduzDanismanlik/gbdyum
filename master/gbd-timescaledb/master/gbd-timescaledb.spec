@@ -8,7 +8,7 @@
 
 Summary:	GBDSQL based time-series database
 Name:		gbd-%{sname}_%{pgmajorversion}
-Version:	1.1.1
+Version:	1.3.1
 Release:	1%{?dist}
 License:	Apache
 Source0:	https://github.com/timescale/%{sname}/archive/%{version}.tar.gz
@@ -38,7 +38,7 @@ support.
 %setup -q -n %{sname}-%{version}
 %patch0 -p0
 %patch1 -p0
-./bootstrap
+./bootstrap -DAPACHE_ONLY=1 -DSEND_TELEMETRY_DEFAULT=NO
 
 %build
 %ifarch ppc64 ppc64le
@@ -72,5 +72,9 @@ cd build; %{__make} DESTDIR=%{buildroot} install
 %{pginstdir}/share/extension/%{sname}.control
 
 %changelog
+* Sun Jun 23 2019 Devrim Gündüz <devrim@gunduz.org> - 1.3.1-1
+- 1.3.1 güncellemesi
+- Telemetri özelliğini kapattık.
+
 * Tue Feb 5 2019 Devrim Gündüz <devrim@gunduz.org> - 1.1.1-1
 - GBDSQL için ilk paket
