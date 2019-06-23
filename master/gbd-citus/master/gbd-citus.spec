@@ -8,7 +8,7 @@
 
 Summary:	GBDSQL-based distributed RDBMS
 Name:		gbd-%{sname}_%{pgmajorversion}
-Version:	8.2.1
+Version:	8.2.2
 Release:	1GBD%{dist}
 License:	AGPLv3
 Group:		Applications/Databases
@@ -106,7 +106,10 @@ make %{?_smp_mflags}
 %{pginstdir}/include/server/distributed/*.h
 
 %changelog
-* Sun Apr 14 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> 8.2-1-1GBD
+* Sun Jun 23 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> 8.2.2-1GBD
+- 8.2.2 güncellemesi
+
+* Sun Apr 14 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> 8.2.1-1GBD
 - 8.2.1 güncellemesi
 
 * Tue Jan 15 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> 8.1.1-1GBD
