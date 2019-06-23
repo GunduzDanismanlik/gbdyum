@@ -1531,7 +1531,7 @@ fi
 %endif
 
 %changelog
-* Thu Jun 19 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.4-1GBD
+* Thu Jun 20 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.4-1GBD
 - 11.4 güncellemesi
 
 * Fri May 10 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.3-1GBD
