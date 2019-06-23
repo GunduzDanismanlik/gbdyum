@@ -26,7 +26,7 @@
 
 Summary:		Pgpool is a connection pooling/replication server for GBDSQL
 Name:			gbd-%{sname}-%{pgmajorversion}
-Version:		4.0.3
+Version:		4.0.5
 Release:		1GBD%{?dist}
 License:		PostgreSQL
 Group:			Applications/Databases
@@ -353,6 +353,9 @@ fi
 %{pginstdir}/lib/pgpool-regclass.so
 
 %changelog
+* Sun Jun 23 2019 Devrim Gündüz <devrim@gunduz.org> 4.0.5-1GBD
+- 4.0.5 güncellemesi
+
 * Sun Apr 14 2019 Devrim Gündüz <devrim@gunduz.org> 4.0.3-1GBD
 - 4.0.3 güncellemesi
 
