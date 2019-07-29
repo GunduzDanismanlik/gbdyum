@@ -8,7 +8,7 @@
 
 Name:		gbdsql%{pgmajorversion}-odbc
 Summary:	GBDSQL ODBC driver
-Version:	11.00.0000
+Version:	11.01.0000
 Release:	1GBD%{?dist}
 License:	LGPLv2
 Group:		Applications/Databases
