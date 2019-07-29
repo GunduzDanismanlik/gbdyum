@@ -2,7 +2,7 @@
 
 Summary:	JDBC driver for GBDSQL
 Name:		gbdsql-jdbc
-Version:	42.2.5
+Version:	42.2.6
 Release:	1GBD%{?dist}
 # ASL 2.0 applies only to gbdsql-jdbc.pom file, the rest is BSD
 License:	BSD and ASL 2.0
