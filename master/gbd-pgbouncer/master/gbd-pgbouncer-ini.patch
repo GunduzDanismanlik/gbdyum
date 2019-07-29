@@ -1,5 +1,5 @@
---- etc/pgbouncer.ini.old	2019-01-14 23:24:32.403692667 +0000
-+++ etc/pgbouncer.ini	2019-01-14 23:25:01.744692667 +0000
+--- etc/pgbouncer.ini.old	2019-07-29 17:16:44.521273924 +0300
++++ etc/pgbouncer.ini	2019-07-29 17:18:09.842924177 +0300
 @@ -13,6 +13,9 @@
  ; redirect bardb to bazdb on localhost
  ;bardb = host=localhost dbname=bazdb
@@ -21,26 +21,25 @@
  
  ;;;
  ;;; Where to wait for clients
-@@ -45,8 +48,7 @@
- listen_port = 6432
+@@ -46,7 +49,7 @@
  
  ; Unix socket is also used for -R.
--; On Debian it should be /var/run/postgresql
+ ; On Debian it should be /var/run/postgresql
 -;unix_socket_dir = /tmp
 +unix_socket_dir = /run/gbdsql
  ;unix_socket_mode = 0777
  ;unix_socket_group =
  
-@@ -105,7 +107,7 @@
+@@ -104,7 +107,7 @@
+ 
  ; any, trust, plain, crypt, md5, cert, hba, pam
  auth_type = trust
- ;auth_file = /8.0/main/global/pg_auth
 -auth_file = /etc/pgbouncer/userlist.txt
 +auth_file = /usr/gbd/pgbouncer/etc/userlist.txt
  
  ;; Path to HBA-style auth config
  ;auth_hba_file =
-@@ -119,10 +121,10 @@
+@@ -118,10 +121,10 @@
  ;;;
  
  ; comma-separated list of users, who are allowed to change settings
@@ -53,7 +52,7 @@
  
  ;;;
  ;;; Pooler personality questions
-@@ -290,7 +292,7 @@
+@@ -289,7 +292,7 @@
  ;; Max number pkt_buf to process in one event loop.
  ;sbuf_loopcnt = 5
  
