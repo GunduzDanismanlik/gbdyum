@@ -38,7 +38,7 @@
 
 Summary:	Geographic Information Systems Extensions to GBDSQL
 Name:		gbd-%{sname}%{postgiscurrmajorversion}_%{pgmajorversion}
-Version:	%{postgismajorversion}.2
+Version:	%{postgismajorversion}.3
 Release:	1GBD%{?dist}
 License:	GPLv2+
 Group:		Applications/Databases
@@ -351,6 +351,9 @@ fi
 %doc %{sname}-%{version}.pdf
 
 %changelog
+* Sun Aug 11 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.5.3-1GBD
+- 2.5.3 güncellemesi
+
 * Sun Apr 14 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.5.2-1GBD
 - 2.5.2 güncellemesi
 
