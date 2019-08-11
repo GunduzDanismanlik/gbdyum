@@ -89,7 +89,7 @@
 
 Summary:	GBDSQL client programs and libraries
 Name:		%{sname}%{pgmajorversion}
-Version:	11.4
+Version:	11.5
 Release:	1GBD%{?dist}
 License:	PostgreSQL
 Group:		Applications/Databases
@@ -1531,6 +1531,9 @@ fi
 %endif
 
 %changelog
+* Sun Aug 11 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.5-1GBD
+- 11.5 güncellemesi
+
 * Thu Jun 20 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.4-1GBD
 - 11.4 güncellemesi
 
