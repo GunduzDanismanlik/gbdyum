@@ -134,6 +134,7 @@ make %{?_smp_mflags} install/fast DESTDIR=%{buildroot}
 %files libs
 %{gbddir}/%{sname}/lib64/libSFCGAL.so*
 %{gbddir}/%{sname}/lib/libSFCGAL.la
+%config(noreplace) %attr (644,root,root) %{_sysconfdir}/ld.so.conf.d/%{name}-libs.conf
 
 %changelog
 * Mon Aug 12 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 1.2.2-2.1GBD
