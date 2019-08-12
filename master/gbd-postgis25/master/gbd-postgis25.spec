@@ -5,7 +5,7 @@
 %global postgisprevmajorversion 2.4
 %global sname	postgis
 %global	geosinstdir %{gbddir}/geos37
-%global	projinstdir %{gbddir}/proj49
+%global	projinstdir %{gbddir}/proj52
 
 %{!?utils:%global	utils 1}
 %if 0%{?fedora} >= 27 || 0%{?rhel} >= 7 || 0%{?suse_version} >= 1315
@@ -39,7 +39,7 @@
 Summary:	Geographic Information Systems Extensions to GBDSQL
 Name:		gbd-%{sname}%{postgiscurrmajorversion}_%{pgmajorversion}
 Version:	%{postgismajorversion}.3
-Release:	1GBD%{?dist}
+Release:	2GBD%{?dist}
 License:	GPLv2+
 Group:		Applications/Databases
 Source0:	http://download.osgeo.org/%{sname}/source/%{sname}-%{version}.tar.gz
@@ -56,7 +56,7 @@ BuildRequires:	gbdsql%{pgmajorversion}-devel, gbd-geos37-devel >= 3.7.0, pcre-de
 BuildRequires:	libjson-c-devel libproj-devel
 %endif
 %else
-BuildRequires:	gbd-proj49-devel, flex, json-c-devel
+BuildRequires:	gbd-proj52-devel, flex, json-c-devel
 %endif
 BuildRequires:	libxml2-devel
 %if %{shp2pgsqlgui}
@@ -67,18 +67,23 @@ BuildRequires:	gbd-sfcgal-devel
 Requires:	gbd-sfcgal
 %endif
 %if %{raster}
-  %if 0%{?rhel} && 0%{?rhel} < 6
+  %if 0%{?rhel} && 0%{?rhel} <= 6
 BuildRequires:	gdal-devel >= 1.9.2-9
   %else
-BuildRequires:	gdal-devel >= 1.11.4-3
+BuildRequires:	gdal23-devel >= 2.3.2-7
   %endif
 %endif
+
+%if 0%{?fedora} >= 29 || 0%{?rhel} >= 8
+BuildRequires:	protobuf-c-devel
+%endif
+
 %ifarch ppc64 ppc64le
 BuildRequires:	advance-toolchain-%{atstring}-devel
 %endif
 
 Requires:	gbdsql%{pgmajorversion} gbd-geos37 >= 3.7.0
-Requires:	gbdsql%{pgmajorversion}-contrib gbd-proj49
+Requires:	gbdsql%{pgmajorversion}-contrib gbd-proj52
 %if 0%{?rhel} && 0%{?rhel} < 6
 Requires:	hdf5 < 1.8.7
 %else
@@ -351,6 +356,9 @@ fi
 %doc %{sname}-%{version}.pdf
 
 %changelog
+* Mon Aug 12 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.5.3-2GBD
+- gbd-proj52 ve gbd-geos37 paketlerini kullanan ilk sürüm
+
 * Sun Aug 11 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.5.3-1GBD
 - 2.5.3 güncellemesi
 
