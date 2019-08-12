@@ -8,7 +8,7 @@
 %endif
 
 Name:		gbd-%{sname}%{pgmajorversion}
-Version:	4.3.0
+Version:	4.4.0
 Release:	1GBD%{?dist}
 Summary:	Replication Manager for GBDSQL Clusters
 License:	GPLv3
@@ -167,6 +167,9 @@ fi
 %endif
 
 %changelog
+* Mon Jul 29 2019 - Devrim Gündüz <devrim@gunduzdanismanlik.com> 4.4.0-1GBD
+- 4.4.0 güncellemesi
+
 * Sun Apr 14 2019 - Devrim Gündüz <devrim@gunduzdanismanlik.com> 4.3.0-1GBD
 - 4.3.0 güncellemesi
 
