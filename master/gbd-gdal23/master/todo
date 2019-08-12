@@ -1,0 +1,3 @@
+CONFIG_PREFIX="/usr/gdal23"
+CONFIG_CFLAGS="-I/usr/gdal23/include"
+

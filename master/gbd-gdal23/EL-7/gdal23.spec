@@ -1,0 +1,1 @@
+../master/gdal23.spec

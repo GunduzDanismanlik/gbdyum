@@ -1,0 +1,12 @@
+Index: gdal-2.2.3-fedora/swig/java/java.opt
+===================================================================
+--- gdal-2.2.3-fedora.orig/swig/java/java.opt
++++ gdal-2.2.3-fedora/swig/java/java.opt
+@@ -7,6 +7,6 @@ JAVADOC=$(JAVA_HOME)/bin/javadoc
+ JAVAC=$(JAVA_HOME)/bin/javac
+ JAVA=$(JAVA_HOME)/bin/java
+ JAR=$(JAVA_HOME)/bin/jar
+-JAVA_INCLUDE=-I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux
++JAVA_INCLUDE=-I/usr/lib/jvm/java/include/ -I/usr/lib/jvm/java/include/linux
+ 
+ 

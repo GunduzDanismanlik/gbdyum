@@ -1,0 +1,314 @@
+--- gdal-2.3.2-fedora/frmts/pdf/pdfdataset.cpp
++++ gdal-2.3.2-fedora/frmts/pdf/pdfdataset.cpp
+@@ -165,7 +165,7 @@ class GDALPDFOutputDev : public SplashOu
+ 
+     public:
+         GDALPDFOutputDev(SplashColorMode colorModeA, int bitmapRowPadA,
+-                         GBool reverseVideoA, SplashColorPtr paperColorA) :
++                         bool reverseVideoA, SplashColorPtr paperColorA) :
+                 SplashOutputDev(colorModeA, bitmapRowPadA,
+                                 reverseVideoA, paperColorA),
+                 bEnableVector(TRUE),
+@@ -227,11 +227,11 @@ class GDALPDFOutputDev : public SplashOu
+         }
+ 
+ #ifndef POPPLER_0_23_OR_LATER
+-        virtual GBool deviceHasTextClip(GfxState *state) override
++        virtual bool deviceHasTextClip(GfxState *state) override
+         {
+             if (bEnableText)
+                 return SplashOutputDev::deviceHasTextClip(state);
+-            return gFalse;
++            return false;
+         }
+ #endif
+ 
+@@ -242,8 +242,8 @@ class GDALPDFOutputDev : public SplashOu
+         }
+ 
+         virtual void drawImageMask(GfxState *state, Object *ref, Stream *str,
+-                                   int width, int height, GBool invert,
+-                                   GBool interpolate, GBool inlineImg) override
++                                   int width, int height, bool invert,
++                                   bool interpolate, bool inlineImg) override
+         {
+             if (bEnableBitmap)
+                 SplashOutputDev::drawImageMask(state, ref, str,
+@@ -263,8 +263,8 @@ class GDALPDFOutputDev : public SplashOu
+ #ifdef POPPLER_0_20_OR_LATER
+         virtual void setSoftMaskFromImageMask(GfxState *state,
+                             Object *ref, Stream *str,
+-                            int width, int height, GBool invert,
+-                            GBool inlineImg, double *baseMatrix) override
++                            int width, int height, bool invert,
++                            bool inlineImg, double *baseMatrix) override
+         {
+             if (bEnableBitmap)
+                 SplashOutputDev::setSoftMaskFromImageMask(state, ref, str,
+@@ -283,7 +283,7 @@ class GDALPDFOutputDev : public SplashOu
+ 
+         virtual void drawImage(GfxState *state, Object *ref, Stream *str,
+                                int width, int height, GfxImageColorMap *colorMap,
+-                               GBool interpolate, int *maskColors, GBool inlineImg) override
++                               bool interpolate, int *maskColors, bool inlineImg) override
+         {
+             if (bEnableBitmap)
+                 SplashOutputDev::drawImage(state, ref, str,
+@@ -305,9 +305,9 @@ class GDALPDFOutputDev : public SplashOu
+         virtual void drawMaskedImage(GfxState *state, Object *ref, Stream *str,
+                                      int width, int height,
+                                      GfxImageColorMap *colorMap,
+-                                     GBool interpolate,
++                                     bool interpolate,
+                                      Stream *maskStr, int maskWidth, int maskHeight,
+-                                     GBool maskInvert, GBool maskInterpolate) override
++                                     bool maskInvert, bool maskInterpolate) override
+         {
+             if (bEnableBitmap)
+                 SplashOutputDev::drawMaskedImage(state, ref, str,
+@@ -322,11 +322,11 @@ class GDALPDFOutputDev : public SplashOu
+         virtual void drawSoftMaskedImage(GfxState *state, Object *ref, Stream *str,
+                                          int width, int height,
+                                          GfxImageColorMap *colorMap,
+-                                         GBool interpolate,
++                                         bool interpolate,
+                                          Stream *maskStr,
+                                          int maskWidth, int maskHeight,
+                                          GfxImageColorMap *maskColorMap,
+-                                         GBool maskInterpolate) override
++                                         bool maskInterpolate) override
+         {
+             if (bEnableBitmap)
+             {
+@@ -1728,7 +1728,7 @@ CPLErr PDFDataset::ReadPixels( int nReqX
+         GDALPDFOutputDev *poSplashOut =
+             new GDALPDFOutputDev(
+                 (nBands < 4) ? splashModeRGB8 : splashModeXBGR8,
+-                4, gFalse,
++                4, false,
+                 (nBands < 4) ? sColor : nullptr);
+ 
+         if (pszRenderingOptions != nullptr)
+@@ -1780,7 +1780,7 @@ CPLErr PDFDataset::ReadPixels( int nReqX
+                                 iPage,
+                                 dfDPI, dfDPI,
+                                 0,
+-                                TRUE, gFalse, gFalse,
++                                TRUE, false, false,
+                                 nReqXOff, nReqYOff,
+                                 nReqXSize, nReqYSize);
+ 
+@@ -2599,7 +2599,7 @@ static void PDFDatasetErrorFunction(CPL_
+ #else
+                                     int nPos,
+ #endif
+-                                    char *pszMsg)
++                                    const char *pszMsg)
+ {
+     CPLString osError;
+ 
+@@ -3440,16 +3440,15 @@ void PDFDataset::FindLayersPoppler()
+     }
+     else
+     {
+-        GooList* ocgList = optContentConfig->getOCGs();
+-        for(int i=0;i<ocgList->getLength();i++)
+-        {
+-            OptionalContentGroup* ocg = (OptionalContentGroup*) ocgList->get(i);
+-            if( ocg != nullptr && ocg->getName() != nullptr )
+-            {
+-                const char* pszLayerName = (const char*)ocg->getName()->getCString();
+-                AddLayer(pszLayerName);
+-                oLayerOCGMapPoppler[pszLayerName] = ocg;
+-            }
++        const auto &ocgList = optContentConfig->getOCGs();
++        for (const auto &oc : ocgList) {
++          OptionalContentGroup* ocg = (OptionalContentGroup*) oc.second.get();
++          if( ocg != nullptr && ocg->getName() != nullptr )
++          {
++              const char* pszLayerName = (const char*)ocg->getName()->c_str();
++              AddLayer(pszLayerName);
++              oLayerOCGMapPoppler[pszLayerName] = ocg;
++          }
+         }
+     }
+ 
+@@ -3472,11 +3471,10 @@ void PDFDataset::TurnLayersOnOffPoppler(
+     {
+         int i;
+         int bAll = EQUAL(pszLayers, "ALL");
+-        GooList* ocgList = optContentConfig->getOCGs();
+-        for(i=0;i<ocgList->getLength();i++)
+-        {
+-            OptionalContentGroup* ocg = (OptionalContentGroup*) ocgList->get(i);
+-            ocg->setState( (bAll) ? OptionalContentGroup::On : OptionalContentGroup::Off );
++        const auto &ocgList = optContentConfig->getOCGs();
++        for (const auto &oc : ocgList) {
++          OptionalContentGroup* ocg = (OptionalContentGroup*) oc.second.get();
++          ocg->setState( (bAll) ? OptionalContentGroup::On : OptionalContentGroup::Off );
+         }
+ 
+         char** papszLayers = CSLTokenizeString2(pszLayers, ",", 0);
+@@ -4430,7 +4428,7 @@ GDALDataset *PDFDataset::Open( GDALOpenI
+ #ifdef HAVE_POPPLER
+     if (bUseLib.test(PDFLIB_POPPLER))
+     {
+-        PDFRectangle* psMediaBox = poPagePoppler->getMediaBox();
++        const PDFRectangle* psMediaBox = poPagePoppler->getMediaBox();
+         dfX1 = psMediaBox->x1;
+         dfY1 = psMediaBox->y1;
+         dfX2 = psMediaBox->x2;
+@@ -4768,12 +4766,12 @@ GDALDataset *PDFDataset::Open( GDALOpenI
+     GooString* poMetadata = poCatalogPoppler->readMetadata();
+     if (poMetadata)
+     {
+-        char* pszContent = poMetadata->getCString();
++        const char* pszContent = poMetadata->c_str();
+         if (pszContent != nullptr &&
+             STARTS_WITH(pszContent, "<?xpacket begin="))
+         {
+             char *apszMDList[2];
+-            apszMDList[0] = pszContent;
++            apszMDList[0] = (char *) pszContent;
+             apszMDList[1] = nullptr;
+             poDS->SetMetadata(apszMDList, "xml:XMP");
+         }
+--- gdal-2.3.2-fedora/frmts/pdf/pdfio.cpp
++++ gdal-2.3.2-fedora/frmts/pdf/pdfio.cpp
+@@ -66,7 +66,7 @@ VSIPDFFileStream::VSIPDFFileStream(
+     poFilename(new GooString(pszFilename)),
+     f(fIn),
+     nStart(0),
+-    bLimited(gFalse),
++    bLimited(false),
+     nLength(0),
+     nCurrentPos(VSI_L_OFFSET_MAX),
+     bHasSavedPos(FALSE),
+@@ -80,7 +80,7 @@ VSIPDFFileStream::VSIPDFFileStream(
+ /************************************************************************/
+ 
+ VSIPDFFileStream::VSIPDFFileStream( VSIPDFFileStream* poParentIn,
+-                                    vsi_l_offset startA, GBool limitedA,
++                                    vsi_l_offset startA, bool limitedA,
+                                     vsi_l_offset lengthA,
+                                     makeSubStream_object_type dictA) :
+ #ifdef POPPLER_0_58_OR_LATER
+@@ -139,7 +139,7 @@ BaseStream* VSIPDFFileStream::copy()
+ /************************************************************************/
+ /*                             makeSubStream()                          */
+ /************************************************************************/
+-Stream *VSIPDFFileStream::makeSubStream(makeSubStream_offset_type startA, GBool limitedA,
++Stream *VSIPDFFileStream::makeSubStream(makeSubStream_offset_type startA, bool limitedA,
+                                         makeSubStream_offset_type lengthA, makeSubStream_object_type dictA)
+ {
+ #ifdef POPPLER_0_58_OR_LATER
+@@ -346,7 +346,7 @@ void VSIPDFFileStream::setPos(setPos_off
+     }
+     else
+     {
+-        if (bLimited == gFalse)
++        if (bLimited == false)
+         {
+             VSIFSeekL(f, 0, SEEK_END);
+         }
+@@ -380,7 +380,7 @@ void VSIPDFFileStream::moveStart(moveSta
+ /*                          hasGetChars()                               */
+ /************************************************************************/
+ 
+-GBool VSIPDFFileStream::hasGetChars()
++bool VSIPDFFileStream::hasGetChars()
+ {
+     return true;
+ }
+@@ -389,7 +389,7 @@ GBool VSIPDFFileStream::hasGetChars()
+ /*                            getChars()                                */
+ /************************************************************************/
+ 
+-int VSIPDFFileStream::getChars(int nChars, Guchar *buffer)
++int VSIPDFFileStream::getChars(int nChars, unsigned char *buffer)
+ {
+     int nRead = 0;
+     while (nRead < nChars)
+--- gdal-2.3.2-fedora/frmts/pdf/pdfio.h
++++ gdal-2.3.2-fedora/frmts/pdf/pdfio.h
+@@ -46,9 +46,9 @@
+ #define moveStart_delta_type Goffset
+ #else
+ #define getPos_ret_type int
+-#define getStart_ret_type Guint
+-#define makeSubStream_offset_type Guint
+-#define setPos_offset_type Guint
++#define getStart_ret_type unsigned int
++#define makeSubStream_offset_type unsigned int
++#define setPos_offset_type unsigned int
+ #define moveStart_delta_type int
+ #endif
+ 
+@@ -64,7 +64,7 @@ class VSIPDFFileStream: public BaseStrea
+         VSIPDFFileStream(VSILFILE* f, const char* pszFilename,
+                          makeSubStream_object_type dictA);
+         VSIPDFFileStream(VSIPDFFileStream* poParent,
+-                         vsi_l_offset startA, GBool limitedA,
++                         vsi_l_offset startA, bool limitedA,
+                          vsi_l_offset lengthA,
+                          makeSubStream_object_type dictA);
+         virtual ~VSIPDFFileStream();
+@@ -73,7 +73,7 @@ class VSIPDFFileStream: public BaseStrea
+         virtual BaseStream* copy() override;
+ #endif
+ 
+-        virtual Stream *   makeSubStream(makeSubStream_offset_type startA, GBool limitedA,
++        virtual Stream *   makeSubStream(makeSubStream_offset_type startA, bool limitedA,
+                                          makeSubStream_offset_type lengthA, makeSubStream_object_type dictA) override;
+         virtual getPos_ret_type      getPos() override;
+         virtual getStart_ret_type    getStart() override;
+@@ -99,8 +99,8 @@ class VSIPDFFileStream: public BaseStrea
+          * This test will be wrong for poppler 0.15 or 0.16,
+          * but will still compile correctly.
+          */
+-        virtual GBool hasGetChars() override;
+-        virtual int getChars(int nChars, Guchar *buffer) override;
++        virtual bool hasGetChars() override;
++        virtual int getChars(int nChars, unsigned char *buffer) override;
+ #else
+         virtual GBool hasGetChars() ;
+         virtual int getChars(int nChars, Guchar *buffer) ;
+@@ -110,7 +110,7 @@ class VSIPDFFileStream: public BaseStrea
+         GooString         *poFilename;
+         VSILFILE          *f;
+         vsi_l_offset       nStart;
+-        GBool              bLimited;
++        bool               bLimited;
+         vsi_l_offset       nLength;
+ 
+         vsi_l_offset       nCurrentPos;
+--- gdal-2.3.2-fedora/frmts/pdf/pdfobject.cpp
++++ gdal-2.3.2-fedora/frmts/pdf/pdfobject.cpp
+@@ -1061,7 +1061,7 @@ const CPLString& GDALPDFObjectPoppler::G
+ #else
+         GooString* gooString = m_po->getString();
+ #endif
+-        return (osStr = GDALPDFGetUTF8StringFromBytes(reinterpret_cast<const GByte*>(gooString->getCString()),
++        return (osStr = GDALPDFGetUTF8StringFromBytes(reinterpret_cast<const GByte*>(gooString->c_str()),
+                                                       static_cast<int>(gooString->getLength())));
+     }
+     else
+@@ -1422,7 +1422,7 @@ char* GDALPDFStreamPoppler::GetBytes()
+         char* pszContent = (char*) VSIMalloc(m_nLength + 1);
+         if (pszContent)
+         {
+-            memcpy(pszContent, gstr->getCString(), m_nLength);
++            memcpy(pszContent, gstr->c_str(), m_nLength);
+             pszContent[m_nLength] = '\0';
+         }
+         delete gstr;
+--- gdal-2.3.2-fedora/frmts/pdf/pdfsdk_headers.h
++++ gdal-2.3.2-fedora/frmts/pdf/pdfsdk_headers.h
+@@ -50,7 +50,6 @@
+ #pragma warning( disable : 4244 ) /* conversion from 'const int' to 'Guchar', possible loss of data */
+ #endif
+ 
+-#include <goo/gtypes.h>
+ #include <goo/GooList.h>
+ 
+ /* begin of poppler xpdf includes */
