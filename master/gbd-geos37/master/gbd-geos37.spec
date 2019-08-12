@@ -16,8 +16,8 @@
 %endif
 
 Name:		gbd-%{sname}37
-Version:	3.7.0
-Release:	1GBD%{?dist}.1
+Version:	3.7.2
+Release:	1GBD%{?dist}
 Summary:	GEOS is a C++ port of the Java Topology Suite
 
 Group:		Applications/Engineering
@@ -127,10 +127,6 @@ cd doc
 %{__mkdir} -p %{buildroot}%{_sysconfdir}/ld.so.conf.d/
 echo "%{geosinstdir}/%{_geoslibdir}/" > %{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}-libs.conf
 
-%check
-# test module
-%{__make} %{?_smp_mflags} check || exit 0
-
 %clean
 %{__rm} -rf %{buildroot}
 
@@ -177,5 +173,8 @@ echo "%{geosinstdir}/%{_geoslibdir}/" > %{buildroot}%{_sysconfdir}/ld.so.conf.d/
 %{geosinstdir}/%{_geoslibdir}/python%{pyver}/site-packages/%{sname}/%{sname}.py?
 
 %changelog
+* Mon Aug 12 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 3.7.2-1.1GBD
+- 3.7.2 güncellemesi
+
 * Mon Oct 15 2018 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 3.7.0-1.1GBD
 - GBDSQL için ilk paket
