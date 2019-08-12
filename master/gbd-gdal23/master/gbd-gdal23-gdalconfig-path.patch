@@ -6,8 +6,8 @@
  	echo 'CONFIG_DEP_LIBS="$(LIBS)"' >> gdal-config-inst
 -	echo 'CONFIG_PREFIX="$(INST_PREFIX)"' >> gdal-config-inst
 -	echo 'CONFIG_CFLAGS="-I$(INST_INCLUDE)"' >> gdal-config-inst
-+	echo 'CONFIG_PREFIX="/usr/gdal23"' >> gdal-config-inst
-+	echo 'CONFIG_CFLAGS="-I/usr/gdal23/include"' >> gdal-config-inst
++	echo 'CONFIG_PREFIX="/usr/gbd/gdal23"' >> gdal-config-inst
++	echo 'CONFIG_CFLAGS="-I/usr/gbd/gdal23/include"' >> gdal-config-inst
  	echo 'CONFIG_DATA="$(INST_DATA)"' >> gdal-config-inst
  	echo 'CONFIG_VERSION="'`cat ../VERSION`'"' >> gdal-config-inst
  	echo 'CONFIG_OGR_ENABLED=yes' >> gdal-config-inst  # Deprecated.  Always true.

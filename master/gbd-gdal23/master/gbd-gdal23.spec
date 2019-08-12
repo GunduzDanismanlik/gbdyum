@@ -80,7 +80,7 @@ Source1:	%{sname}autotest-%{testversion}.tar.gz
 Source3:	%{sname}-cleaner.sh
 
 Source4:	PROVENANCE.TXT-fedora
-Source5:	%{name}-pgdg-libs.conf
+Source5:	%{name}-libs.conf
 
 # Fix bash-completion install dir
 Patch3:		%{name}-completion.patch
@@ -95,8 +95,8 @@ Patch10:	%{name}-2.3.1-perl-build.patch
 
 Patch11:	%{name}-2.3.2-poppler-0.73.0.patch
 
-# PGDG patches
-Patch12:	%{name}-gdalconfig-pgdg-path.patch
+# GBD patches
+Patch12:	%{name}-gdalconfig-path.patch
 
 BuildRequires:	gcc gcc-c++
 BuildRequires:	ant
@@ -570,7 +570,7 @@ done
 %{__rm} -f %{buildroot}%{gdalinstdir}/share/man/man1/*_%{name}-%{version}-fedora_apps_*
 %{__rm} -f %{buildroot}%{gdalinstdir}/share/man/man1/_home_rouault_dist_wrk_gdal_apps_.1*
 
-# PGDG: Move includes under gdalinst directory:
+# GBD: Move includes under gdalinst directory:
 %{__mkdir} -p %{buildroot}%{gdalinstdir}/include
 %{__mkdir} -p %{buildroot}%{gdalinstdir}/share/man
 %{__mv} %{buildroot}%{_includedir}/* %{buildroot}%{gdalinstdir}/include
@@ -627,7 +627,7 @@ done
 %{gdalinstdir}/share/
 #TODO: Possibly remove files like .dxf, .dgn, ...
 %dir %{gdalinstdir}/lib/%{sname}plugins
-%config(noreplace) %attr (644,root,root) %{_sysconfdir}/ld.so.conf.d/%{name}-pgdg-libs.conf
+%config(noreplace) %attr (644,root,root) %{_sysconfdir}/ld.so.conf.d/%{name}-gbd-libs.conf
 
 %files devel
 %{gdalinstdir}/bin/%{sname}-config
