@@ -6,6 +6,7 @@
 %global sname	postgis
 %global	geosinstdir %{gbddir}/geos37
 %global	projinstdir %{gbddir}/proj52
+%global gdal23instdir %{gbddir}/gdal23
 
 %{!?utils:%global	utils 1}
 %if 0%{?fedora} >= 27 || 0%{?rhel} >= 7 || 0%{?suse_version} >= 1315
