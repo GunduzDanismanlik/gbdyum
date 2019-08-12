@@ -114,7 +114,7 @@ BuildRequires:	fontconfig-devel
 # No freexl in EL5
 BuildRequires:	freexl-devel
 BuildRequires:	g2clib-static
-BuildRequires:	geos37-devel >= 3.7.1
+BuildRequires:	gbd-geos37-devel >= 3.7.1
 BuildRequires:	ghostscript
 BuildRequires:	hdf-devel
 BuildRequires:	hdf-static
@@ -163,7 +163,7 @@ BuildRequires:	%{_bindir}/pkg-config
 %if 0%{?with_poppler}
 BuildRequires:	poppler-devel
 %endif
-BuildRequires:	proj52-devel >= 5.2.0
+BuildRequires:	gbd-proj52-devel >= 5.2.0
 BuildRequires:	sqlite-devel
 BuildRequires:	swig
 %if %{build_refman}
