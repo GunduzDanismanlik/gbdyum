@@ -70,7 +70,7 @@ Requires:	gbd-sfcgal
   %if 0%{?rhel} && 0%{?rhel} <= 6
 BuildRequires:	gdal-devel >= 1.9.2-9
   %else
-BuildRequires:	gdal23-devel >= 2.3.2-7
+BuildRequires:	gbd-gdal23-devel >= 2.3.2-7
   %endif
 %endif
 
@@ -98,7 +98,7 @@ Requires: json-c
 %if 0%{?rhel} && 0%{?rhel} < 6
 Requires:	gdal-libs >= 1.9.2-9
 %else
-Requires:	gdal-libs >= 1.11.4-3
+Requires:	gbd-gdal23-libs >= 2.3.2-7
 %endif
 %endif
 Requires(post):	%{_sbindir}/update-alternatives
@@ -191,8 +191,15 @@ The %{name}-utils package provides the utilities for PostGIS.
 %patch0 -p0
 
 %build
+# Add GeOS flags
 LDFLAGS="-Wl,-rpath,%{geosinstdir}/lib64 ${LDFLAGS}" ; export LDFLAGS
 SHLIB_LINK="$SHLIB_LINK -Wl,-rpath,%{geosinstdir}/lib64" ; export SHLIB_LINK
+
+# GDAL:
+LDFLAGS="-Wl,-rpath,%{gdal23instdir}/lib ${LDFLAGS}" ; export LDFLAGS
+SHLIB_LINK="$SHLIB_LINK -Wl,-rpath,%{gdal23instdir}/lib" ; export SHLIB_LINK
+
+CFLAGS="${CFLAGS:-%optflags}"
 
 %ifarch ppc64 ppc64le
 	sed -i 's:^GEOS_LDFLAGS=:GEOS_LDFLAGS=-L%{atpath}/%{_lib} :g' configure
@@ -213,6 +220,7 @@ LDFLAGS="$LDFLAGS -L/%{geosinstdir}/lib64 -L%{projinstdir}/lib"; export LDFLAGS
 %if %{shp2pgsqlgui}
 	--with-gui \
 %endif
+	--with-gdalconfig=%{gdal23instdir}/bin/gdal-config \
 	--enable-rpath --libdir=%{pginstdir}/lib \
 	--with-geosconfig=/%{geosinstdir}/bin/geos-config \
 	--with-projdir=%{projinstdir}
