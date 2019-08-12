@@ -152,7 +152,7 @@ BuildRequires:	mariadb-devel
 %if 0%{?fedora}
 BuildRequires:	mariadb-connector-c-devel
 %endif
-BuildRequires:	postgresql%{pgmajorversion}-devel
+BuildRequires:	gbdsql%{pgmajorversion}-devel
 BuildRequires:	pcre-devel
 BuildRequires:	ogdi-devel
 BuildRequires:	perl-devel
@@ -651,9 +651,5 @@ done
 #Or as before, using ldconfig
 
 %changelog
-* Thu Jun 27 2019 Devrim Gündüz <devrim@gunduz.org> - 2.3.2-8
-- Add linker config file, per various bug reports.
-
-* Wed Jun 5 2019 Devrim Gündüz <devrim@gunduz.org> - 2.3.2-7
-- Initial packaging for PostgreSQL RPM repository, based on
-  Fedora packaging.
+* Mon Aug 12 2019 Devrim Gündüz <devrim@gunduz.org> - 2.3.2-8
+- GBDSQL için ilk paket
