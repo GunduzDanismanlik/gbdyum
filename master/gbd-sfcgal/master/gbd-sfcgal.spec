@@ -136,7 +136,7 @@ make %{?_smp_mflags} install/fast DESTDIR=%{buildroot}
 %{gbddir}/%{sname}/lib/libSFCGAL.la
 
 %changelog
-* Mon Aug 12 20198 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 1.2.2-2.1GBD
+* Mon Aug 12 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 1.2.2-2.1GBD
 - Linker yapılandrma dosyası eklendi.
 
 * Mon Oct 15 2018 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 1.2.2-1.1GBD
