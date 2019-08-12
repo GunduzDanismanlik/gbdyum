@@ -10,10 +10,11 @@
 Summary:	C++ wrapper library around CGAL for PostGIS
 Name:		%{gbdsname}
 Version:	1.2.2
-Release:	1GBD%{?dist}
+Release:	2GBD%{?dist}
 License:	GLPLv2
 Group:		System Environment/Libraries
 Source:		https://github.com/Oslandia/%{sname}/archive/v%{version}.tar.gz
+Source2:	%{name}-libs.conf
 URL:		http://%{sname}.org/
 BuildRequires:	cmake, CGAL-devel
 %if 0%{?suse_version}
@@ -92,6 +93,11 @@ make %{?_smp_mflags}
 %install
 make %{?_smp_mflags} install/fast DESTDIR=%{buildroot}
 
+# Install linker config file:
+%{__mkdir} -p %{buildroot}%{_sysconfdir}/ld.so.conf.d/
+%{__install} %{SOURCE2} %{buildroot}%{_sysconfdir}/ld.so.conf.d/
+
+
 %post
 %ifarch ppc64 ppc64le
 %{atpath}/sbin/ldconfig
@@ -130,5 +136,8 @@ make %{?_smp_mflags} install/fast DESTDIR=%{buildroot}
 %{gbddir}/%{sname}/lib/libSFCGAL.la
 
 %changelog
+* Mon Aug 12 20198 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 1.2.2-2.1GBD
+- Linker yapılandrma dosyası eklendi.
+
 * Mon Oct 15 2018 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 1.2.2-1.1GBD
 - GBDSQL için ilk paket
