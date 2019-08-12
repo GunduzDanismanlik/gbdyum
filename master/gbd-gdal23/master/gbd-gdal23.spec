@@ -1,9 +1,9 @@
 %global pgmajorversion 11
 %global sname gdal
 %global gbddir /usr/gbd
-%global gdalinstdir %{gbddir}/%{name}
-%global geos37instdir /usr/geos37
-%global proj52instdir /usr/proj52
+%global gdalinstdir %{gbddir}/%{sname}
+%global geos37instdir /usr/gbd/geos37
+%global proj52instdir /usr/gbd/proj52
 
 #TODO: g2clib and grib (said to be modified)
 #TODO: Create script to make clean tarball
