@@ -1,0 +1,1 @@
+../master/gbd-libgeotiff15.spec
