@@ -9,8 +9,13 @@
 
 Summary:	C++ wrapper library around CGAL for PostGIS
 Name:		%{gbdsname}
-Version:	1.2.2
-Release:	2GBD%{?dist}
+%if 0%{?fedora} || 0%{?rhel} >= 8
+Version:	1.3.7
+%endif
+%if 0%{?rhel} && 0%{?rhel} <= 7
+Version:	1.3.1
+%endif
+Release:	1GBD%{?dist}
 License:	GLPLv2
 Group:		System Environment/Libraries
 Source:		https://github.com/Oslandia/%{sname}/archive/v%{version}.tar.gz
