@@ -83,7 +83,7 @@ sed -i 's|@LIBTOOL@|%{_bindir}/libtool|g' $makefile
 done
 %endif
 
-./configure --prefix=%{geosinstdir} --libdir=/usr/geos%{_geosversion}/%{_geoslibdir} --disable-static --disable-dependency-tracking --disable-python
+./configure --prefix=%{geosinstdir} --libdir=%{geosinstdir}/%{_geoslibdir} --disable-static --disable-dependency-tracking --disable-python
 # Touch the file, since we are not using ruby bindings anymore:
 # Per http://lists.osgeo.org/pipermail/geos-devel/2009-May/004149.html
 touch swig/python/geos_wrap.cxx
