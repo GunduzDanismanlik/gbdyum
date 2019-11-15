@@ -141,5 +141,5 @@ find %{buildroot} -type f -name "*.la" -delete
 
 
 %changelog
-* Fri Nov 15 20199 Devrim Gunduz <devrim@gunduz.org> - 4.3.0a-4
+* Fri Nov 15 2019 Devrim Gunduz <devrim@gunduz.org> - 4.3.0a-4
 - Initial packaging for GBDSQL for RHEL 7.
