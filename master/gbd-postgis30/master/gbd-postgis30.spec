@@ -45,7 +45,7 @@
 %endif
 %global _smp_mflags	-j1
 
-Summary:	Geographic Information Systems Extensions to PostgreSQL
+Summary:	Geographic Information Systems Extensions to GBDSQL
 Name:		gbd-%{sname}%{postgiscurrmajorversion}_%{pgmajorversion}
 Version:	%{postgismajorversion}.0
 Release:	1%{?dist}
@@ -57,27 +57,27 @@ Patch0:		%{sname}%{postgiscurrmajorversion}-%{postgismajorversion}.0-gdalfpic.pa
 
 URL:		http://www.postgis.net/
 
-BuildRequires:	postgresql%{pgmajorversion}-devel, geos%{geosversion}-devel >= 3.8.0, pcre-devel
+BuildRequires:	gbdsql%{pgmajorversion}-devel, gbd-geos%{geosversion}-devel >= 3.8.0, pcre-devel
 %if 0%{?suse_version}
 %if 0%{?suse_version} >= 1315
 BuildRequires:	libjson-c-devel libproj-devel
 %endif
 %else
-BuildRequires:	proj%{projversion}-devel, flex, json-c-devel
+BuildRequires:	gbd-proj%{projversion}-devel, flex, json-c-devel
 %endif
 BuildRequires:	libxml2-devel
 %if %{shp2pgsqlgui}
 BuildRequires:	gtk2-devel > 2.8.0
 %endif
 %if %{sfcgal}
-BuildRequires:	SFCGAL-devel
-Requires:	SFCGAL
+BuildRequires:	gbd-sfcgal-devel
+Requires:	gbd-sfcgal
 %endif
 %if %{raster}
   %if 0%{?rhel} && 0%{?rhel} <= 6
 BuildRequires:	gdal-devel >= 1.9.2-9
   %else
-BuildRequires:	gdal%{gdalversion}-devel >= %{gdalminorversion}
+BuildRequires:	gbd-gdal%{gdalversion}-devel >= %{gdalminorversion}
   %endif
 %endif
 %ifarch ppc64 ppc64le
@@ -88,8 +88,8 @@ BuildRequires:	advance-toolchain-%{atstring}-devel
 BuildRequires:	protobuf-c-devel
 %endif
 
-Requires:	postgresql%{pgmajorversion} geos%{geosversion} >= 3.8.0
-Requires:	postgresql%{pgmajorversion}-contrib proj%{projversion} xerces-c
+Requires:	gbdsql%{pgmajorversion} geos%{geosversion} >= 3.8.0
+Requires:	gbdsql%{pgmajorversion}-contrib proj%{projversion} xerces-c
 %if 0%{?rhel} && 0%{?rhel} < 6
 Requires:	hdf5 < 1.8.7
 %else
@@ -123,8 +123,8 @@ Obsoletes:	%{sname}3_%{pgmajorversion} <= %{postgismajorversion}.0-1
 Provides:	%{sname}3_%{pgmajorversion} => %{postgismajorversion}.0
 
 %description
-PostGIS adds support for geographic objects to the PostgreSQL object-relational
-database. In effect, PostGIS "spatially enables" the PostgreSQL server,
+PostGIS adds support for geographic objects to the GBDSQL object-relational
+database. In effect, PostGIS "spatially enables" the GBDSQL server,
 allowing it to be used as a backend spatial database for geographic information
 systems (GIS), much like ESRI's SDE or Oracle's Spatial extension. PostGIS
 follows the OpenGIS "Simple Features Specification for SQL" and has been
