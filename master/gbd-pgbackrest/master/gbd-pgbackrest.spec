@@ -3,7 +3,7 @@
 %global gbddir	/usr/gbd
 Summary:	Reliable PostgreSQL Backup & Restore
 Name:		gbd-%{sname}
-Version:	2.15.1
+Version:	2.19
 Release:	1GBD%{?dist}
 License:	MIT
 Group:		Applications/Databases
@@ -70,6 +70,9 @@ popd
 %attr(-,gbdsql,gbdsql) /var/spool/%{name}
 
 %changelog
+* Fri Nov 15 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.19-1GBD
+- 2.19 güncellemesi
+
 * Tue Jul 2 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.15.1-1GBD
 - 2.15.1 güncellemesi
 
