@@ -3,12 +3,12 @@
 
 Summary:	A fast GBDSQL log analyzer
 Name:		gbd-%{sname}
-Version:	10.3
+Version:	11.1
 Release:	1GBD%{?dist}
 Group:		Applications/Databases
 License:	PostgreSQL
 Source0:	https://github.com/darold/%{sname}/archive/v%{version}.tar.gz
-URL:		https://darold.github.io/%{sname}/
+URL:		https://github.com/darold
 BuildArch:	noarch
 Requires:	perl-Text-CSV_XS
 
@@ -57,8 +57,11 @@ compressed file.
 %{gbddir}/%{sname}/man/man1/%{name}
 
 %changelog
-* Sun Apr 14 2019 - Devrim Gündüz <devrim@gunduzdanismanlik.com> -10.3GBD
+* Fri Nov 15 2019 - Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.1GBD
+- 11.1 güncellemesi
+
+* Sun Apr 14 2019 - Devrim Gündüz <devrim@gunduzdanismanlik.com> - 10.3GBD
 - 10.3 güncellemesi
 
-* Wed Jan 2 2019 - Devrim Gündüz <devrim@gunduzdanismanlik.com> -10.2GBD
+* Wed Jan 2 2019 - Devrim Gündüz <devrim@gunduzdanismanlik.com> - 10.2GBD
 - GBDSSQL için ilk paket
