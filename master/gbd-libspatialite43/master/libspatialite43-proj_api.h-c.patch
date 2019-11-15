@@ -1,0 +1,50 @@
+--- src/gaiageo/gg_transform.c.old	2019-09-21 14:53:13.762164363 +0300
++++ src/gaiageo/gg_transform.c	2019-09-21 14:53:44.150362081 +0300
+@@ -55,6 +55,7 @@
+ #endif
+ 
+ #ifndef OMIT_PROJ		/* including PROJ.4 */
++#define ACCEPT_USE_OF_DEPRECATED_PROJ_API_H
+ #include <proj_api.h>
+ #endif
+ 
+--- src/connection_cache/alloc_cache.c.old	2019-09-21 14:53:58.994458663 +0300
++++ src/connection_cache/alloc_cache.c	2019-09-21 14:54:19.011588879 +0300
+@@ -76,6 +76,7 @@
+ #endif
+ 
+ #ifndef OMIT_PROJ		/* including PROJ.4 */
++#define ACCEPT_USE_OF_DEPRECATED_PROJ_API_H
+ #include <proj_api.h>
+ #endif
+ 
+--- src/spatialite/spatialite.c.old	2019-09-21 14:54:28.489650500 +0300
++++ src/spatialite/spatialite.c	2019-09-21 14:54:39.409721497 +0300
+@@ -113,6 +113,7 @@
+ #endif
+ 
+ #ifndef OMIT_PROJ		/* including PROJ.4 */
++#define ACCEPT_USE_OF_DEPRECATED_PROJ_API_H
+ #include <proj_api.h>
+ #endif
+ 
+--- test/check_sql_stmt.c.old	2019-09-21 14:55:04.357883695 +0300
++++ test/check_sql_stmt.c	2019-09-21 14:55:10.917926345 +0300
+@@ -58,6 +58,7 @@
+ #include "spatialite.h"
+ 
+ #ifndef OMIT_GEOS		/* including GEOS */
++#define ACCEPT_USE_OF_DEPRECATED_PROJ_API_H
+ #include <geos_c.h>
+ #endif
+ 
+--- src/spatialite/statistics.c.old	2019-09-21 15:00:00.587809622 +0300
++++ src/spatialite/statistics.c	2019-09-21 15:00:21.161943381 +0300
+@@ -79,6 +79,7 @@
+ #endif
+ 
+ #ifndef OMIT_PROJ		/* including PROJ.4 */
++#define ACCEPT_USE_OF_DEPRECATED_PROJ_API_H
+ #include <proj_api.h>
+ #endif
+ 
