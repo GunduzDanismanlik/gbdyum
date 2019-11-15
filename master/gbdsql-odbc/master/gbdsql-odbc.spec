@@ -8,7 +8,7 @@
 
 Name:		gbdsql%{pgmajorversion}-odbc
 Summary:	GBDSQL ODBC driver
-Version:	11.01.0000
+Version:	12.00.0000
 Release:	1GBD%{?dist}
 License:	LGPLv2
 Group:		Applications/Databases
@@ -105,5 +105,8 @@ strip %{buildroot}%{pginstdir}/lib/*.so
 %endif
 
 %changelog
+* Fri Nov 15 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 12.00.0000-1GBD
+- 12.00.0000 güncellemesi
+
 * Sun Jan 27 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.00.0000-1GBD
 - GBDSQL için ilk paket
