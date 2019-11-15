@@ -25,8 +25,8 @@
 %{!?pam:%global pam 1}
 %{!?plpython2:%global plpython2 1}
 
-%if 0%{?rhel} && 0%{?rhel} <= 7
-# RHEL 6 and 7 does not have Python 3
+%if 0%{?rhel} && 0%{?rhel} < 7
+# RHEL 6 does not have Python 3
 %{!?plpython3:%global plpython3 0}
 %endif
 
@@ -37,8 +37,9 @@
 %global python3_build_list hstore_plpython jsonb_plpython ltree_plpython
 %endif
 
-%if 0%{?rhel} && 0%{?rhel} >= 8
-# RHEL 8 now uses Python3
+%if 0%{?rhel} >= 7
+# Support Python3 on RHEL/CentOS 7 as of 7.7+.
+# RHEL 8 uses Python3
 %{!?plpython3:%global plpython3 1}
 # This is the list of contrib modules that will be compiled with PY3 as well:
 %global python3_build_list hstore_plpython jsonb_plpython ltree_plpython
@@ -89,10 +90,9 @@
 
 Summary:	GBDSQL client programs and libraries
 Name:		%{sname}%{pgmajorversion}
-Version:	11.5
+Version:	11.6
 Release:	1GBD%{?dist}
 License:	PostgreSQL
-Group:		Applications/Databases
 Url:		https://www.gunduzdanismanlik.com
 
 Source0:	https://download.postgresql.org/pub/source/v%{version}/postgresql-%{version}.tar.bz2
@@ -271,8 +271,7 @@ Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 Requires(post):	%{_sbindir}/update-alternatives
 Requires(postun):	%{_sbindir}/update-alternatives
 
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-Provides:	%{sname}
+Provides:	%{sname} >= %{version}-%{release}
 
 %ifarch ppc64 ppc64le
 AutoReq:	0
@@ -294,8 +293,12 @@ if you're installing the gbdsql%{pgmajorversion}-server package.
 
 %package libs
 Summary:	The shared libraries required for any GBDSQL clients
-Group:		Applications/Databases
 Provides:	postgresql-libs = %{pgmajorversion}
+%if 0%{?rhel} && 0%{?rhel} <= 6
+Requires:	openssl
+%else
+Requires:	openssl-libs >= 1.0.2k
+%endif
 
 %ifarch ppc64 ppc64le
 AutoReq:	0
@@ -310,7 +313,6 @@ GBDSQL server.
 
 %package server
 Summary:	The programs needed to create and run a GBDSQL server
-Group:		Applications/Databases
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 Requires(pre):	/usr/sbin/useradd /usr/sbin/groupadd
@@ -332,7 +334,7 @@ Requires(postun):	systemd
 %else
 Requires:	/usr/sbin/useradd, /sbin/chkconfig
 %endif
-Provides:	postgresql-server
+Provides:	postgresql-server >= %{version}-%{release}
 
 %ifarch ppc64 ppc64le
 AutoReq:	0
@@ -347,8 +349,7 @@ and maintain GBDSQL databases.
 
 %package docs
 Summary:	Extra documentation for GBDSQL
-Group:		Applications/Databases
-Provides:	postgresql-docs
+Provides:	postgresql-docs >= %{version}-%{release}
 
 %description docs
 The gbdsql%{pgmajorversion}-docs package includes the SGML source for the documentation
@@ -359,10 +360,9 @@ includes HTML version of the documentation.
 
 %package contrib
 Summary:	Contributed source and binaries distributed with GBDSQL
-Group:		Applications/Databases
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
-Provides:	postgresql-contrib
+Provides:	postgresql-contrib >= %{version}-%{release}
 
 %ifarch ppc64 ppc64le
 AutoReq:	0
@@ -375,7 +375,6 @@ included in the GBDSQL distribution.
 
 %package devel
 Summary:	GBDSQL development header files and libraries
-Group:		Development/Libraries
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	%{name}-libs%{?_isa} = %{version}-%{release}
 %if %icu
@@ -397,7 +396,7 @@ BuildRequires:	perl-IPC-Run
 %endif
 %endif
 
-Provides:	postgresql-devel
+Provides:	postgresql-devel >= %{version}-%{release}
 
 %ifarch ppc64 ppc64le
 AutoReq:	0
@@ -414,14 +413,13 @@ to develop applications which will interact with a GBDSQL server.
 %if %llvm
 %package llvmjit
 Summary:	Just-in-time compilation support for GBDSQL
-Group:		Applications/Databases
 Requires:	%{name}-server%{?_isa} = %{version}-%{release}
 %if 0%{?rhel} && 0%{?rhel} == 7
 Requires:	llvm5.0 >= 5.0
 %else
 Requires:	llvm => 5.0
 %endif
-Provides:	postgresql-llvmjit
+Provides:	postgresql-llvmjit >= %{version}-%{release}
 
 %ifarch ppc64 ppc64le
 AutoReq:	0
@@ -438,14 +436,13 @@ goal of accelerating analytics queries.
 %if %plperl
 %package plperl
 Summary:	The Perl procedural language for GBDSQL
-Group:		Applications/Databases
 Requires:	%{name}-server%{?_isa} = %{version}-%{release}
 Requires:	perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 %ifarch ppc ppc64
 BuildRequires:	perl-devel
 %endif
 Obsoletes:	gbdsql%{pgmajorversion}-pl
-Provides:	postgresql-plperl
+Provides:	postgresql-plperl >= %{version}-%{release}
 
 %ifarch ppc64 ppc64le
 AutoReq:	0
@@ -462,12 +459,16 @@ Install this if you want to write database functions in Perl.
 %if %plpython2
 %package plpython
 Summary:	The Python procedural language for GBDSQL
-Group:		Applications/Databases
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	%{name}-server%{?_isa} = %{version}-%{release}
 Obsoletes:	%{name}-pl
-Provides:	postgresql-plpython
+Provides:	postgresql-plpython >= %{version}-%{release}
 Provides:	%{name}-plpython2%{?_isa} = %{version}-%{release}
+%if 0%{?rhel} && 0%{?rhel} <= 6
+Requires:	python-libs
+%else
+Requires:	python2-libs
+%endif
 
 %ifarch ppc64 ppc64le
 AutoReq:	0
@@ -484,11 +485,11 @@ Install this if you want to write database functions in Python.
 %if %plpython3
 %package plpython3
 Summary:	The Python3 procedural language for GBDSQL
-Group:		Applications/Databases
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	%{name}-server%{?_isa} = %{version}-%{release}
 Obsoletes:	%{name}-pl
-Provides:	postgresql-plpython3
+Provides:	postgresql-plpython3 >= %{version}-%{release}
+Requires:	python3-libs
 
 %ifarch ppc64 ppc64le
 AutoReq:	0
@@ -505,12 +506,11 @@ Install this if you want to write database functions in Python 3.
 %if %pltcl
 %package pltcl
 Summary:	The Tcl procedural language for GBDSQL
-Group:		Applications/Databases
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 Requires:	%{name}-server%{?_isa} = %{version}-%{release}
 Requires:	tcl
 Obsoletes:	%{name}-pl
-Provides:	postgresql-pltcl
+Provides:	postgresql-pltcl >= %{version}-%{release}
 
 %ifarch ppc64 ppc64le
 AutoReq:	0
@@ -526,10 +526,9 @@ for the backend.
 %if %test
 %package test
 Summary:	The test suite distributed with GBDSQL
-Group:		Applications/Databases
 Requires:	%{name}-server%{?_isa} = %{version}-%{release}
 Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
-Provides:	postgresql-test
+Provides:	postgresql-test >= %{version}-%{release}
 
 %ifarch ppc64 ppc64le
 AutoReq:	0
@@ -1063,7 +1062,6 @@ if [ $1 -eq 1 ] ; then
    %endif
    %else
    %systemd_post %{sname}-%{pgmajorversion}.service
-   %tmpfiles_create
    %endif
   %else
    chkconfig --add %{sname}-%{pgmajorversion}
@@ -1515,13 +1513,21 @@ fi
 %{pgbaseinstdir}/lib/plpython2.so
 %{pgbaseinstdir}/share/extension/plpython2u*
 %{pgbaseinstdir}/share/extension/plpythonu*
+%{pgbaseinstdir}/lib/hstore_plpython2.so
+%{pgbaseinstdir}/lib/jsonb_plpython2.so
+%{pgbaseinstdir}/lib/ltree_plpython2.so
+%{pgbaseinstdir}/share/extension/*_plpythonu*
+%{pgbaseinstdir}/share/extension/*_plpython2u*
 %endif
 
 %if %plpython3
 %files plpython3 -f pg_plpython3.lst
 %{pgbaseinstdir}/share/extension/plpython3*
 %{pgbaseinstdir}/lib/plpython3.so
-%endif
+%{pgbaseinstdir}/lib/hstore_plpython3.so
+%{pgbaseinstdir}/lib/jsonb_plpython3.so
+%{pgbaseinstdir}/lib/ltree_plpython3.so
+%{pgbaseinstdir}/share/extension/*_plpython3u*%endif
 
 %if %test
 %files test
@@ -1531,6 +1537,18 @@ fi
 %endif
 
 %changelog
+* Fri Nov 15 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.6-1GBD
+- 11.6 güncellemesi
+  https://www.postgresql.org/docs/release/11.6/
+- Fix Python dependency issue in the main package, and move all
+  plpython* packages into their respective subpackages.
+- Use correct openssl-libs dependency, per John Harvey.
+- Remove obsoleted tmpfiles_create macro. We don't need it anyway,
+  already manually install the file.
+- Initial attempt to support PL/Python3 on RHEL 7. Python2 is almost
+  EOL, so this is a sane move now.
+  Per https://redmine.postgresql.org/issues/2701
+
 * Sun Aug 11 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 11.5-1GBD
 - 11.5 güncellemesi
 
