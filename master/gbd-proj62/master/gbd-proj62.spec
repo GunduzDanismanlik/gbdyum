@@ -4,7 +4,7 @@
 %global projinstdir %{gbddir}%{sname}62
 
 %if 0%{?rhel} && 0%{?rhel} == 7
-%global sqlitepname	sqlite33
+%global sqlitepname	gbd-sqlite33
 %global sqlite33dir	/usr/sqlite330
 %else
 %global sqlitepname	sqlite
