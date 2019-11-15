@@ -124,7 +124,7 @@ EOF
 %{libgeotiffinstdir}/man/man1/listgeo.1
 %{libgeotiffinstdir}/man/man1/geotifcp.1
 %{libgeotiffinstdir}/man/man1/applygeo.1
-%config(noreplace) %attr (644,root,root) %{_sysconfdir}/ld.so.conf.d/%{name}-pgdg-libs.conf
+%config(noreplace) %attr (644,root,root) %{_sysconfdir}/ld.so.conf.d/%{name}-libs.conf
 
 %files devel
 %dir %{libgeotiffinstdir}/include
