@@ -12,7 +12,7 @@
 %define	rpmver	3.30.1
 
 Summary:	Library that implements an embeddable SQL database engine
-Name:		%{sname}33
+Name:		%{gbdsname}33
 Version:	%{rpmver}
 Release:	1%{?dist}
 License:	Public Domain
