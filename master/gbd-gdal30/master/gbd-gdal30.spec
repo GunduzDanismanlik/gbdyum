@@ -129,7 +129,7 @@ BuildRequires:	fontconfig-devel
 # No freexl in EL5
 BuildRequires:	freexl-devel
 BuildRequires:	g2clib-static
-BuildRequires:	geos%{geosmajorversion}-devel >= 3.8.0
+BuildRequires:	gbd-geos%{geosmajorversion}-devel >= 3.8.0
 BuildRequires:	ghostscript
 BuildRequires:	hdf-devel
 BuildRequires:	hdf-static
@@ -150,7 +150,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	libkml-devel
 %endif
 %if %{with_spatialite}
-BuildRequires:	libspatialite%{libspatialiteversion}-devel
+BuildRequires:	gbd-libspatialite%{libspatialiteversion}-devel
 %endif
 
 BuildRequires:	libtiff-devel
@@ -167,9 +167,9 @@ BuildRequires:	mariadb-devel
 %if 0%{?fedora}
 BuildRequires:	mariadb-connector-c-devel
 %endif
-BuildRequires:	postgresql%{pgmajorversion}-devel
+BuildRequires:	gbdsql%{pgmajorversion}-devel
 BuildRequires:	pcre-devel
-BuildRequires:	ogdi41-devel
+BuildRequires:	gbd-ogdi41-devel
 BuildRequires:	perl-devel
 BuildRequires:	perl-generators
 BuildRequires:	openjpeg2-devel
@@ -178,7 +178,7 @@ BuildRequires:	%{_bindir}/pkg-config
 %if 0%{?with_poppler}
 BuildRequires:	poppler-devel
 %endif
-BuildRequires:	proj%{projmajorversion}-devel >= 6.2.1
+BuildRequires:	gbd-proj%{projmajorversion}-devel >= 6.2.1
 BuildRequires:	sqlite-devel
 BuildRequires:	swig
 %if %{build_refman}
@@ -674,28 +674,6 @@ popd
 #Or as before, using ldconfig
 
 %changelog
-* Tue Nov 12 2019 Devrim Gunduz <devrim@gunduz.org> - 3.0.2-2
-- Rebuild for new poppler on RHEL 8.1
-
-* Tue Oct 29 2019 Devrim Gunduz <devrim@gunduz.org> - 3.0.2-1
+* Fri Nov 15 2019 Devrim Gunduz <devrim@gunduz.org> - 3.0.2-2
 - Update to 3.0.2
-
-* Mon Oct 7 2019 Devrim Gunduz <devrim@gunduz.org> - 3.0.1-5
-- Rebuild for GeOS 3.8.0
-
-* Thu Sep 26 2019 Devrim Gündüz <devrim@gunduz.org> - 3.0.1-4.1
-- Rebuild for PostgreSQL 12
-
-* Tue Sep 24 2019 Devrim Gunduz <devrim@gunduz.org> - 3.0.1-4
-- Rebuild for GeOS 3.7.2
-
-* Sat Sep 21 2019 Devrim Gündüz <devrim@gunduz.org> - 3.0.1-3
-- Use our own libspatialite package, to avoid Proj dependency that
-  comes from OS.
-
-* Tue Sep 17 2019 Devrim Gündüz <devrim@gunduz.org> - 3.0.1-2
-- Fix a conflict with GDAL23 package
-
-- Initial packaging for PostgreSQL RPM repository
-* Tue Sep 10 2019 Devrim Gündüz <devrim@gunduz.org> - 3.0.1-1
-- Initial packaging for PostgreSQL RPM repository
+- Initial packaging for GBDSQL
