@@ -39,7 +39,8 @@ are required to perform a backup which increases security.
 
 %build
 pushd src
-./configure
+export CPPFLAGS='-I %{pginstdir}/include'
+LDFLAGS='-L%{pginstdir}/lib' %configure
 %{__make}
 popd
 
