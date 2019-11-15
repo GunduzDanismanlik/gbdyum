@@ -4,8 +4,8 @@
 %global postgiscurrmajorversion %(echo %{postgismajorversion}|tr -d '.')
 %global postgisprevmajorversion 2.4
 %global sname	postgis
-%global	geosinstdir %{gbddir}/geos37
-%global	projinstdir %{gbddir}/proj52
+%global geosinstdir %{gbddir}/geos37
+%global projinstdir %{gbddir}/proj52
 %global gdal23instdir %{gbddir}/gdal23
 
 %{!?utils:%global	utils 1}
@@ -19,7 +19,7 @@
 %else
 %{!?raster:%global     raster 0}
 %endif
-%if 0%{?fedora} >= 27 || 0%{?rhel} >= 7 || 0%{?suse_version} >= 1315
+%if 0%{?fedora} >= 27 || 0%{?rhel} >= 6 || 0%{?suse_version} >= 1315
 %ifnarch ppc64 ppc64le
 # TODO
 %{!?sfcgal:%global     sfcgal 1}
@@ -47,7 +47,6 @@ Source0:	http://download.osgeo.org/%{sname}/source/%{sname}-%{version}.tar.gz
 Source2:	http://download.osgeo.org/%{sname}/docs/%{sname}-%{version}.pdf
 Source4:	gbd-%{sname}%{postgiscurrmajorversion}-filter-requires-perl-Pg.sh
 Patch0:		gbd-%{sname}%{postgiscurrmajorversion}-%{postgismajorversion}.0-gdalfpic.patch
-
 URL:		http://www.postgis.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -95,12 +94,17 @@ Requires:	pcre
 %if 0%{?suse_version} >= 1315
 Requires:	libjson-c2 libgdal20
 %else
-Requires: json-c
-%if 0%{?rhel} && 0%{?rhel} < 6
+Requires:	json-c
+%if 0%{?rhel} && 0%{?rhel} <= 6
 Requires:	gdal-libs >= 1.9.2-9
 %else
 Requires:	gbd-gdal23-libs >= 2.3.2-7
 %endif
+
+%if 0%{?fedora} >= 29 || 0%{?rhel} >= 8
+Requires:	protobuf-c
+%endif
+
 %endif
 Requires(post):	%{_sbindir}/update-alternatives
 %ifarch ppc64 ppc64le
@@ -166,6 +170,16 @@ Requires:	advance-toolchain-%{atstring}-runtime
 %description docs
 The %{name}-docs package includes PDF documentation of PostGIS.
 
+%if %{shp2pgsqlgui}
+%package	gui
+Summary:	GUI for PostGIS
+Group:		Applications/Databases
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+
+%description	gui
+The %{name}-gui package provides a gui for PostGIS.
+%endif
+
 %if %utils
 %package utils
 Summary:	The utils for PostGIS
@@ -209,7 +223,9 @@ CFLAGS="${CFLAGS:-%optflags}"
 	CC=%{atpath}/bin/gcc; export CC
 %endif
 
-LDFLAGS="$LDFLAGS -L/%{geosinstdir}/lib64 -L%{projinstdir}/lib"; export LDFLAGS
+# Strip out fstack-clash-protection from CFLAGS:
+CFLAGS=`echo $CFLAGS|xargs -n 1|grep -v fstack-clash-protection|xargs -n 100`; export CFLAGS
+LDFLAGS="$LDFLAGS -L%{geosinstdir}/lib64 -L%{projinstdir}/lib"; export LDFLAGS
 
 %configure --with-pgconfig=%{pginstdir}/bin/pg_config \
 %if !%raster
@@ -268,7 +284,6 @@ fi
 %{__rm} -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
 %doc COPYING CREDITS NEWS TODO README.%{sname} doc/html loader/README.* doc/%{sname}.xml doc/ZMSgeoms.txt
 %if 0%{?rhel} && 0%{?rhel} <= 6
 %doc LICENSE.TXT
@@ -316,11 +331,6 @@ fi
 %{pginstdir}/share/extension/%{sname}_tiger_geocoder*.sql
 %{pginstdir}/share/extension/%{sname}_tiger_geocoder.control
 %endif
-%if %shp2pgsqlgui
-%{pginstdir}/bin/shp2pgsql-gui
-%{pginstdir}/share/applications/shp2pgsql-gui.desktop
-%{pginstdir}/share/icons/hicolor/*/apps/shp2pgsql-gui.png
-%endif
 %ifarch ppc64 ppc64le
  %else
  %if %{pgmajorversion} >= 11 && %{pgmajorversion} < 90
@@ -353,16 +363,24 @@ fi
 %{pginstdir}/lib/liblwgeom*.a
 %{pginstdir}/lib/liblwgeom*.la
 
+%files docs
+%defattr(-,root,root)
+%doc %{sname}-%{version}.pdf
+
+%if %shp2pgsqlgui
+%files gui
+%defattr(-,root,root)
+%{pginstdir}/bin/shp2pgsql-gui
+%{pginstdir}/share/applications/shp2pgsql-gui.desktop
+%{pginstdir}/share/icons/hicolor/*/apps/shp2pgsql-gui.png
+%endif
+
 %if %utils
 %files utils
 %defattr(-,root,root)
 %doc utils/README
 %attr(755,root,root) %{_datadir}/%{name}/*.pl
 %endif
-
-%files docs
-%defattr(-,root,root)
-%doc %{sname}-%{version}.pdf
 
 %changelog
 * Mon Aug 12 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.5.3-2GBD
