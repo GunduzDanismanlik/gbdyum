@@ -1,0 +1,31 @@
+*** postgis/lwgeom_functions_basic.c	2019-01-28 14:10:38.000000000 -0500
+--- postgis/lwgeom_functions_basic.c.new	2019-01-28 14:10:27.000000000 -0500
+***************
+*** 1563,1572 ****
+  		holes = lwalloc(sizeof(LWLINE *)*nholes);
+  		for (i=0; i<nholes; i++)
+  		{
+- #pragma GCC diagnostic push
+- #pragma GCC diagnostic ignored "-Wsign-compare"
+  			GSERIALIZED *g = (GSERIALIZED *)(ARR_DATA_PTR(array)+offset);
+- #pragma GCC diagnostic pop
+  			LWLINE *hole;
+  			offset += INTALIGN(VARSIZE(g));
+  			if ( gserialized_get_type(g) != LINETYPE )
+--- 1563,1569 ----
+JohnsCrunchyMBP:postgis jharv$ diff -c postgis/lwgeom_geos.c postgis/lwgeom_geos.c.new
+*** postgis/lwgeom_geos.c	2019-01-28 14:10:38.000000000 -0500
+--- postgis/lwgeom_geos.c.new	2019-01-28 14:10:31.000000000 -0500
+***************
+*** 393,402 ****
+  	/* One geom, good geom? Return it */
+  	if ( count == 1 && nelems == 1 )
+  	{
+- #pragma GCC diagnostic push
+- #pragma GCC diagnostic ignored "-Wsign-compare"
+  		PG_RETURN_POINTER((GSERIALIZED *)(ARR_DATA_PTR(array)));
+- #pragma GCC diagnostic pop
+  	}
+
+  	/* Ok, we really need GEOS now ;) */
+--- 393,399 ----
