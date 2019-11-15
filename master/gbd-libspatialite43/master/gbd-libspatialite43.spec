@@ -44,7 +44,7 @@
   %global _no_checks 1
 %endif
 
-Name:		%{sname}%{libspatialiteversion}
+Name:		gbd-%{sname}%{libspatialiteversion}
 Version:	4.3.0a
 Release:	4%{?dist}
 Summary:	Enables SQLite to support spatial data
