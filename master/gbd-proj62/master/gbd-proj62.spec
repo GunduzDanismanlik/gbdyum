@@ -26,7 +26,7 @@ License:	MIT
 URL:		https://proj.org
 Source0:	http://download.osgeo.org/%{sname}/%{sname}-%{version}.tar.gz
 Source1:	http://download.osgeo.org/%{sname}/%{sname}-datumgrid-1.8.zip
-Source2:	%{name}-pgdg-libs.conf
+Source2:	%{name}-libs.conf
 
 
 BuildRequires:	%{sqlitepname}-devel >= 3.7 gcc-c++
@@ -140,7 +140,7 @@ SHLIB_LINK="$SHLIB_LINK -Wl,-rpath,%{sqlite33dir}/lib" ; export SHLIB_LINK
 %{projinstdir}/share/man/man1/*.1
 %{projinstdir}/share/proj/*
 %{projinstdir}/lib/libproj.so.15*
-%config(noreplace) %attr (644,root,root) %{_sysconfdir}/ld.so.conf.d/%{name}-pgdg-libs.conf
+%config(noreplace) %attr (644,root,root) %{_sysconfdir}/ld.so.conf.d/%{name}-libs.conf
 
 %files devel
 %defattr(-,root,root,-)
