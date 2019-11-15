@@ -1,0 +1,11 @@
+--- gdal/configure.old	2019-10-29 13:11:07.568837803 +0000
++++ gdal/configure	2019-10-29 13:11:31.989063374 +0000
+@@ -30448,6 +30448,8 @@
+           OGDI_INCLUDE="-I/usr/include"
+       elif test -f "/usr/local/include/ecs.h"; then
+           OGDI_INCLUDE="-I/usr/local/include"
++      elif test -f "/usr/gbd/ogdi41/include/ecs.h"; then
++          OGDI_INCLUDE="-I/usr/gbd/ogdi41/include"
+       fi
+     fi
+ 

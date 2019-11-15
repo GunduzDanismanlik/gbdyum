@@ -1,0 +1,11 @@
+--- gdal/frmts/mrf/mrf_band.cpp.old	2019-10-29 13:05:35.413769644 +0000
++++ gdal/frmts/mrf/mrf_band.cpp	2019-10-29 13:05:48.962894799 +0000
+@@ -49,7 +49,7 @@
+ 
+ #include <vector>
+ #include <assert.h>
+-#include "zlib.h"
++#include "../zlib/zlib.h"
+ 
+ CPL_CVSID("$Id$")
+ 

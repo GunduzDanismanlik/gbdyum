@@ -1,0 +1,9 @@
+--- gdal/swig/perl/GNUmakefile.old	2019-10-29 13:08:12.754223012 +0000
++++ gdal/swig/perl/GNUmakefile	2019-10-29 13:08:34.518424050 +0000
+@@ -64,3 +64,6 @@
+ 
+ .FORCE:
+ 	perl parse-for-doxygen.pl > all.pm; doxygen; rm -f all.pm
++
++.PHONY: generate
++

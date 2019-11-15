@@ -1,0 +1,13 @@
+--- gdal/apps/GNUmakefile.old	2019-10-29 13:09:53.782156222 +0000
++++ gdal/apps/GNUmakefile	2019-10-29 13:10:27.692469453 +0000
+@@ -203,8 +203,8 @@
+ 	echo '#!/bin/sh' > gdal-config-inst
+ 	echo 'CONFIG_LIBS="$(CONFIG_LIBS_INS)"' >> gdal-config-inst
+ 	echo 'CONFIG_DEP_LIBS="$(LIBS)"' >> gdal-config-inst
+-	echo 'CONFIG_PREFIX="$(INST_PREFIX)"' >> gdal-config-inst
+-	echo 'CONFIG_CFLAGS="-I$(INST_INCLUDE)"' >> gdal-config-inst
++	echo 'CONFIG_PREFIX="/usr/gbd/gdal30"' >> gdal-config-inst
++	echo 'CONFIG_CFLAGS="-I/usr/gbd/gdal30/include"' >> gdal-config-inst
+ 	echo 'CONFIG_DATA="$(INST_DATA)"' >> gdal-config-inst
+ 	echo 'CONFIG_VERSION="'`cat ../VERSION`'"' >> gdal-config-inst
+ 	echo 'CONFIG_OGR_ENABLED=yes' >> gdal-config-inst  # Deprecated.  Always true.

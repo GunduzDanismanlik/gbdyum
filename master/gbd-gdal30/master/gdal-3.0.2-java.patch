@@ -1,0 +1,10 @@
+--- gdal/swig/java/java.opt.old	2019-10-29 13:03:54.400836584 +0000
++++ gdal/swig/java/java.opt	2019-10-29 13:04:17.170046904 +0000
+@@ -7,6 +7,6 @@
+ JAVAC=$(JAVA_HOME)/bin/javac
+ JAVA=$(JAVA_HOME)/bin/java
+ JAR=$(JAVA_HOME)/bin/jar
+-JAVA_INCLUDE=-I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/linux
++JAVA_INCLUDE=-I/usr/lib/jvm/java/include/ -I/usr/lib/jvm/java/include/linux
+ 
+ 
