@@ -1,1 +1,0 @@
-../master/geos38.spec
