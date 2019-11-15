@@ -2,7 +2,7 @@
 
 Summary:	JDBC driver for GBDSQL
 Name:		gbdsql-jdbc
-Version:	42.2.6
+Version:	42.2.8
 Release:	1GBD%{?dist}
 # ASL 2.0 applies only to gbdsql-jdbc.pom file, the rest is BSD
 License:	BSD and ASL 2.0
@@ -66,6 +66,10 @@ export CLASSPATH=
 # different platforms don't build in the same minute.  For now, rely on
 # upstream to have updated the translations files before packaging.
 
+%if 0%{?rhel} && 0%{?rhel} == 7
+%pom_remove_plugin :karaf-maven-plugin pgjdbc
+%endif
+
 mvn -DskipTests -P release-artifacts clean package
 
 %install
@@ -128,6 +132,9 @@ test $? -eq 0 && { cat test.log ; exit 1 ; }
 %{_datadir}/maven-fragments/%{name}
 %{_datadir}/maven-poms/JPP-%{name}.pom
 %endif
+%if 0%{?rhel} && 0%{?rhel} == 8
+%{_datadir}/maven-poms/JPP-%{name}.pom
+%endif
 %if 0%{?fedora}
 %{_datadir}/maven-poms/JPP-%{name}.pom
 %endif
@@ -142,5 +149,9 @@ test $? -eq 0 && { cat test.log ; exit 1 ; }
 %doc %{_javadocdir}/%{name}
 
 %changelog
+* Fri Nov 15 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 42.2.8-1.1GBD
+- 42.2.8 güncellemesi
+- RHEL 8 desteği
+
 * Sun Jan 27 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 42.2.5-1.1GBD
 - GBDSQL için ilk paket
