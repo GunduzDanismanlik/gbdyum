@@ -1,0 +1,10 @@
+--- tests/unit/geos_unit.cpp.old	2018-09-24 16:58:01.743995978 +0100
++++ tests/unit/geos_unit.cpp	2018-09-24 16:58:17.319084137 +0100
+@@ -12,6 +12,7 @@
+ #include <tut/tut_reporter.hpp>
+ // geos
+ #include <geos/unload.h>
++#include <stdlib.h>
+ // std
+ #include <cstdlib>
+ #include <iomanip>
