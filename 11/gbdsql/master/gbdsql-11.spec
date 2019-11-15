@@ -1527,7 +1527,7 @@ fi
 %{pgbaseinstdir}/lib/hstore_plpython3.so
 %{pgbaseinstdir}/lib/jsonb_plpython3.so
 %{pgbaseinstdir}/lib/ltree_plpython3.so
-%{pgbaseinstdir}/share/extension/*_plpython3u*%endif
+%{pgbaseinstdir}/share/extension/*_plpython3u*
 %endif
 
 %if %test
