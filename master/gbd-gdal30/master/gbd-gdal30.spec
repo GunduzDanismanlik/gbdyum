@@ -139,7 +139,7 @@ BuildRequires:	jasper-devel
 BuildRequires:	jpackage-utils
 # For 'mvn_artifact' and 'mvn_install'
 BuildRequires:	json-c-devel
-BuildRequires:	libgeotiff%{libgeotiffmajorversion}-devel
+BuildRequires:	gbd-libgeotiff%{libgeotiffmajorversion}-devel
 # No libgta in EL5
 BuildRequires:	libgta-devel
 
