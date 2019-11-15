@@ -9,7 +9,7 @@
 
 Summary:	PostgreSQL performance monitoring and auditing tool
 Name:		gbd-%{sname}
-Version:	2.9
+Version:	3.1
 Release:	1GBD%{?dist}
 License:	BSD
 Group:		Applications/Databases
@@ -66,5 +66,8 @@ of the PostgreSQL cluster and the system utilization
 %endif
 
 %changelog
+* Fri Nov 15 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 3.1-1GBD
+- 3.1 güncellemesi
+
 * Wed Jan 2 2019 Devrim Gündüz <devrim@gunduzdanismanlik.com> - 2.9-1GBD
 - GBDSQL için ilk paket
