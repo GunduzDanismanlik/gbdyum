@@ -11,7 +11,7 @@
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
 DIST=.f30
-SPECFILE="geos38.spec"
+SPECFILE="gbd-geos38.spec"
 
 # Now, include global Makefile
 include ../../../common/Makefile.global
