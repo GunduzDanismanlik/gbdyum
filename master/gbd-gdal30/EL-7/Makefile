@@ -10,7 +10,7 @@
 
 ARCH=`rpm --eval "%{_arch}"`
 DIR=`pwd`
-DIST=.f42
+DIST=.rhel7
 SPECFILE="gbd-gdal30.spec"
 
 # Now, include global Makefile
