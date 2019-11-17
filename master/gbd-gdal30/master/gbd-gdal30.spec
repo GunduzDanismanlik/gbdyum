@@ -650,7 +650,7 @@ popd
 %{gdalinstdir}/share/
 #TODO: Possibly remove files like .dxf, .dgn, ...
 %dir %{gdalinstdir}/lib/%{sname}plugins
-%config(noreplace) %attr (644,root,root) %{_sysconfdir}/ld.so.conf.d/%{name}-libs.conf
+%config(noreplace) %attr (644,root,root) %{_sysconfdir}/ld.so.conf.d/%{name}-gbd-libs.conf
 
 %files devel
 %{gdalinstdir}/bin/%{sname}-config
