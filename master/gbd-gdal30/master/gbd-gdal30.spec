@@ -1,7 +1,7 @@
 %global gbddir /usr/gbd
 %global sname gdal
 %global gbdname gbd-%{sname}
-%global gdalinstdir %{gbddir}/%{name}
+%global gdalinstdir %{gbddir}/%{sname}
 %global	gdalsomajorversion	26
 
 %global	geosmajorversion	38
@@ -80,7 +80,7 @@
 %endif
 %endif
 
-Name:		%{sname}30
+Name:		gbd-%{sname}30
 Version:	3.0.2
 Release:	2%{?dist}%{?bootstrap:.%{bootstrap}.bootstrap}
 Summary:	GIS file format library
@@ -102,12 +102,12 @@ Source5:	%{name}-gbd-libs.conf
 Patch3:		%{name}-completion.patch
 
 # Fedora uses Alternatives for Java
-Patch8:		%{sname}-%{version}-java.patch
+Patch8:		%{name}-%{version}-java.patch
 
-Patch9:		%{sname}-%{version}-zlib.patch
+Patch9:		%{name}-%{version}-zlib.patch
 
 # https://github.com/OSGeo/gdal/pull/876
-Patch10:	%{sname}-%{version}-perl-build.patch
+Patch10:	%{name}-%{version}-perl-build.patch
 
 # PGDG patches
 Patch12:	%{name}-gdalconfig-pgdg-path.patch
