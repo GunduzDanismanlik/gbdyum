@@ -111,7 +111,7 @@ Patch10:	%{name}-%{version}-perl-build.patch
 
 # PGDG patches
 Patch12:	%{name}-gdalconfig-pgdg-path.patch
-Patch13:	gdal30-configure-ogdi41.patch
+Patch13:	%{name}-configure-ogdi41.patch
 
 BuildRequires:	gcc gcc-c++
 BuildRequires:	ant
