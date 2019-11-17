@@ -10,9 +10,9 @@
 %global gdalversion	30
 %global projversion	62
 
-%global	geosinstdir %{gbdinstdir}/geos%{geosversion}
-%global	projinstdir %{gbdinstdir}/proj%{projversion}
-%global gdalinstdir %{gbdinstdir}/gdal%{gdalversion}
+%global	geosinstdir %{gbddir}/geos%{geosversion}
+%global	projinstdir %{gbddir}/proj%{projversion}
+%global gdalinstdir %{gbddir}/gdal%{gdalversion}
 
 %global gdalminorversion 3.0.2
 
@@ -230,9 +230,9 @@ CFLAGS="$CFLAGS -I%{gdalinstdir}/include"; export CFLAGS
 %if %{shp2pgsqlgui}
         --with-gui \
 %endif
-        --with-gdalconfig=%{gdal23instdir}/bin/gdal-config \
+        --with-gdalconfig=%{gdalinstdir}/bin/gdal-config \
         --enable-rpath --libdir=%{pginstdir}/lib \
-        --with-geosconfig=/%{geosinstdir}/bin/geos-config \
+        --with-geosconfig=%{geosinstdir}/bin/geos-config \
         --with-projdir=%{projinstdir}
 
 SHLIB_LINK="$SHLIB_LINK" %{__make} LPATH=`%{pginstdir}/bin/pg_config --pkglibdir` shlib="%{sname}-%{postgissomajorversion}.so"
